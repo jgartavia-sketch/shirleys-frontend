@@ -1,0 +1,153 @@
+.catering-page {
+  min-height: 100vh;
+
+  padding: 220px 8% 100px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(6, 10, 7, 0.98),
+      rgba(12, 18, 12, 0.98)
+    );
+
+  color: #f7f0df;
+}
+
+.page-header {
+  max-width: 760px;
+  margin-bottom: 60px;
+}
+
+.page-header span {
+  display: inline-block;
+  margin-bottom: 14px;
+
+  color: #d4af37;
+
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.page-header h1 {
+  margin: 0 0 22px;
+
+  color: #fff7df;
+
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1;
+}
+
+.page-header p {
+  color: #e8dec5;
+
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+
+  margin-bottom: 70px;
+}
+
+.service-card {
+  padding: 34px;
+
+  border-radius: 28px;
+
+  border: 1px solid rgba(212, 175, 55, 0.16);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.06),
+      rgba(255,255,255,0.02)
+    );
+
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+
+  transition: 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(212, 175, 55, 0.42);
+}
+
+.service-card h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+
+  color: #d4af37;
+
+  font-size: 1.5rem;
+}
+
+.service-card p {
+  color: #e8dec5;
+
+  line-height: 1.8;
+}
+
+.reservation-box {
+  padding: 50px;
+
+  border-radius: 32px;
+
+  text-align: center;
+
+  border: 1px solid rgba(212, 175, 55, 0.18);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(212,175,55,0.12),
+      rgba(255,255,255,0.03)
+    );
+}
+
+.reservation-box h2 {
+  margin-top: 0;
+
+  color: #fff7df;
+
+  font-size: 2.5rem;
+}
+
+.reservation-box p {
+  max-width: 650px;
+
+  margin: 0 auto 30px;
+
+  color: #e8dec5;
+
+  line-height: 1.8;
+}
+
+.reserve-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 28px;
+
+  border-radius: 999px;
+
+  text-decoration: none;
+  font-weight: 700;
+
+  color: #071007;
+  background: #d4af37;
+
+  transition: 0.3s ease;
+}
+
+.reserve-btn:hover {
+  transform: translateY(-3px);
+
+  background: #f0ca57;
+}
