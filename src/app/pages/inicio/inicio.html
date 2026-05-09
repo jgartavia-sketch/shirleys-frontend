@@ -17,3 +17,135 @@
     </div>
   </div>
 </section>
+
+<section class="customers-section">
+  <div class="customers-container">
+
+    <div class="customers-text">
+      <span class="customers-badge">Shirley’s Customers</span>
+
+      <h2>
+        Cada cena puede convertirse en recompensas.
+      </h2>
+
+      <p class="customers-description">
+        Regístrese gratuitamente y forme parte de la familia
+        Shirley’s. Obtenga un código QR personal para acumular puntos en cada
+        compra y acceder a beneficios exclusivos.
+      </p>
+
+      <div class="points-preview">
+        <div class="point-card">
+          <span>₡5.000</span>
+          <strong>3 puntos</strong>
+        </div>
+
+        <div class="point-card">
+          <span>₡10.000</span>
+          <strong>7 puntos</strong>
+        </div>
+
+        <div class="point-card">
+          <span>+₡15.000</span>
+          <strong>9 puntos</strong>
+        </div>
+      </div>
+
+      <div class="emotional-call">
+        <p>
+          No es solo comida.
+          <br>
+          Se trata de convertir esos momentos en experiencias que no se van.
+        </p>
+      </div>
+    </div>
+
+    <div class="customers-card">
+
+      <div class="mock-phone">
+
+        <div class="mock-header">
+          <span>Registro rápido</span>
+        </div>
+
+        <form class="mock-form">
+
+          <input
+            #customerName
+            type="text"
+            placeholder="Nombre completo"
+          />
+
+          <input
+            #customerEmail
+            type="email"
+            placeholder="Correo electrónico"
+          />
+
+          <input
+            #customerWhatsapp
+            type="text"
+            placeholder="Número de WhatsApp"
+          />
+
+          <button
+            type="button"
+            (click)="sendMockQr(
+              customerName.value,
+              customerEmail.value,
+              customerWhatsapp.value
+            )"
+          >
+            Obtener mi QR
+          </button>
+
+        </form>
+
+        <div class="mock-success">
+
+          <div class="mock-qr">
+            QR
+          </div>
+
+          <h3>Shirley’s Customers</h3>
+
+          <p>
+            Acumule puntos y disfrute beneficios exclusivos en cada visita.
+          </p>
+
+          
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+@if (showQrPopup) {
+  <div class="qr-popup-overlay">
+
+    <div class="qr-popup">
+
+      <div class="popup-qr">
+        QR
+      </div>
+
+      <h3>¡QR enviado exitosamente!</h3>
+
+      <p>
+        {{ popupMessage }}
+      </p>
+
+      <button
+        type="button"
+        (click)="closeQrPopup()"
+      >
+        Entendido
+      </button>
+
+    </div>
+
+  </div>
+}
