@@ -139,12 +139,16 @@
       </p>
 
       <button
-        type="button"
-        (click)="closeQrPopup()"
-      >
-        Entendido
-      </button>
-
+  type="button"
+  [disabled]="isSendingQr"
+  (click)="sendMockQr(
+    customerName.value,
+    customerEmail.value,
+    customerWhatsapp.value
+  )"
+>
+  {{ isSendingQr ? 'Enviando...' : 'Obtener mi QR' }}
+</button>
     </div>
 
   </div>
