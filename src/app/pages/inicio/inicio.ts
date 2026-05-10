@@ -10,8 +10,9 @@ import { RouterLink } from '@angular/router';
 export class Inicio {
   showQrPopup = false;
   popupMessage = '';
+  isSendingQr = false;
 
-  sendMockQr(name: string, email: string, whatsapp: string): void {
+  async sendMockQr(name: string, email: string, whatsapp: string): Promise<void> {
     if (!name.trim() || !email.trim() || !whatsapp.trim()) {
       this.popupMessage =
         'Por favor complete nombre, correo y WhatsApp para generar su QR.';
@@ -19,11 +20,39 @@ export class Inicio {
       return;
     }
 
-    this.popupMessage =
-      'Registro exitoso. Su QR de Shirley’s Customers fue enviado al correo: ' +
-      email;
+    this.isSendingQr = true;
 
-    this.showQrPopup = true;
+    try {
+      const response = await fetch('https://shirleys-backend.onrender.com/api/customers/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          whatsapp,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('No se pudo completar el registro.');
+      }
+
+      const data = await response.json();
+
+      this.popupMessage =
+        `${data.message}. Código de cliente: ${data.customer.code}. ` +
+        `Confirmación enviada al correo: ${data.customer.email}.`;
+
+      this.showQrPopup = true;
+    } catch (error) {
+      this.popupMessage =
+        'No se pudo conectar con el backend. Verifique que Shirley’s Backend esté encendido.';
+      this.showQrPopup = true;
+    } finally {
+      this.isSendingQr = false;
+    }
   }
 
   closeQrPopup(): void {
