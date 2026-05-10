@@ -90,13 +90,14 @@
 
           <button
             type="button"
+            [disabled]="isSendingQr"
             (click)="sendMockQr(
               customerName.value,
               customerEmail.value,
               customerWhatsapp.value
             )"
           >
-            Obtener mi QR
+            {{ isSendingQr ? 'Enviando...' : 'Obtener mi QR' }}
           </button>
 
         </form>
@@ -113,7 +114,6 @@
             Acumule puntos y disfrute beneficios exclusivos en cada visita.
           </p>
 
-          
         </div>
 
       </div>
@@ -139,16 +139,12 @@
       </p>
 
       <button
-  type="button"
-  [disabled]="isSendingQr"
-  (click)="sendMockQr(
-    customerName.value,
-    customerEmail.value,
-    customerWhatsapp.value
-  )"
->
-  {{ isSendingQr ? 'Enviando...' : 'Obtener mi QR' }}
-</button>
+        type="button"
+        (click)="closeQrPopup()"
+      >
+        Enviado
+      </button>
+
     </div>
 
   </div>
