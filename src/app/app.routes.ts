@@ -35,5 +35,11 @@ export const routes: Routes = [
     path: 'contacto',
     loadComponent: () =>
       import('./pages/contacto/contacto').then(m => m.Contacto)
+  },
+
+  {
+    path: 'customers/:code',
+    loadComponent: () =>
+      import('./pages/customer-card/customer-card').then(m => m.CustomerCard)
   }
 ];

@@ -1,0 +1,38 @@
+<div class="customer-card-page">
+
+  <div class="card-glow"></div>
+
+  <div class="customer-card">
+
+    <div class="brand-section">
+      <h1>Shirley’s Customers</h1>
+      <p>Programa oficial de fidelización</p>
+    </div>
+
+    <div class="customer-avatar">
+      {{ customerName.charAt(0) }}
+    </div>
+
+    <div class="customer-info">
+
+      <h2>{{ customerName }}</h2>
+
+      <p class="email">
+        {{ customerEmail }}
+      </p>
+
+      <div class="points-box">
+        <span>Puntos acumulados</span>
+        <strong>{{ customerPoints }}</strong>
+      </div>
+
+      <div class="customer-code">
+        Código:
+        <span>{{ customerCode }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
