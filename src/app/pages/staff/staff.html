@@ -4,8 +4,12 @@
       <p class="eyebrow">Shirley’s Customers</p>
       <h1>Panel del mesero</h1>
       <p>
-        Escanea el QR del cliente o escribe su código para ver su perfil y puntos acumulados.
+        Escanea el QR del cliente, consulta su perfil y registra compras para sumar puntos.
       </p>
+
+      <button type="button" class="logout-btn" (click)="logout()">
+        Cerrar sesión
+      </button>
     </div>
 
     <div class="scanner-actions">
@@ -83,5 +87,48 @@
         </div>
       </div>
     </div>
+
+    <form
+      class="purchase-form"
+      *ngIf="!loading && customer"
+      (ngSubmit)="registerPurchase()"
+    >
+      <div class="purchase-header">
+        <p class="eyebrow">Registrar compra</p>
+        <h3>Sumar puntos al cliente</h3>
+      </div>
+
+      <label for="invoiceNumber">Número de factura</label>
+      <input
+        id="invoiceNumber"
+        name="invoiceNumber"
+        type="text"
+        [(ngModel)]="invoiceNumber"
+        placeholder="Ej: FAC-00125"
+        autocomplete="off"
+      />
+
+      <label for="purchaseAmount">Monto de compra</label>
+      <input
+        id="purchaseAmount"
+        name="purchaseAmount"
+        type="number"
+        [(ngModel)]="purchaseAmount"
+        placeholder="Ej: 10000"
+        min="1"
+      />
+
+      <button type="submit" [disabled]="purchaseLoading">
+        {{ purchaseLoading ? 'Registrando...' : 'Registrar compra' }}
+      </button>
+
+      <div class="success-card" *ngIf="purchaseSuccess">
+        {{ purchaseSuccess }}
+      </div>
+
+      <div class="error-card" *ngIf="purchaseError">
+        {{ purchaseError }}
+      </div>
+    </form>
   </section>
 </div>

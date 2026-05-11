@@ -1,0 +1,40 @@
+<div class="staff-login-page">
+  <section class="staff-login-card">
+
+    <div class="login-header">
+      <p class="eyebrow">Shirley’s Customers</p>
+
+      <h1>Acceso Staff</h1>
+
+      <p>
+        Panel interno autorizado para personal de Shirley’s.
+      </p>
+    </div>
+
+    <form class="login-form" (ngSubmit)="login()">
+
+      <label for="password">
+        Contraseña de acceso
+      </label>
+
+      <input
+        id="password"
+        name="password"
+        type="password"
+        [(ngModel)]="password"
+        placeholder="Ingrese la contraseña staff"
+        autocomplete="off"
+      />
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Validando...' : 'Ingresar al panel' }}
+      </button>
+
+    </form>
+
+    <div class="error-box" *ngIf="error">
+      {{ error }}
+    </div>
+
+  </section>
+</div>
