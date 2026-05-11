@@ -1,8 +1,9 @@
-import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 import { BrowserQRCodeReader, IScannerControls } from '@zxing/browser';
 
 interface Customer {
@@ -64,7 +65,8 @@ export class Staff implements OnInit, OnDestroy {
   constructor(
     private http: HttpClient,
     private zone: NgZone,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -93,33 +95,43 @@ export class Staff implements OnInit, OnDestroy {
     this.purchaseError = '';
     this.purchaseSuccess = '';
     this.customer = null;
+    this.cdr.detectChanges();
 
     const url = `${this.apiUrl}/${cleanCode}`;
 
-    this.http.get<CustomerResponse>(url).subscribe({
-      next: (response) => {
-        this.zone.run(() => {
-          this.customer = response.customer;
-          this.customerCode = response.customer.code;
+    this.http.get<CustomerResponse>(url)
+      .pipe(
+        finalize(() => {
+          this.zone.run(() => {
+            this.loading = false;
+            this.cdr.detectChanges();
+          });
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          this.zone.run(() => {
+            this.customer = response.customer;
+            this.customerCode = response.customer.code;
+            this.error = false;
+            this.cdr.detectChanges();
+          });
+        },
 
-          this.loading = false;
-          this.error = false;
-        });
-      },
-
-      error: () => {
-        this.zone.run(() => {
-          this.loading = false;
-          this.error = true;
-          this.customer = null;
-        });
-      }
-    });
+        error: () => {
+          this.zone.run(() => {
+            this.error = true;
+            this.customer = null;
+            this.cdr.detectChanges();
+          });
+        }
+      });
   }
 
   registerPurchase(): void {
     if (!this.customer) {
       this.purchaseError = 'Primero debes buscar o escanear un cliente.';
+      this.cdr.detectChanges();
       return;
     }
 
@@ -128,43 +140,57 @@ export class Staff implements OnInit, OnDestroy {
 
     if (!cleanInvoice) {
       this.purchaseError = 'Ingresa el número de factura.';
+      this.cdr.detectChanges();
       return;
     }
 
     if (!amount || amount <= 0) {
       this.purchaseError = 'Ingresa un monto válido.';
+      this.cdr.detectChanges();
       return;
     }
 
     this.purchaseLoading = true;
     this.purchaseError = '';
     this.purchaseSuccess = '';
+    this.cdr.detectChanges();
 
     this.http.post<PurchaseResponse>(`${this.apiUrl}/purchase`, {
       customer_code: this.customer.code,
       invoice_number: cleanInvoice,
       amount
-    }).subscribe({
-      next: (response) => {
-        this.zone.run(() => {
-          this.customer = response.customer;
-          this.customerCode = response.customer.code;
+    })
+      .pipe(
+        finalize(() => {
+          this.zone.run(() => {
+            this.purchaseLoading = false;
+            this.cdr.detectChanges();
+          });
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          this.zone.run(() => {
+            this.customer = response.customer;
+            this.customerCode = response.customer.code;
 
-          this.purchaseSuccess = `Compra registrada. Se sumaron ${response.purchase.points_earned} puntos.`;
-          this.invoiceNumber = '';
-          this.purchaseAmount = null;
-          this.purchaseLoading = false;
-        });
-      },
+            this.purchaseSuccess = `Compra registrada. Se sumaron ${response.purchase.points_earned} puntos.`;
+            this.invoiceNumber = '';
+            this.purchaseAmount = null;
 
-      error: (error) => {
-        this.zone.run(() => {
-          this.purchaseError =
-            error?.error?.detail || 'No se pudo registrar la compra.';
-          this.purchaseLoading = false;
-        });
-      }
-    });
+            this.cdr.detectChanges();
+          });
+        },
+
+        error: (error) => {
+          this.zone.run(() => {
+            this.purchaseError =
+              error?.error?.detail || 'No se pudo registrar la compra.';
+
+            this.cdr.detectChanges();
+          });
+        }
+      });
   }
 
   async startQrScanner(): Promise<void> {
@@ -173,12 +199,16 @@ export class Staff implements OnInit, OnDestroy {
     this.qrAlreadyProcessed = false;
     this.scannerMessage = 'Activando cámara...';
     this.scanning = true;
+    this.cdr.detectChanges();
 
     setTimeout(async () => {
       try {
         if (!this.qrVideo?.nativeElement) {
-          this.scannerMessage = 'No se encontró el visor de cámara.';
-          this.scanning = false;
+          this.zone.run(() => {
+            this.scannerMessage = 'No se encontró el visor de cámara.';
+            this.scanning = false;
+            this.cdr.detectChanges();
+          });
           return;
         }
 
@@ -196,6 +226,7 @@ export class Staff implements OnInit, OnDestroy {
             if (!extractedCode) {
               this.zone.run(() => {
                 this.scannerMessage = 'QR leído, pero no contiene un código válido.';
+                this.cdr.detectChanges();
               });
               return;
             }
@@ -207,15 +238,20 @@ export class Staff implements OnInit, OnDestroy {
               this.scannerMessage = 'QR leído correctamente.';
               this.stopQrScanner();
               this.searchCustomer();
+              this.cdr.detectChanges();
             });
           }
         );
 
-        this.scannerMessage = 'Apunta la cámara al QR del cliente.';
+        this.zone.run(() => {
+          this.scannerMessage = 'Apunta la cámara al QR del cliente.';
+          this.cdr.detectChanges();
+        });
       } catch {
         this.zone.run(() => {
           this.scannerMessage = 'No se pudo activar la cámara. Revisa permisos del navegador.';
           this.scanning = false;
+          this.cdr.detectChanges();
         });
       }
     }, 100);
@@ -228,6 +264,7 @@ export class Staff implements OnInit, OnDestroy {
     }
 
     this.scanning = false;
+    this.cdr.detectChanges();
   }
 
   private extractCustomerCode(qrText: string): string | null {
