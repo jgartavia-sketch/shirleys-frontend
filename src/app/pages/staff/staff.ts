@@ -55,7 +55,7 @@ export class Staff implements OnInit, OnDestroy {
 
   customer: Customer | null = null;
 
-  private readonly apiUrl = 'http://127.0.0.1:8000/api/customers';
+  private readonly apiUrl = 'https://shirleys-backend.onrender.com/api/customers';
 
   private qrReader = new BrowserQRCodeReader();
   private scannerControls?: IScannerControls;

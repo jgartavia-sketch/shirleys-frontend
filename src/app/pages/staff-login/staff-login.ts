@@ -24,7 +24,8 @@ export class StaffLogin {
   loading = false;
   error = '';
 
-  private readonly apiUrl = 'http://127.0.0.1:8000/api/staff/login';
+  private readonly apiUrl =
+    'https://shirleys-backend.onrender.com/api/staff/login';
 
   constructor(
     private http: HttpClient,
@@ -44,9 +45,12 @@ export class StaffLogin {
     }).subscribe({
       next: (response) => {
         localStorage.setItem('shirleys_staff_token', response.token);
+
         this.loading = false;
+
         this.router.navigate(['/staff']);
       },
+
       error: () => {
         this.loading = false;
         this.error = 'Contraseña incorrecta o acceso no autorizado.';

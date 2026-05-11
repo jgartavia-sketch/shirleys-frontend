@@ -45,7 +45,7 @@ export class CustomerCard implements OnInit {
   loading = true;
   error = false;
 
-  private readonly apiUrl = 'http://127.0.0.1:8000/api/customers';
+  private readonly apiUrl = 'https://shirleys-backend.onrender.com/api/customers';
 
   ngOnInit(): void {
     this.customerCode = this.route.snapshot.paramMap.get('code') || '';
