@@ -1,38 +1,101 @@
 <div class="customer-card-page">
-
   <div class="card-glow"></div>
 
   <div class="customer-card">
 
-    <div class="brand-section">
-      <h1>Shirley’s Customers</h1>
-      <p>Programa oficial de fidelización</p>
-    </div>
-
-    <div class="customer-avatar">
-      {{ customerName.charAt(0) }}
-    </div>
-
-    <div class="customer-info">
-
-      <h2>{{ customerName }}</h2>
-
-      <p class="email">
-        {{ customerEmail }}
-      </p>
-
-      <div class="points-box">
-        <span>Puntos acumulados</span>
-        <strong>{{ customerPoints }}</strong>
+    <!-- LOADING -->
+    <ng-container *ngIf="loading">
+      <div class="brand-section">
+        <h1>Shirley’s Customers</h1>
+        <p>Cargando tu perfil de fidelización...</p>
       </div>
 
-      <div class="customer-code">
-        Código:
-        <span>{{ customerCode }}</span>
+      <div class="customer-avatar skeleton-avatar"></div>
+
+      <div class="skeleton-line large"></div>
+      <div class="skeleton-line"></div>
+
+      <div class="points-box skeleton-points">
+        <div class="skeleton-line"></div>
+        <div class="skeleton-big"></div>
+      </div>
+    </ng-container>
+
+    <!-- ERROR -->
+    <ng-container *ngIf="!loading && error">
+      <div class="brand-section">
+        <h1>Shirley’s Customers</h1>
+        <p>Gracias por querer ser parte de la familia Shirley’s.</p>
       </div>
 
-    </div>
+      <div class="customer-avatar error-avatar">
+        !
+      </div>
+
+      <div class="customer-info">
+        <h2>Cliente no encontrado</h2>
+
+        <p class="email">
+          El código QR no es válido o el cliente no existe.
+        </p>
+      </div>
+    </ng-container>
+
+    <!-- CUSTOMER -->
+    <ng-container *ngIf="!loading && !error">
+      <div class="brand-section">
+        <h1>Shirley’s Customers</h1>
+        <p>Gracias por ser parte de la familia Shirley’s.</p>
+      </div>
+
+      <div class="customer-avatar">
+        {{ customerName.charAt(0) }}
+      </div>
+
+      <div class="customer-info">
+        <h2>{{ customerName }}</h2>
+
+        <p class="email">
+          {{ customerEmail }}
+        </p>
+
+        <div class="points-box">
+          <span>Puntos acumulados</span>
+          <strong>{{ customerPoints }}</strong>
+        </div>
+
+        <div class="customer-code">
+          Código:
+          <span>{{ customerCode }}</span>
+        </div>
+      </div>
+
+      <div class="purchase-section" *ngIf="purchases.length > 0">
+        <h3>Últimas compras</h3>
+
+        <div class="purchase-card" *ngFor="let purchase of purchases">
+          <div class="purchase-top">
+            <span class="invoice">
+              Factura #{{ purchase.invoice_number || 'N/A' }}
+            </span>
+
+            <span class="purchase-points">
+              +{{ purchase.points_earned || 0 }} pts
+            </span>
+          </div>
+
+          <div class="purchase-bottom">
+            <span>
+              ₡{{ purchase.amount || 0 }}
+            </span>
+
+            <span>
+              {{ purchase.created_at | date:'shortDate' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
 
   </div>
-
 </div>

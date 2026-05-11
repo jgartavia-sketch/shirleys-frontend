@@ -41,5 +41,16 @@ export const routes: Routes = [
     path: 'customers/:code',
     loadComponent: () =>
       import('./pages/customer-card/customer-card').then(m => m.CustomerCard)
+  },
+
+  {
+    path: 'staff',
+    loadComponent: () =>
+      import('./pages/staff/staff').then(m => m.Staff)
+  },
+
+  {
+    path: '**',
+    redirectTo: 'inicio'
   }
 ];

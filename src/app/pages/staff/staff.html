@@ -1,0 +1,87 @@
+<div class="staff-page">
+  <section class="staff-panel">
+    <div class="staff-header">
+      <p class="eyebrow">Shirley’s Customers</p>
+      <h1>Panel del mesero</h1>
+      <p>
+        Escanea el QR del cliente o escribe su código para ver su perfil y puntos acumulados.
+      </p>
+    </div>
+
+    <div class="scanner-actions">
+      <button
+        type="button"
+        class="scan-btn"
+        *ngIf="!scanning"
+        (click)="startQrScanner()"
+      >
+        Escanear QR
+      </button>
+
+      <button
+        type="button"
+        class="stop-btn"
+        *ngIf="scanning"
+        (click)="stopQrScanner()"
+      >
+        Detener cámara
+      </button>
+    </div>
+
+    <div class="scanner-box" *ngIf="scanning">
+      <video #qrVideo class="qr-video"></video>
+      <p>{{ scannerMessage }}</p>
+    </div>
+
+    <form class="search-box" (ngSubmit)="searchCustomer()">
+      <label for="customerCode">Código del cliente</label>
+
+      <div class="search-row">
+        <input
+          id="customerCode"
+          name="customerCode"
+          type="text"
+          [(ngModel)]="customerCode"
+          placeholder="Ej: SHR-20260510182740"
+          autocomplete="off"
+        />
+
+        <button type="submit" [disabled]="loading">
+          {{ loading ? 'Buscando...' : 'Buscar' }}
+        </button>
+      </div>
+    </form>
+
+    <div class="loading-card" *ngIf="loading">
+      Consultando cliente...
+    </div>
+
+    <div class="error-card" *ngIf="!loading && error">
+      Cliente no encontrado. Revisa el código e intenta de nuevo.
+    </div>
+
+    <div class="customer-result" *ngIf="!loading && customer">
+      <div class="customer-avatar">
+        {{ customer.name.charAt(0) }}
+      </div>
+
+      <div class="customer-data">
+        <p class="eyebrow">Cliente identificado</p>
+        <h2>{{ customer.name }}</h2>
+
+        <p>{{ customer.email }}</p>
+        <p>WhatsApp: {{ customer.whatsapp }}</p>
+
+        <div class="points-box">
+          <span>Puntos disponibles</span>
+          <strong>{{ customer.points }}</strong>
+        </div>
+
+        <div class="customer-code">
+          Código:
+          <span>{{ customer.code }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
