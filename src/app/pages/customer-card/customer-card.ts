@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -33,6 +33,8 @@ interface CustomerResponse {
 export class CustomerCard implements OnInit {
   private route = inject(ActivatedRoute);
   private http = inject(HttpClient);
+  private zone = inject(NgZone);
+  private cdr = inject(ChangeDetectorRef);
 
   customerCode = '';
   customerName = 'Cargando cliente...';
@@ -49,50 +51,46 @@ export class CustomerCard implements OnInit {
 
   ngOnInit(): void {
     this.customerCode = this.route.snapshot.paramMap.get('code') || '';
-
-    console.log('Código recibido desde la ruta:', this.customerCode);
-
     this.loadCustomer();
   }
 
   loadCustomer(): void {
     if (!this.customerCode) {
-      console.error('No llegó ningún código en la ruta.');
       this.showError();
       return;
     }
 
     const requestUrl = `${this.apiUrl}/${this.customerCode}`;
 
-    console.log('Consultando backend:', requestUrl);
-
     this.loading = true;
     this.error = false;
+    this.cdr.detectChanges();
 
     this.http.get<CustomerResponse>(requestUrl).subscribe({
       next: (data) => {
-        console.log('Respuesta del backend:', data);
+        this.zone.run(() => {
+          if (!data || !data.customer) {
+            this.showError();
+            return;
+          }
 
-        if (!data || !data.customer) {
-          console.error('La respuesta no trae customer.');
-          this.showError();
-          return;
-        }
+          this.customerName = data.customer.name || 'Cliente Shirley’s';
+          this.customerEmail = data.customer.email || '';
+          this.customerWhatsapp = data.customer.whatsapp || '';
+          this.customerPoints = data.customer.points || 0;
+          this.purchases = data.purchases || [];
 
-        this.customerName = data.customer.name || 'Cliente Shirley’s';
-        this.customerEmail = data.customer.email || '';
-        this.customerWhatsapp = data.customer.whatsapp || '';
-        this.customerPoints = data.customer.points || 0;
-        this.purchases = data.purchases || [];
+          this.loading = false;
+          this.error = false;
 
-        this.loading = false;
-        this.error = false;
-
-        console.log('Cliente renderizado correctamente.');
+          this.cdr.detectChanges();
+        });
       },
-      error: (error) => {
-        console.error('Error cargando cliente:', error);
-        this.showError();
+      error: () => {
+        this.zone.run(() => {
+          this.showError();
+          this.cdr.detectChanges();
+        });
       }
     });
   }
