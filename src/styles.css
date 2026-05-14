@@ -149,6 +149,83 @@ section {
   animation: fadeIn 0.8s ease both;
 }
 
+/* =========================
+   SCROLL ANIMATIONS
+========================= */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(38px) scale(0.985);
+  filter: blur(8px);
+
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* cinematic stagger */
+
+.point-card:nth-child(1),
+.footer-column:nth-child(1) {
+  transition-delay: 0.08s;
+}
+
+.point-card:nth-child(2),
+.footer-column:nth-child(2) {
+  transition-delay: 0.16s;
+}
+
+.point-card:nth-child(3),
+.footer-column:nth-child(3) {
+  transition-delay: 0.24s;
+}
+
+.info-card:nth-child(1),
+.contact-card:nth-child(1) {
+  transition-delay: 0.08s;
+}
+
+.info-card:nth-child(2),
+.contact-card:nth-child(2) {
+  transition-delay: 0.16s;
+}
+
+.info-card:nth-child(3),
+.contact-card:nth-child(3) {
+  transition-delay: 0.24s;
+}
+
+/* smooth floating atmosphere */
+
+@keyframes ambientFloat {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.mock-phone,
+.info-card,
+.contact-card {
+  animation: ambientFloat 6s ease-in-out infinite;
+}
+
+/* premium fade */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
