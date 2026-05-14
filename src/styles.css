@@ -1,1 +1,162 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700;800&display=swap');
+
+:root {
+  --background-dark: #050805;
+  --background-soft: #0d140d;
+
+  --gold-primary: #d4af37;
+  --gold-soft: #f2c866;
+
+  --text-primary: #fff3d1;
+  --text-secondary: #e8dec5;
+
+  --glass-border: rgba(255, 240, 207, 0.12);
+
+  --shadow-premium:
+    0 20px 60px rgba(0, 0, 0, 0.45);
+
+  --transition-smooth: 0.28s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left,
+      rgba(212, 175, 55, 0.08),
+      transparent 24%
+    ),
+    linear-gradient(
+      135deg,
+      #050805,
+      #0b130c 52%,
+      #101710
+    );
+
+  color: var(--text-primary);
+
+  font-family: 'Inter', sans-serif;
+
+  overflow-x: hidden;
+
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+p,
+span,
+a,
+button,
+input,
+textarea {
+  font-family: 'Inter', sans-serif;
+}
+
+button,
+a {
+  transition:
+    transform var(--transition-smooth),
+    opacity var(--transition-smooth),
+    background var(--transition-smooth),
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth);
+}
+
+button:hover,
+a:hover {
+  transform: translateY(-2px);
+}
+
+::selection {
+  background: rgba(212, 175, 55, 0.28);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070b07;
+}
+
+::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(
+      180deg,
+      #d4af37,
+      #8d6b14
+    );
+
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(
+      180deg,
+      #f2c866,
+      #b98d1e
+    );
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+section {
+  position: relative;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+
+  backdrop-filter: blur(18px);
+
+  border: 1px solid var(--glass-border);
+
+  box-shadow: var(--shadow-premium);
+}
+
+.gold-glow {
+  box-shadow:
+    0 0 40px rgba(212, 175, 55, 0.14);
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
