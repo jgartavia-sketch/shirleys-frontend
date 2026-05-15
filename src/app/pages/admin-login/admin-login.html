@@ -1,0 +1,56 @@
+<section class="admin-login-page">
+
+  <div class="login-overlay"></div>
+
+  <div class="admin-login-card">
+
+    <span class="login-tag">
+      Shirley’s Executive Access
+    </span>
+
+    <h1>Panel Administrativo</h1>
+
+    <p>
+      Acceso interno autorizado para administración, clientes y operaciones.
+    </p>
+
+    <form (ngSubmit)="login()">
+
+      <div class="input-group">
+        <label>Correo administrativo</label>
+
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="admin@shirleyscr.com"
+        />
+      </div>
+
+      <div class="input-group">
+        <label>Contraseña</label>
+
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="••••••••••"
+        />
+      </div>
+
+      <div class="error-box" *ngIf="error">
+        {{ error }}
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="loading"
+      >
+        {{ loading ? 'Verificando acceso...' : 'Ingresar al panel' }}
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
