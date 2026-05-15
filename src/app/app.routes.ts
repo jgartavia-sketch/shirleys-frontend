@@ -56,6 +56,12 @@ export const routes: Routes = [
   },
 
   {
+    path: 'admin',
+    loadComponent: () =>
+      import('./pages/admin/admin').then(m => m.Admin)
+  },
+
+  {
     path: '**',
     redirectTo: 'inicio'
   }

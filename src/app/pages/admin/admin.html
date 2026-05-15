@@ -1,0 +1,55 @@
+<section class="admin-page">
+
+  <div class="admin-hero">
+    <span class="admin-kicker">Shirley’s Admin Panel</span>
+    <h1>Centro administrativo</h1>
+    <p>
+      Panel interno para visualizar clientes, puntos, compras y actividad del programa
+      Shirley’s Customers.
+    </p>
+  </div>
+
+  <div class="admin-stats">
+    <article class="stat-card" *ngFor="let stat of stats">
+      <span>{{ stat.title }}</span>
+      <strong>{{ stat.value }}</strong>
+      <p>{{ stat.subtitle }}</p>
+    </article>
+  </div>
+
+  <div class="admin-grid">
+
+    <section class="admin-card">
+      <div class="card-header">
+        <h2>Clientes recientes</h2>
+        <span>Actividad inicial</span>
+      </div>
+
+      <div class="customer-row" *ngFor="let customer of recentCustomers">
+        <div>
+          <strong>{{ customer.name }}</strong>
+          <p>{{ customer.visits }} visitas registradas</p>
+        </div>
+
+        <span>{{ customer.points }} pts</span>
+      </div>
+    </section>
+
+    <section class="admin-card">
+      <div class="card-header">
+        <h2>Próximos módulos</h2>
+        <span>Roadmap interno</span>
+      </div>
+
+      <ul class="roadmap-list">
+        <li>Buscar clientes por nombre, correo o WhatsApp</li>
+        <li>Ver historial de compras por número de factura</li>
+        <li>Editar puntos manualmente con permiso admin</li>
+        <li>Dashboard de estadísticas y clientes frecuentes</li>
+        <li>Integración futura con facturación Noha System</li>
+      </ul>
+    </section>
+
+  </div>
+
+</section>
