@@ -16,7 +16,12 @@ interface CateringEvent {
   styleUrl: './catering.css',
 })
 export class Catering {
+  private readonly apiUrl = 'http://localhost:3001/api/catering/quote';
+
   selectedEvent = 'baby-showers';
+  loading = false;
+  successMessage = '';
+  errorMessage = '';
 
   events: CateringEvent[] = [
     {
@@ -51,13 +56,64 @@ export class Catering {
 
   selectEvent(eventId: string): void {
     this.selectedEvent = eventId;
+    this.successMessage = '';
+    this.errorMessage = '';
   }
 
-  submitQuote(event: Event): void {
+  async submitQuote(event: Event): Promise<void> {
     event.preventDefault();
 
-    alert(
-      `Solicitud registrada para: ${this.selectedEventName}\n\nPronto conectaremos este formulario al backend.`
-    );
+    if (this.loading) return;
+
+    const form = event.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    const payload = {
+      event_type: this.selectedEventName,
+      name: String(formData.get('name') || '').trim(),
+      email: String(formData.get('email') || '').trim(),
+      whatsapp: String(formData.get('whatsapp') || '').trim(),
+      event_date: String(formData.get('eventDate') || '').trim(),
+      message: String(formData.get('message') || '').trim(),
+    };
+
+    this.successMessage = '';
+    this.errorMessage = '';
+
+    if (!payload.name || !payload.email || !payload.whatsapp || !payload.event_date) {
+      this.errorMessage = 'Complete nombre, correo, WhatsApp y fecha del evento.';
+      return;
+    }
+
+    try {
+      this.loading = true;
+
+      const response = await fetch(this.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.detail || 'No se pudo enviar la solicitud.');
+      }
+
+      this.successMessage =
+        'Solicitud enviada correctamente. Shirley’s le contactará pronto por WhatsApp.';
+
+      form.reset();
+      this.selectedEvent = 'baby-showers';
+    } catch (error) {
+      this.errorMessage =
+        error instanceof Error
+          ? error.message
+          : 'No se pudo enviar la solicitud. Intente nuevamente.';
+    } finally {
+      this.loading = false;
+    }
   }
 }

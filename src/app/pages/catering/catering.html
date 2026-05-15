@@ -110,8 +110,30 @@
         <strong>{{ selectedEventName }}</strong>
       </div>
 
-      <button type="submit" class="reserve-btn">
-        Solicitar cotización
+      <div
+        class="success-message"
+        *ngIf="successMessage"
+      >
+        {{ successMessage }}
+      </div>
+
+      <div
+        class="error-message"
+        *ngIf="errorMessage"
+      >
+        {{ errorMessage }}
+      </div>
+
+      <button
+        type="submit"
+        class="reserve-btn"
+        [disabled]="loading"
+      >
+        {{
+          loading
+            ? 'Enviando solicitud...'
+            : 'Solicitar cotización'
+        }}
       </button>
     </div>
   </form>
