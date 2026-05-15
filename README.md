@@ -1,103 +1,92 @@
-````md
-# 🍽️ Shirley’s CR
+# Shirley’s CR 🍽️
 
-> Modern restaurant platform focused on customer experience, catering services, loyalty systems, and operational optimization.
-
----
+Modern restaurant platform focused on digital customer experience, catering services, loyalty systems, and operational optimization.
 
 ## 🌐 Live Website
 
-🔗 https://www.shirleyscr.com
+[https://www.shirleyscr.com](https://www.shirleyscr.com)
 
 ---
 
-# 📖 About The Project
+# About The Project
 
-Shirley’s CR is a modern restaurant platform currently under active development.
+Shirley’s CR is a modern restaurant web platform currently under active development.
 
 The project combines:
 
-- Restaurant presentation website
-- Catering service management
-- Customer loyalty ecosystem
-- QR-based customer experience
-- Operational workflows
-- Digital reservations
-- Future AI-assisted operational tools
+* Restaurant presentation website
+* Catering service management
+* Customer loyalty ecosystem
+* QR-based customer experience
+* Operational workflows
+* Digital reservations
+* Future AI-assisted operational tools
 
-The objective is to create a scalable digital ecosystem capable of improving customer interaction, operational organization, and long-term business growth.
-
----
-
-# 🚀 Current Features
-
-## Frontend
-
-- Modern responsive UI
-- Premium restaurant-style design
-- Angular architecture
-- Responsive navigation system
-- Catering section
-- Contact page
-- Dynamic homepage
-- Mobile-first optimization
-
-## Shirley’s Customers
-
-- Customer registration system
-- QR customer identification
-- Customer points system
-- Staff operational workflow
-- Customer profile pages
-- Future invoice integration
+The goal is not only to build a restaurant website, but to create a scalable digital ecosystem capable of improving customer interaction, operational organization, and business growth.
 
 ---
 
-# 🛠️ Technologies Used
+# Current Features
 
 ## Frontend
 
-```bash
-Angular
-TypeScript
-HTML5
-CSS3
-````
+* Modern responsive UI
+* Premium restaurant-style design
+* Angular architecture
+* Responsive navigation system
+* Catering section
+* Contact page
+* Dynamic homepage
+* Mobile-first optimization
+
+## Loyalty System — Shirley’s Customers
+
+* Customer registration system
+* QR customer identification
+* Customer points system
+* Staff operational workflow
+* Customer profile pages
+* Future invoice integration
+
+---
+
+# Technologies Used
+
+## Frontend
+
+* Angular
+* TypeScript
+* HTML5
+* CSS3
 
 ## Backend
 
-```bash
-Python
-FastAPI
-REST APIs
-```
+* Python
+* FastAPI
+* REST APIs
 
 ## Database
 
-```bash
-SQLite (Current MVP)
-PostgreSQL (Future Infrastructure)
-```
+* SQLite (Current MVP)
+* PostgreSQL (Future scalable infrastructure)
 
 ## Infrastructure & Tools
 
-```bash
-GitHub
-Vercel
-Render
-Hostinger
-VS Code
-```
+* GitHub
+* Vercel
+* Render
+* Hostinger
+* VS Code
 
 ---
 
-# ⚠️ Development Status
+# Current Development Status
 
-This project is currently under active development.
+⚠️ This project is currently under active development.
 
 New features, integrations, optimizations, and infrastructure improvements are continuously being added.
 
-### Planned Roadmap
+Future roadmap includes:
 
 * Real invoice integrations
 * Advanced customer analytics
@@ -109,33 +98,29 @@ New features, integrations, optimizations, and infrastructure improvements are c
 
 ---
 
-# 🎯 Vision
+# Vision
 
 Shirley’s CR is designed to evolve beyond a traditional restaurant website.
 
-The long-term vision is to build a digital-first restaurant ecosystem where customer experience, operational efficiency, loyalty systems, and intelligent workflows operate together within a single scalable platform.
+The long-term vision is to build a digital-first restaurant ecosystem where customer experience, operational efficiency, loyalty systems, and intelligent workflows work together in a single platform.
 
 ---
 
-# 👨‍💻 Developer
+# Developer
 
-**José G. Artavia**
+Developed by José G. Artavia
 
 * Full Stack Developer
 * Operations & Project Management
 * AgriTech Founder
 
-### GitHub
-
-🔗 [https://github.com/jgartavia-sketch](https://github.com/jgartavia-sketch)
+GitHub:
+[https://github.com/jgartavia-sketch](https://github.com/jgartavia-sketch)
 
 ---
 
-# 📍 Preview
+# Preview
 
 Visit the live platform:
 
 👉 [https://www.shirleyscr.com](https://www.shirleyscr.com)
-
-```
-```
