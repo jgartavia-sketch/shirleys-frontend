@@ -5,50 +5,114 @@
     <h1>Eventos que dejan recuerdos.</h1>
 
     <p>
-      En Shirley’s nos encargamos de cada detalle para que usted disfrute
-      momentos especiales con excelente comida y atención.
+      Elija el tipo de evento, complete sus datos y solicite una cotización
+      personalizada para vivir la experiencia Shirley’s.
     </p>
   </div>
 
-  <div class="services-grid">
-    <div class="service-card">
-      <h3>Baby Showers</h3>
+  <form class="catering-form" (submit)="submitQuote($event)">
+    <div class="form-section">
+      <span class="section-label">PASO 1</span>
+
+      <h2>¿Qué tipo de evento desea cotizar?</h2>
+
       <p>
-        Menús y presentación especial para celebrar momentos inolvidables.
+        Seleccione una opción para personalizar su solicitud.
       </p>
+
+      <div class="services-grid">
+        <button
+          type="button"
+          class="service-card"
+          *ngFor="let event of events"
+          [class.selected]="selectedEvent === event.id"
+          (click)="selectEvent(event.id)"
+        >
+          <span>{{ event.number }}</span>
+
+          <h3>{{ event.title }}</h3>
+
+          <p>
+            {{ event.description }}
+          </p>
+        </button>
+      </div>
     </div>
 
-    <div class="service-card">
-      <h3>Cumpleaños</h3>
+    <div class="form-section quote-panel">
+      <span class="section-label">PASO 2</span>
+
+      <h2>Datos para la cotización</h2>
+
       <p>
-        Comida deliciosa y ambiente cálido para compartir con familia y amigos.
+        Con esta información Shirley’s podrá coordinar disponibilidad y detalles
+        del evento.
       </p>
+
+      <div class="inputs-grid">
+        <label>
+          Nombre completo
+
+          <input
+            type="text"
+            name="name"
+            placeholder="Ej: María González"
+            required
+          />
+        </label>
+
+        <label>
+          Correo electrónico
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Ej: correo@email.com"
+            required
+          />
+        </label>
+
+        <label>
+          WhatsApp
+
+          <input
+            type="tel"
+            name="whatsapp"
+            placeholder="Ej: 8888-8888"
+            required
+          />
+        </label>
+
+        <label>
+          Fecha del evento
+
+          <input
+            type="date"
+            name="eventDate"
+            required
+          />
+        </label>
+      </div>
+
+      <label class="full-message">
+        Detalles adicionales
+
+        <textarea
+          name="message"
+          rows="5"
+          placeholder="Cantidad aproximada de personas, lugar del evento o detalles importantes..."
+        ></textarea>
+      </label>
+
+      <div class="selected-summary">
+        <span>Evento seleccionado</span>
+
+        <strong>{{ selectedEventName }}</strong>
+      </div>
+
+      <button type="submit" class="reserve-btn">
+        Solicitar cotización
+      </button>
     </div>
-
-    <div class="service-card">
-      <h3>Reuniones</h3>
-      <p>
-        Opciones ideales para encuentros empresariales y sociales.
-      </p>
-    </div>
-
-    <div class="service-card">
-      <h3>Bodas & Eventos</h3>
-      <p>
-        Servicio elegante y personalizado para fechas especiales.
-      </p>
-    </div>
-  </div>
-
-  <div class="reservation-box">
-    <h2>Reservar fecha</h2>
-
-    <p>
-      Coordine su evento con nosotros y asegure una experiencia única.
-    </p>
-
-    <a routerLink="/contacto" class="reserve-btn">
-      Contactar ahora
-    </a>
-  </div>
+  </form>
 </section>

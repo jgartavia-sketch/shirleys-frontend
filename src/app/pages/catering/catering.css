@@ -1,153 +1,224 @@
 .catering-page {
   min-height: 100vh;
-
   padding: 220px 8% 100px;
-
   background:
-    linear-gradient(
-      180deg,
-      rgba(6, 10, 7, 0.98),
-      rgba(12, 18, 12, 0.98)
-    );
-
+    radial-gradient(circle at top right, rgba(212, 175, 55, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(6, 10, 7, 0.98), rgba(12, 18, 12, 0.98));
   color: #f7f0df;
 }
 
 .page-header {
-  max-width: 760px;
+  max-width: 820px;
   margin-bottom: 60px;
 }
 
-.page-header span {
+.page-header span,
+.section-label {
   display: inline-block;
   margin-bottom: 14px;
-
   color: #d4af37;
-
   letter-spacing: 2px;
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.78rem;
+  font-weight: 800;
 }
 
 .page-header h1 {
   margin: 0 0 22px;
-
   color: #fff7df;
-
-  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
   line-height: 1;
 }
 
-.page-header p {
+.page-header p,
+.form-section p {
   color: #e8dec5;
-
   line-height: 1.8;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+}
+
+.catering-form {
+  display: grid;
+  gap: 34px;
+}
+
+.form-section {
+  padding: clamp(28px, 4vw, 48px);
+  border-radius: 34px;
+  border: 1px solid rgba(212, 175, 55, 0.16);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+  box-shadow: 0 24px 70px rgba(0,0,0,0.32);
+}
+
+.form-section h2 {
+  margin: 0 0 12px;
+  color: #fff7df;
+  font-size: clamp(2rem, 4vw, 3.2rem);
 }
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-
-  margin-bottom: 70px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  margin-top: 34px;
 }
 
 .service-card {
-  padding: 34px;
-
-  border-radius: 28px;
-
+  position: relative;
+  min-height: 230px;
+  padding: 32px;
+  border-radius: 30px;
   border: 1px solid rgba(212, 175, 55, 0.16);
-
   background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,0.06),
-      rgba(255,255,255,0.02)
-    );
-
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-
+    linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+  box-shadow: 0 20px 55px rgba(0,0,0,0.28);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
   transition: 0.3s ease;
 }
 
-.service-card:hover {
+.service-card:hover,
+.service-card.selected {
   transform: translateY(-6px);
+  border-color: rgba(212, 175, 55, 0.65);
+  background:
+    linear-gradient(145deg, rgba(212,175,55,0.18), rgba(255,255,255,0.035));
+}
 
-  border-color: rgba(212, 175, 55, 0.42);
+.service-card.selected::after {
+  content: "Seleccionado";
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #071007;
+  background: #d4af37;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.service-card span {
+  display: block;
+  margin-bottom: 42px;
+  color: rgba(255, 247, 223, 0.38);
+  font-weight: 900;
 }
 
 .service-card h3 {
-  margin-top: 0;
-  margin-bottom: 16px;
-
+  margin: 0 0 16px;
   color: #d4af37;
-
-  font-size: 1.5rem;
+  font-size: 1.55rem;
 }
 
 .service-card p {
+  margin: 0;
   color: #e8dec5;
-
-  line-height: 1.8;
+  line-height: 1.75;
 }
 
-.reservation-box {
-  padding: 50px;
-
-  border-radius: 32px;
-
-  text-align: center;
-
-  border: 1px solid rgba(212, 175, 55, 0.18);
-
+.quote-panel {
   background:
-    linear-gradient(
-      145deg,
-      rgba(212,175,55,0.12),
-      rgba(255,255,255,0.03)
-    );
+    radial-gradient(circle at top left, rgba(212,175,55,0.14), transparent 36%),
+    linear-gradient(145deg, rgba(255,255,255,0.065), rgba(255,255,255,0.025));
 }
 
-.reservation-box h2 {
-  margin-top: 0;
+.inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-top: 34px;
+}
 
+label {
+  display: grid;
+  gap: 10px;
+  color: #f7f0df;
+  font-weight: 700;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 17px 18px;
+  border: 1px solid rgba(212, 175, 55, 0.16);
+  border-radius: 18px;
+  outline: none;
+  background: rgba(255,255,255,0.07);
   color: #fff7df;
-
-  font-size: 2.5rem;
+  font: inherit;
+  transition: 0.25s ease;
 }
 
-.reservation-box p {
-  max-width: 650px;
+textarea {
+  resize: vertical;
+}
 
-  margin: 0 auto 30px;
+input:focus,
+textarea:focus {
+  border-color: rgba(212, 175, 55, 0.7);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.11);
+}
 
+.full-message {
+  margin-top: 22px;
+}
+
+.selected-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 28px 0;
+  padding: 20px 22px;
+  border-radius: 22px;
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  background: rgba(0,0,0,0.22);
+}
+
+.selected-summary span {
   color: #e8dec5;
+}
 
-  line-height: 1.8;
+.selected-summary strong {
+  color: #d4af37;
+  font-size: 1.1rem;
 }
 
 .reserve-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 14px 28px;
-
+  width: 100%;
+  min-height: 56px;
+  border: none;
   border-radius: 999px;
-
-  text-decoration: none;
-  font-weight: 700;
-
   color: #071007;
-  background: #d4af37;
-
+  background: linear-gradient(135deg, #d4af37, #f0ca57);
+  font-weight: 900;
+  font-size: 1rem;
+  cursor: pointer;
   transition: 0.3s ease;
 }
 
 .reserve-btn:hover {
   transform: translateY(-3px);
+  box-shadow: 0 18px 45px rgba(212,175,55,0.24);
+}
 
-  background: #f0ca57;
+@media (max-width: 760px) {
+  .catering-page {
+    padding: 160px 6% 80px;
+  }
+
+  .inputs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .selected-summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .service-card {
+    min-height: auto;
+  }
 }
