@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface CateringEvent {
@@ -16,6 +16,7 @@ interface CateringEvent {
   styleUrl: './catering.css',
 })
 export class Catering {
+  private readonly cdr = inject(ChangeDetectorRef);
   private readonly apiUrl = 'http://localhost:3001/api/catering/quote';
 
   selectedEvent = 'baby-showers';
@@ -82,11 +83,13 @@ export class Catering {
 
     if (!payload.name || !payload.email || !payload.whatsapp || !payload.event_date) {
       this.errorMessage = 'Complete nombre, correo, WhatsApp y fecha del evento.';
+      this.cdr.detectChanges();
       return;
     }
 
     try {
       this.loading = true;
+      this.cdr.detectChanges();
 
       const response = await fetch(this.apiUrl, {
         method: 'POST',
@@ -102,11 +105,10 @@ export class Catering {
         throw new Error(data.detail || 'No se pudo enviar la solicitud.');
       }
 
-      this.successMessage =
-        'Solicitud enviada correctamente. Shirley’s le contactará pronto por WhatsApp.';
-
       form.reset();
       this.selectedEvent = 'baby-showers';
+      this.successMessage =
+        'Solicitud enviada correctamente. Shirley’s le contactará pronto por WhatsApp.';
     } catch (error) {
       this.errorMessage =
         error instanceof Error
@@ -114,6 +116,7 @@ export class Catering {
           : 'No se pudo enviar la solicitud. Intente nuevamente.';
     } finally {
       this.loading = false;
+      this.cdr.detectChanges();
     }
   }
 }
