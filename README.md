@@ -1,59 +1,141 @@
-# Shirleys
+````md
+# 🍽️ Shirley’s CR
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.10.
+> Modern restaurant platform focused on customer experience, catering services, loyalty systems, and operational optimization.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🌐 Live Website
+
+🔗 https://www.shirleyscr.com
+
+---
+
+# 📖 About The Project
+
+Shirley’s CR is a modern restaurant platform currently under active development.
+
+The project combines:
+
+- Restaurant presentation website
+- Catering service management
+- Customer loyalty ecosystem
+- QR-based customer experience
+- Operational workflows
+- Digital reservations
+- Future AI-assisted operational tools
+
+The objective is to create a scalable digital ecosystem capable of improving customer interaction, operational organization, and long-term business growth.
+
+---
+
+# 🚀 Current Features
+
+## Frontend
+
+- Modern responsive UI
+- Premium restaurant-style design
+- Angular architecture
+- Responsive navigation system
+- Catering section
+- Contact page
+- Dynamic homepage
+- Mobile-first optimization
+
+## Shirley’s Customers
+
+- Customer registration system
+- QR customer identification
+- Customer points system
+- Staff operational workflow
+- Customer profile pages
+- Future invoice integration
+
+---
+
+# 🛠️ Technologies Used
+
+## Frontend
 
 ```bash
-ng serve
-```
+Angular
+TypeScript
+HTML5
+CSS3
+````
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Backend
 
 ```bash
-ng generate --help
+Python
+FastAPI
+REST APIs
 ```
 
-## Building
-
-To build the project run:
+## Database
 
 ```bash
-ng build
+SQLite (Current MVP)
+PostgreSQL (Future Infrastructure)
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Infrastructure & Tools
 
 ```bash
-ng test
+GitHub
+Vercel
+Render
+Hostinger
+VS Code
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+# ⚠️ Development Status
 
-```bash
-ng e2e
+This project is currently under active development.
+
+New features, integrations, optimizations, and infrastructure improvements are continuously being added.
+
+### Planned Roadmap
+
+* Real invoice integrations
+* Advanced customer analytics
+* AI-assisted workflows
+* Operational dashboards
+* Enhanced reservation systems
+* Automated customer engagement tools
+* Scalable cloud infrastructure
+
+---
+
+# 🎯 Vision
+
+Shirley’s CR is designed to evolve beyond a traditional restaurant website.
+
+The long-term vision is to build a digital-first restaurant ecosystem where customer experience, operational efficiency, loyalty systems, and intelligent workflows operate together within a single scalable platform.
+
+---
+
+# 👨‍💻 Developer
+
+**José G. Artavia**
+
+* Full Stack Developer
+* Operations & Project Management
+* AgriTech Founder
+
+### GitHub
+
+🔗 [https://github.com/jgartavia-sketch](https://github.com/jgartavia-sketch)
+
+---
+
+# 📍 Preview
+
+Visit the live platform:
+
+👉 [https://www.shirleyscr.com](https://www.shirleyscr.com)
+
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```
