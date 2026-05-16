@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -9,7 +9,6 @@ interface AdminSummary {
   total_points_delivered: number;
   average_ticket: number;
   new_customers_this_month: number;
-
   top_customers: TopCustomer[];
   recent_purchases: RecentPurchase[];
 }
@@ -30,7 +29,6 @@ interface RecentPurchase {
   amount: number;
   points_earned: number;
   created_at: string;
-
   customer: {
     code: string;
     name: string;
@@ -49,6 +47,7 @@ interface RecentPurchase {
 export class Admin implements OnInit {
 
   private apiUrl = 'https://shirleys-backend.onrender.com/api/admin/summary';
+
   loading = true;
   error = '';
 
@@ -63,44 +62,46 @@ export class Admin implements OnInit {
     recent_purchases: [],
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadAdminSummary();
   }
 
   loadAdminSummary(): void {
-
     this.loading = true;
     this.error = '';
 
     this.http.get<AdminSummary>(this.apiUrl).subscribe({
       next: (response) => {
-
         this.summary = response;
-
         this.loading = false;
+        this.error = '';
 
         console.log('✅ Admin summary loaded:', response);
+
+        this.cdr.detectChanges();
       },
 
       error: (error) => {
-
         console.error('❌ Error loading admin summary:', error);
 
         this.error = 'No se pudo cargar el panel administrativo.';
-
         this.loading = false;
+
+        this.cdr.detectChanges();
       }
     });
   }
 
   formatCurrency(value: number): string {
-
     return new Intl.NumberFormat('es-CR', {
       style: 'currency',
       currency: 'CRC',
       maximumFractionDigits: 0,
-    }).format(value);
+    }).format(value || 0);
   }
 }
