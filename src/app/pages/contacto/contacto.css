@@ -1,6 +1,7 @@
+```css
 .contact-page {
   min-height: 100vh;
-  padding: 220px 8% 100px;
+  padding: var(--page-top-space, 220px) 8% 100px;
   background: linear-gradient(180deg, rgba(6, 10, 7, 0.98), rgba(10, 16, 10, 0.98));
   color: #f7f0df;
 }
@@ -132,7 +133,12 @@
 
 @media (max-width: 760px) {
   .contact-page {
-    padding: 150px 22px 70px;
+    padding: var(--page-top-space, 210px) 22px 70px;
+  }
+
+  .page-header h1,
+  .social-header h2 {
+    line-height: 1.08;
   }
 
   .contact-card,
