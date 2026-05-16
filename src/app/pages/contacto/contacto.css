@@ -1,138 +1,15 @@
-.contact-page {
-  min-height: 100vh;
-  padding: 220px 8% 100px;
-  background: linear-gradient(180deg, rgba(6, 10, 7, 0.98), rgba(10, 16, 10, 0.98));
-  color: #f7f0df;
-}
-
-.page-header {
-  max-width: 760px;
-  margin-bottom: 60px;
-}
-
-.page-header span,
-.social-header span {
-  display: inline-block;
-  margin-bottom: 14px;
-  color: #d4af37;
-  letter-spacing: 2px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.page-header h1,
-.social-header h2 {
-  margin: 0 0 22px;
-  color: #fff7df;
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  line-height: 1;
-}
-
-.page-header p,
-.social-header p {
-  color: #e8dec5;
-  line-height: 1.8;
-  font-size: 1.1rem;
-}
-
-.contact-grid,
-.social-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-}
-
-.contact-card,
-.social-card {
-  padding: 36px;
-  border-radius: 30px;
-  border: 1px solid rgba(212, 175, 55, 0.16);
-  background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  transition: 0.3s ease;
-}
-
-.contact-card:hover,
-.social-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(212, 175, 55, 0.42);
-}
-
-.contact-card h3,
-.social-card h3 {
-  margin-top: 0;
-  margin-bottom: 14px;
-  color: #d4af37;
-  font-size: 1.45rem;
-}
-
-.contact-card p,
-.social-card p {
-  margin-bottom: 12px;
-  color: #e8dec5;
-  line-height: 1.8;
-}
-
-.social-section {
-  margin-top: 90px;
-}
-
-.social-header {
-  max-width: 840px;
-  margin-bottom: 38px;
-}
-
-.social-header h2 {
-  font-size: clamp(2.3rem, 5vw, 4rem);
-}
-
-.social-card {
-  display: flex;
-  gap: 22px;
-  align-items: flex-start;
-  text-decoration: none;
-  color: inherit;
-  position: relative;
-  overflow: hidden;
-}
-
-.social-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.16), transparent 42%);
-  transition: 0.3s ease;
-}
-
-.social-card:hover::before {
-  opacity: 1;
-}
-
-.social-icon {
-  position: relative;
-  z-index: 1;
-  flex: 0 0 54px;
-  height: 54px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  background: rgba(212, 175, 55, 0.12);
-  border: 1px solid rgba(212, 175, 55, 0.22);
-  color: #ffe08a;
-  font-size: 1.6rem;
-  font-weight: 800;
-}
-
-.social-card div:last-child {
-  position: relative;
-  z-index: 1;
-}
-
 @media (max-width: 760px) {
   .contact-page {
-    padding: 150px 22px 70px;
+    padding: 250px 22px 70px;
+  }
+
+  .page-header {
+    margin-bottom: 52px;
+  }
+
+  .page-header h1,
+  .social-header h2 {
+    line-height: 1.08;
   }
 
   .contact-card,
