@@ -48,8 +48,7 @@ interface RecentPurchase {
 })
 export class Admin implements OnInit {
 
-  private apiUrl = 'https://TU-BACKEND.onrender.com/api/admin/summary';
-
+  private apiUrl = 'https://shirleys-backend.onrender.com/api/admin/summary';
   loading = true;
   error = '';
 
