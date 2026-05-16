@@ -4,52 +4,99 @@
     <span class="admin-kicker">Shirley’s Admin Panel</span>
     <h1>Centro administrativo</h1>
     <p>
-      Panel interno para visualizar clientes, puntos, compras y actividad del programa
-      Shirley’s Customers.
+      Datos reales del programa Shirley’s Customers para tomar decisiones sobre clientes,
+      compras, puntos y recurrencia.
     </p>
   </div>
 
-  <div class="admin-stats">
-    <article class="stat-card" *ngFor="let stat of stats">
-      <span>{{ stat.title }}</span>
-      <strong>{{ stat.value }}</strong>
-      <p>{{ stat.subtitle }}</p>
-    </article>
+  <div class="admin-alert" *ngIf="loading">
+    Cargando información administrativa...
   </div>
 
-  <div class="admin-grid">
+  <div class="admin-alert error" *ngIf="!loading && error">
+    {{ error }}
+  </div>
 
-    <section class="admin-card">
-      <div class="card-header">
-        <h2>Clientes recientes</h2>
-        <span>Actividad inicial</span>
-      </div>
+  <ng-container *ngIf="!loading && !error">
 
-      <div class="customer-row" *ngFor="let customer of recentCustomers">
-        <div>
-          <strong>{{ customer.name }}</strong>
-          <p>{{ customer.visits }} visitas registradas</p>
+    <div class="admin-stats">
+
+      <article class="stat-card">
+        <span>Clientes registrados</span>
+        <strong>{{ summary.total_customers }}</strong>
+        <p>Nuevos este mes: {{ summary.new_customers_this_month }}</p>
+      </article>
+
+      <article class="stat-card">
+        <span>Compras registradas</span>
+        <strong>{{ summary.total_purchases }}</strong>
+        <p>Facturas vinculadas al programa</p>
+      </article>
+
+      <article class="stat-card">
+        <span>Ventas registradas</span>
+        <strong>{{ formatCurrency(summary.total_sales) }}</strong>
+        <p>Ticket promedio: {{ formatCurrency(summary.average_ticket) }}</p>
+      </article>
+
+      <article class="stat-card">
+        <span>Puntos entregados</span>
+        <strong>{{ summary.total_points_delivered }}</strong>
+        <p>Puntos emitidos a clientes</p>
+      </article>
+
+    </div>
+
+    <div class="admin-grid">
+
+      <section class="admin-card">
+        <div class="card-header">
+          <h2>Top clientes</h2>
+          <span>Por compras y recurrencia</span>
         </div>
 
-        <span>{{ customer.points }} pts</span>
-      </div>
-    </section>
+        <div class="empty-state" *ngIf="summary.top_customers.length === 0">
+          Aún no hay clientes con compras registradas.
+        </div>
 
-    <section class="admin-card">
-      <div class="card-header">
-        <h2>Próximos módulos</h2>
-        <span>Roadmap interno</span>
-      </div>
+        <div class="customer-row" *ngFor="let customer of summary.top_customers">
+          <div>
+            <strong>{{ customer.name || 'Cliente sin nombre' }}</strong>
+            <p>
+              {{ customer.purchases_count }} compras ·
+              {{ formatCurrency(customer.total_spent) }}
+            </p>
+          </div>
 
-      <ul class="roadmap-list">
-        <li>Buscar clientes por nombre, correo o WhatsApp</li>
-        <li>Ver historial de compras por número de factura</li>
-        <li>Editar puntos manualmente con permiso admin</li>
-        <li>Dashboard de estadísticas y clientes frecuentes</li>
-        <li>Integración futura con facturación Noha System</li>
-      </ul>
-    </section>
+          <span>{{ customer.points }} pts</span>
+        </div>
+      </section>
 
-  </div>
+      <section class="admin-card">
+        <div class="card-header">
+          <h2>Compras recientes</h2>
+          <span>Últimas facturas registradas</span>
+        </div>
+
+        <div class="empty-state" *ngIf="summary.recent_purchases.length === 0">
+          Aún no hay compras registradas.
+        </div>
+
+        <div class="customer-row" *ngFor="let purchase of summary.recent_purchases">
+          <div>
+            <strong>{{ purchase.customer.name || 'Cliente sin nombre' }}</strong>
+            <p>
+              Factura {{ purchase.invoice_number }} ·
+              {{ formatCurrency(purchase.amount) }}
+            </p>
+          </div>
+
+          <span>+{{ purchase.points_earned }} pts</span>
+        </div>
+      </section>
+
+    </div>
+
+  </ng-container>
 
 </section>
