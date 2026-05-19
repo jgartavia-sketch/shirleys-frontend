@@ -245,3 +245,11 @@
     text-align: left;
   }
 }
+.brand-link::after {
+  display: none;
+}
+
+.brand-logo {
+  position: relative;
+  z-index: 2;
+}
