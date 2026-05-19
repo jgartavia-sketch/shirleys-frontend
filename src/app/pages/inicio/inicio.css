@@ -24,7 +24,6 @@
 
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
 }
 
 .hero-section::before {
@@ -482,12 +481,8 @@
 @media (max-width: 900px) {
   .hero-section {
     min-height: 100vh;
-    padding: 430px 7% 84px;
-
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-color: #050805;
+    padding: 220px 7% 84px;
+    background-position: center;
   }
 
   .hero-content h1 {
@@ -510,12 +505,8 @@
 @media (max-width: 560px) {
   .hero-section {
     min-height: 100vh;
-    padding: 360px 6% 72px;
-
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-color: #050805;
+    padding: 215px 6% 72px;
+    background-position: center;
   }
 
   .hero-content h1 {
