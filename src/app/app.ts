@@ -53,7 +53,6 @@ export class App implements AfterViewInit, OnDestroy {
 
     const animatedElements = document.querySelectorAll(
       `
-      section,
       .hero-content,
       .customers-text,
       .customers-card,
@@ -79,12 +78,21 @@ export class App implements AfterViewInit, OnDestroy {
         });
       },
       {
-        threshold: 0.14,
-        rootMargin: '0px 0px -70px 0px'
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
       }
     );
 
     animatedElements.forEach(element => {
+      if (
+        element.closest('.navbar') ||
+        element.classList.contains('navbar') ||
+        element.classList.contains('menu-page') ||
+        element.classList.contains('catering-page')
+      ) {
+        return;
+      }
+
       element.classList.add('scroll-reveal');
       this.observer?.observe(element);
     });

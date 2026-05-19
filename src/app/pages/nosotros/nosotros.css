@@ -1,19 +1,52 @@
 .about-page {
+  position: relative;
+
   min-height: 100vh;
+
+  overflow: hidden;
 
   padding: 220px 8% 100px;
 
   background:
     linear-gradient(
       180deg,
-      rgba(7, 10, 7, 0.98),
-      rgba(12, 18, 12, 0.98)
-    );
+      rgba(0, 0, 0, 0.30),
+      rgba(0, 0, 0, 0.46)
+    ),
+    url("/images/hero/hero-4.png");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 
   color: #f7f0df;
 }
 
+.about-page::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(212, 175, 55, 0.08),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(18, 84, 45, 0.08),
+      transparent 34%
+    );
+
+  pointer-events: none;
+}
+
 .about-container {
+  position: relative;
+  z-index: 2;
+
   max-width: 850px;
 
   padding: 50px;
@@ -22,18 +55,23 @@
 
   border-radius: 0 32px 32px 0;
 
+  backdrop-filter: blur(4px);
+
   background:
     linear-gradient(
       145deg,
-      rgba(255,255,255,0.05),
-      rgba(255,255,255,0.02)
+      rgba(15, 18, 15, 0.38),
+      rgba(15, 18, 15, 0.18)
     );
 
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.22),
+    0 0 24px rgba(212,175,55,0.05);
 }
 
 .about-container span {
   display: inline-block;
+
   margin-bottom: 16px;
 
   color: #d4af37;
@@ -51,13 +89,40 @@
 
   font-size: clamp(2.8rem, 6vw, 5rem);
   line-height: 1;
+
+  text-shadow: 0 10px 26px rgba(0,0,0,0.35);
 }
 
 .about-container p {
   margin-bottom: 22px;
 
-  color: #e8dec5;
+  color: #f3ead6;
 
   font-size: 1.08rem;
   line-height: 1.9;
+
+  text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+@media (max-width: 760px) {
+  .about-page {
+    padding: 200px 6% 80px;
+
+    background-attachment: scroll;
+  }
+
+  .about-container {
+    padding: 34px 28px;
+
+    border-radius: 0 24px 24px 0;
+  }
+
+  .about-container h1 {
+    line-height: 1.05;
+  }
+
+  .about-container p {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
 }

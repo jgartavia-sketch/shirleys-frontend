@@ -3,7 +3,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 155px 8% 95px;
+  padding: 230px 8% 95px;
   overflow: hidden;
   isolation: isolate;
 
@@ -20,7 +20,7 @@
       rgba(0, 0, 0, 0.18) 58%,
       rgba(0, 0, 0, 0.58) 100%
     ),
-    url("/shirleys-view-hero.jpg");
+    url("/images/hero/hero-1.png");
 
   background-size: cover;
   background-position: center;
@@ -481,7 +481,7 @@
 @media (max-width: 900px) {
   .hero-section {
     min-height: 100vh;
-    padding: 150px 7% 84px;
+    padding: 220px 7% 84px;
     background-position: center;
   }
 
@@ -505,7 +505,7 @@
 @media (max-width: 560px) {
   .hero-section {
     min-height: 100vh;
-    padding: 150px 6% 72px;
+    padding: 215px 6% 72px;
     background-position: center;
   }
 

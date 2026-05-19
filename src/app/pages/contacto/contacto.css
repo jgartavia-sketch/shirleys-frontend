@@ -1,8 +1,41 @@
 .contact-page {
+  position: relative;
   min-height: 100vh;
+  overflow: hidden;
   padding: var(--page-top-space, 220px) 8% 100px;
-  background: linear-gradient(180deg, rgba(6, 10, 7, 0.98), rgba(10, 16, 10, 0.98));
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.38),
+      rgba(0, 0, 0, 0.54)
+    ),
+    url("/images/hero/hero-3.png");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
   color: #f7f0df;
+}
+
+.contact-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at top right, rgba(212, 175, 55, 0.10), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(18, 84, 45, 0.12), transparent 32%);
+
+  pointer-events: none;
+}
+
+.page-header,
+.contact-grid,
+.social-section {
+  position: relative;
+  z-index: 2;
 }
 
 .page-header {
@@ -48,8 +81,17 @@
   padding: 36px;
   border-radius: 30px;
   border: 1px solid rgba(212, 175, 55, 0.16);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10, 14, 10, 0.62),
+      rgba(10, 14, 10, 0.40)
+    );
+
+  backdrop-filter: blur(6px);
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
   transition: 0.3s ease;
 }
 
@@ -133,6 +175,7 @@
 @media (max-width: 760px) {
   .contact-page {
     padding: var(--page-top-space, 210px) 22px 70px;
+    background-attachment: scroll;
   }
 
   .page-header h1,

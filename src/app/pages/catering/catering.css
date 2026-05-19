@@ -1,10 +1,42 @@
 .catering-page {
+  position: relative;
   min-height: 100vh;
-  padding: var(--page-top-space, 220px) 8% 100px;
-  background:
-    radial-gradient(circle at top right, rgba(212, 175, 55, 0.12), transparent 34%),
-    linear-gradient(180deg, rgba(6, 10, 7, 0.98), rgba(12, 18, 12, 0.98));
+  overflow: hidden;
+
+  padding: 300px 8% 100px;
+
   color: #f7f0df;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.34),
+      rgba(0, 0, 0, 0.52)
+    ),
+    url("/images/hero/hero-2.png");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.catering-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at top right, rgba(212, 175, 55, 0.08), transparent 36%),
+    radial-gradient(circle at bottom left, rgba(18, 84, 45, 0.10), transparent 34%);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-header,
+.catering-form {
+  position: relative;
+  z-index: 2;
 }
 
 .page-header {
@@ -26,14 +58,16 @@
   margin: 0 0 22px;
   color: #fff7df;
   font-size: clamp(2.8rem, 6vw, 5.2rem);
-  line-height: 1;
+  line-height: 0.95;
+  text-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
 }
 
 .page-header p,
 .form-section p {
-  color: #e8dec5;
+  color: #fff1cf;
   line-height: 1.8;
   font-size: 1.05rem;
+  text-shadow: 0 8px 22px rgba(0, 0, 0, 0.42);
 }
 
 .catering-form {
@@ -44,10 +78,17 @@
 .form-section {
   padding: clamp(28px, 4vw, 48px);
   border-radius: 34px;
-  border: 1px solid rgba(212, 175, 55, 0.16);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+
   background:
-    linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
-  box-shadow: 0 24px 70px rgba(0,0,0,0.32);
+    linear-gradient(
+      145deg,
+      rgba(7, 13, 8, 0.54),
+      rgba(7, 13, 8, 0.30)
+    );
+
+  box-shadow: 0 24px 70px rgba(0,0,0,0.26);
+  backdrop-filter: blur(10px);
 }
 
 .form-section h2 {
@@ -68,10 +109,16 @@
   min-height: 230px;
   padding: 32px;
   border-radius: 30px;
-  border: 1px solid rgba(212, 175, 55, 0.16);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+
   background:
-    linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
-  box-shadow: 0 20px 55px rgba(0,0,0,0.28);
+    linear-gradient(
+      145deg,
+      rgba(7, 13, 8, 0.56),
+      rgba(7, 13, 8, 0.28)
+    );
+
+  box-shadow: 0 20px 55px rgba(0,0,0,0.24);
   color: inherit;
   text-align: left;
   cursor: pointer;
@@ -82,8 +129,13 @@
 .service-card.selected {
   transform: translateY(-6px);
   border-color: rgba(212, 175, 55, 0.65);
+
   background:
-    linear-gradient(145deg, rgba(212,175,55,0.18), rgba(255,255,255,0.035));
+    linear-gradient(
+      145deg,
+      rgba(212,175,55,0.18),
+      rgba(7,13,8,0.34)
+    );
 }
 
 .service-card.selected::after {
@@ -102,26 +154,26 @@
 .service-card span {
   display: block;
   margin-bottom: 42px;
-  color: rgba(255, 247, 223, 0.38);
+  color: rgba(255, 247, 223, 0.55);
   font-weight: 900;
 }
 
 .service-card h3 {
   margin: 0 0 16px;
-  color: #d4af37;
+  color: #f0ca57;
   font-size: 1.55rem;
 }
 
 .service-card p {
   margin: 0;
-  color: #e8dec5;
+  color: #f2e8cf;
   line-height: 1.75;
 }
 
 .quote-panel {
   background:
-    radial-gradient(circle at top left, rgba(212,175,55,0.14), transparent 36%),
-    linear-gradient(145deg, rgba(255,255,255,0.065), rgba(255,255,255,0.025));
+    radial-gradient(circle at top left, rgba(212,175,55,0.12), transparent 36%),
+    linear-gradient(145deg, rgba(7,13,8,0.54), rgba(7,13,8,0.30));
 }
 
 .inputs-grid {
@@ -142,10 +194,10 @@ input,
 textarea {
   width: 100%;
   padding: 17px 18px;
-  border: 1px solid rgba(212, 175, 55, 0.16);
+  border: 1px solid rgba(212, 175, 55, 0.18);
   border-radius: 18px;
   outline: none;
-  background: rgba(255,255,255,0.07);
+  background: rgba(7, 13, 8, 0.48);
   color: #fff7df;
   font: inherit;
   transition: 0.25s ease;
@@ -173,8 +225,8 @@ textarea:focus {
   margin: 28px 0;
   padding: 20px 22px;
   border-radius: 22px;
-  border: 1px solid rgba(212, 175, 55, 0.18);
-  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: rgba(0,0,0,0.20);
 }
 
 .selected-summary span {
@@ -232,7 +284,8 @@ textarea:focus {
 
 @media (max-width: 760px) {
   .catering-page {
-    padding: var(--page-top-space, 210px) 6% 80px;
+    padding: 320px 6% 80px;
+    background-attachment: scroll;
   }
 
   .page-header h1 {
