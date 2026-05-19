@@ -112,13 +112,14 @@
     background:
       linear-gradient(
         180deg,
-        rgba(0, 0, 0, 0.24),
-        rgba(0, 0, 0, 0.68)
+        rgba(0, 0, 0, 0.30),
+        rgba(0, 0, 0, 0.60)
       ),
       url("/images/hero/hero-4.png");
 
-    background-size: cover;
+    background-size: auto 100vh;
     background-position: center top;
+    background-repeat: no-repeat;
     background-attachment: scroll;
   }
 
@@ -126,8 +127,8 @@
     background:
       linear-gradient(
         180deg,
-        rgba(0, 0, 0, 0.04),
-        rgba(0, 0, 0, 0.28)
+        rgba(0, 0, 0, 0.02),
+        rgba(0, 0, 0, 0.24)
       );
   }
 

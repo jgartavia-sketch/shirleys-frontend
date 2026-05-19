@@ -12,24 +12,16 @@
   left: 50%;
   width: min(1180px, calc(100% - 36px));
   z-index: 50;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 14px;
-
   padding: 18px 24px 20px;
   border: 1px solid rgba(242, 200, 102, 0.18);
   border-radius: 32px;
-
-  background:
-    linear-gradient(135deg, rgba(5, 8, 5, 0.76), rgba(13, 20, 13, 0.56));
-
-  box-shadow:
-    0 24px 70px rgba(0, 0, 0, 0.38),
-    0 0 42px rgba(212, 175, 55, 0.07);
-
+  background: linear-gradient(135deg, rgba(5, 8, 5, 0.76), rgba(13, 20, 13, 0.56));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38), 0 0 42px rgba(212, 175, 55, 0.07);
   backdrop-filter: blur(18px);
   transform: translateX(-50%);
 }
@@ -48,13 +40,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 78px;
   height: 78px;
-
   border-radius: 50%;
   overflow: hidden;
-
   background: transparent;
   border: none;
   text-decoration: none;
@@ -81,15 +70,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   min-height: 42px;
   padding: 0 18px;
-
   border-radius: 999px;
-
   color: rgba(255, 243, 209, 0.84);
   text-decoration: none;
-
   font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: 0.2px;
@@ -113,22 +98,21 @@
 .premium-footer {
   position: relative;
   overflow: hidden;
-  padding: 72px 7% 26px;
+  padding: 62px 7% 24px;
   border-top: 1px solid rgba(242, 200, 102, 0.16);
   background:
-    radial-gradient(circle at 18% 20%, rgba(212, 175, 55, 0.12), transparent 28%),
-    radial-gradient(circle at 90% 90%, rgba(17, 92, 48, 0.16), transparent 30%),
+    radial-gradient(circle at 18% 20%, rgba(212, 175, 55, 0.10), transparent 28%),
     linear-gradient(135deg, #040704, #0b130c 55%, #050805);
 }
 
 .footer-glow {
   position: absolute;
-  width: 320px;
-  height: 320px;
+  width: 300px;
+  height: 300px;
   top: -180px;
   left: 8%;
   border-radius: 50%;
-  background: rgba(212, 175, 55, 0.10);
+  background: rgba(212, 175, 55, 0.08);
   filter: blur(18px);
   pointer-events: none;
 }
@@ -157,17 +141,17 @@
 .footer-column span,
 .footer-bottom p {
   color: rgba(232, 222, 197, 0.78);
-  line-height: 1.65;
+  line-height: 1.55;
 }
 
 .footer-column {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
 }
 
 .footer-column h3 {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   color: #fff3d1;
   font-size: 1.18rem;
 }
@@ -186,15 +170,15 @@
   position: relative;
   z-index: 1;
   max-width: 1180px;
-  margin: 42px auto 0;
-  padding-top: 18px;
+  margin: 34px auto 0;
+  padding-top: 16px;
   border-top: 1px solid rgba(255, 240, 207, 0.1);
   text-align: center;
 }
 
 .footer-bottom p {
   margin: 0;
-  font-size: 0.86rem;
+  font-size: 0.84rem;
 }
 
 @media (max-width: 900px) {
@@ -227,12 +211,12 @@
   }
 
   .premium-footer {
-    padding: 48px 7% 22px;
+    padding: 42px 7% 22px;
   }
 
   .footer-container {
     grid-template-columns: 1fr 1fr;
-    gap: 26px;
+    gap: 24px;
   }
 
   .footer-brand {
@@ -241,7 +225,7 @@
   }
 
   .footer-logo {
-    width: 70px;
+    width: 68px;
     margin-bottom: 12px;
   }
 }
@@ -276,53 +260,64 @@
   }
 
   .premium-footer {
-    padding: 34px 22px 20px;
+    padding: 24px 22px 16px;
   }
 
   .footer-glow {
-    width: 240px;
-    height: 240px;
-    top: -150px;
+    display: none;
   }
 
   .footer-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 22px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer-logo {
+    width: 54px;
+    margin: 0;
   }
 
   .footer-brand p {
     margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.45;
   }
 
   .footer-column {
-    gap: 7px;
+    gap: 5px;
+  }
+
+  .footer-column:first-of-type {
+    display: none;
   }
 
   .footer-column h3 {
-    font-size: 1.02rem;
-    margin-bottom: 4px;
+    font-size: 0.98rem;
+    margin-bottom: 3px;
   }
 
   .footer-column span,
-  .footer-column a,
-  .footer-brand p {
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-
-  .footer-logo {
-    width: 58px;
-    margin-bottom: 10px;
+  .footer-column a {
+    font-size: 0.82rem;
+    line-height: 1.35;
   }
 
   .footer-bottom {
-    margin-top: 24px;
-    padding-top: 14px;
-    text-align: left;
+    margin-top: 18px;
+    padding-top: 12px;
+    text-align: center;
   }
 
   .footer-bottom p {
-    font-size: 0.78rem;
-    line-height: 1.5;
+    font-size: 0.72rem;
+    line-height: 1.35;
   }
 }

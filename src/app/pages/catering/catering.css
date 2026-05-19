@@ -290,13 +290,14 @@ textarea:focus {
     background:
       linear-gradient(
         180deg,
-        rgba(0, 0, 0, 0.26),
-        rgba(0, 0, 0, 0.70)
+        rgba(0, 0, 0, 0.32),
+        rgba(0, 0, 0, 0.58)
       ),
       url("/images/hero/hero-2.png");
 
-    background-size: cover;
+    background-size: auto 100vh;
     background-position: center top;
+    background-repeat: no-repeat;
     background-attachment: scroll;
   }
 
@@ -304,8 +305,8 @@ textarea:focus {
     background:
       linear-gradient(
         180deg,
-        rgba(0, 0, 0, 0.04),
-        rgba(0, 0, 0, 0.34)
+        rgba(0, 0, 0, 0.02),
+        rgba(0, 0, 0, 0.24)
       );
   }
 
