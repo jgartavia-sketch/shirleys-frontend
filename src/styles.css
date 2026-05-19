@@ -237,6 +237,7 @@ section {
     transform: translateY(0);
   }
 }
+
 /* =========================
    PREMIUM CURSOR EFFECTS
 ========================= */
@@ -283,4 +284,5 @@ button::after {
 
 a:hover::after,
 button:hover::after {
-  left: 140
+  left: 140%;
+}

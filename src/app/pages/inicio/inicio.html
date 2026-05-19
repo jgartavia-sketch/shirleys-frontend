@@ -1,14 +1,14 @@
 <section class="hero-section">
   <div class="hero-overlay"></div>
+  <div class="hero-vignette"></div>
 
   <div class="hero-content">
-    <span class="hero-tag">Restaurante & Catering Service</span>
-
-    <h1>Tradición, sabor real y momentos inolvidables.</h1>
+    <h1>Donde la vista se vuelve parte de la cena.</h1>
 
     <p>
-      Disfrute una experiencia cálida con vista, ambiente y comida hecha con
-      dedicación para compartir en familia, pareja o eventos especiales.
+      Entre montaña, bosque y ciudad, Shirley’s ofrece una experiencia cálida
+      para disfrutar buena comida, ambiente familiar y momentos que se quedan
+      grabados en el horizonte.
     </p>
 
     <div class="hero-buttons">
@@ -25,13 +25,13 @@
       <span class="customers-badge">Shirley’s Customers</span>
 
       <h2>
-        Cada cena puede convertirse en recompensas.
+        Cada visita también puede convertirse en recompensas.
       </h2>
 
       <p class="customers-description">
-        Regístrese gratuitamente y forme parte de la familia
-        Shirley’s. Obtenga un código QR personal para acumular puntos en cada
-        compra y acceder a beneficios exclusivos.
+        Regístrese gratuitamente y forme parte de la familia Shirley’s.
+        Obtenga un código QR personal para acumular puntos en cada compra
+        y acceder a beneficios exclusivos.
       </p>
 
       <div class="points-preview">
@@ -55,7 +55,7 @@
         <p>
           No es solo comida.
           <br>
-          Se trata de convertir esos momentos en experiencias que no se van.
+          Es volver a un lugar donde la vista, el sabor y el momento se encuentran.
         </p>
       </div>
     </div>
@@ -70,23 +70,9 @@
 
         <form class="mock-form">
 
-          <input
-            #customerName
-            type="text"
-            placeholder="Nombre completo"
-          />
-
-          <input
-            #customerEmail
-            type="email"
-            placeholder="Correo electrónico"
-          />
-
-          <input
-            #customerWhatsapp
-            type="text"
-            placeholder="Número de WhatsApp"
-          />
+          <input #customerName type="text" placeholder="Nombre completo" />
+          <input #customerEmail type="email" placeholder="Correo electrónico" />
+          <input #customerWhatsapp type="text" placeholder="Número de WhatsApp" />
 
           <button
             type="button"
@@ -138,10 +124,7 @@
         {{ popupMessage }}
       </p>
 
-      <button
-        type="button"
-        (click)="closeQrPopup()"
-      >
+      <button type="button" (click)="closeQrPopup()">
         Entendido
       </button>
 
