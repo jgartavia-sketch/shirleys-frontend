@@ -174,22 +174,107 @@
 
 @media (max-width: 760px) {
   .contact-page {
-    padding: var(--page-top-space, 210px) 22px 70px;
+    min-height: auto;
+    padding: 175px 22px 54px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.26),
+        rgba(0, 0, 0, 0.70)
+      ),
+      url("/images/hero/hero-3.png");
+
+    background-size: cover;
+    background-position: center top;
     background-attachment: scroll;
+  }
+
+  .contact-page::before {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.04),
+        rgba(0, 0, 0, 0.30)
+      );
+  }
+
+  .page-header {
+    margin-bottom: 32px;
+  }
+
+  .page-header span,
+  .social-header span {
+    margin-bottom: 10px;
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
   }
 
   .page-header h1,
   .social-header h2 {
-    line-height: 1.08;
+    margin-bottom: 16px;
+    font-size: clamp(2.15rem, 12vw, 3.35rem);
+    line-height: 1.03;
+  }
+
+  .page-header p,
+  .social-header p {
+    font-size: 0.96rem;
+    line-height: 1.65;
+  }
+
+  .contact-grid,
+  .social-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .contact-card,
   .social-card {
-    padding: 26px;
+    padding: 22px 20px;
     border-radius: 24px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(10, 14, 10, 0.66),
+        rgba(10, 14, 10, 0.44)
+      );
+
+    backdrop-filter: blur(6px);
+    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.22);
+  }
+
+  .contact-card h3,
+  .social-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.24rem;
+  }
+
+  .contact-card p,
+  .social-card p {
+    margin-bottom: 8px;
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  .social-section {
+    margin-top: 44px;
+  }
+
+  .social-header {
+    margin-bottom: 24px;
   }
 
   .social-card {
-    flex-direction: column;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .social-icon {
+    flex: 0 0 44px;
+    height: 44px;
+    border-radius: 15px;
+    font-size: 1.25rem;
   }
 }

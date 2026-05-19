@@ -106,23 +106,73 @@
 
 @media (max-width: 760px) {
   .about-page {
-    padding: 200px 6% 80px;
+    min-height: auto;
+    padding: 175px 22px 56px;
 
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.24),
+        rgba(0, 0, 0, 0.68)
+      ),
+      url("/images/hero/hero-4.png");
+
+    background-size: cover;
+    background-position: center top;
     background-attachment: scroll;
   }
 
-  .about-container {
-    padding: 34px 28px;
+  .about-page::before {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.04),
+        rgba(0, 0, 0, 0.28)
+      );
+  }
 
+  .about-container {
+    padding: 26px 22px;
+
+    border-left: 3px solid #d4af37;
     border-radius: 0 24px 24px 0;
+
+    backdrop-filter: blur(6px);
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(15, 18, 15, 0.58),
+        rgba(15, 18, 15, 0.36)
+      );
+
+    box-shadow:
+      0 16px 44px rgba(0,0,0,0.22),
+      0 0 18px rgba(212,175,55,0.04);
+  }
+
+  .about-container span {
+    margin-bottom: 10px;
+
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
   }
 
   .about-container h1 {
-    line-height: 1.05;
+    margin-bottom: 18px;
+
+    font-size: clamp(2.15rem, 12vw, 3.35rem);
+    line-height: 1.03;
+
+    text-shadow: 0 9px 22px rgba(0,0,0,0.38);
   }
 
   .about-container p {
-    font-size: 1rem;
-    line-height: 1.8;
+    margin-bottom: 16px;
+
+    font-size: 0.96rem;
+    line-height: 1.68;
+
+    text-shadow: 0 2px 8px rgba(0,0,0,0.18);
   }
 }
