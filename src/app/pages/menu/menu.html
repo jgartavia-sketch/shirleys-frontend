@@ -26,9 +26,11 @@
       </div>
 
       <div class="menu-content">
-        <span class="category-badge">FAST FOOD</span>
+        <button class="category-badge" type="button" (click)="toggleSection('fastFood')">
+          FAST FOOD
+        </button>
 
-        <div class="menu-items">
+        <div class="menu-items" *ngIf="openSections['fastFood']">
 
           <div class="menu-item">
             <span>Ceviche Pequeño</span>
@@ -120,11 +122,11 @@
       </div>
 
       <div class="menu-content">
-        <span class="category-badge">
+        <button class="category-badge" type="button" (click)="toggleSection('hamburguesas')">
           HAMBURGUESAS / EMPANADAS
-        </span>
+        </button>
 
-        <div class="menu-items">
+        <div class="menu-items" *ngIf="openSections['hamburguesas']">
 
           <div class="menu-item">
             <span>Hamburguesa de Carne</span>
@@ -166,9 +168,11 @@
       </div>
 
       <div class="menu-content">
-        <span class="category-badge">ARROCES</span>
+        <button class="category-badge" type="button" (click)="toggleSection('arroces')">
+          ARROCES
+        </button>
 
-        <div class="menu-items">
+        <div class="menu-items" *ngIf="openSections['arroces']">
 
           <div class="menu-item">
             <span>Arroz con Pollo</span>
@@ -205,9 +209,11 @@
       </div>
 
       <div class="menu-content">
-        <span class="category-badge">ESPECIALES</span>
+        <button class="category-badge" type="button" (click)="toggleSection('especiales')">
+          ESPECIALES
+        </button>
 
-        <div class="menu-items">
+        <div class="menu-items" *ngIf="openSections['especiales']">
 
           <div class="menu-item">
             <span>Papanachos Shirley’s</span>
@@ -254,9 +260,11 @@
       </div>
 
       <div class="menu-content">
-        <span class="category-badge">TACOS DE BIRRIA</span>
+        <button class="category-badge" type="button" (click)="toggleSection('tacos')">
+          TACOS DE BIRRIA
+        </button>
 
-        <div class="menu-items">
+        <div class="menu-items" *ngIf="openSections['tacos']">
 
           <div class="menu-item">
             <span>Orden de 3</span>
@@ -298,9 +306,11 @@
       </div>
 
       <div class="menu-content">
-        <span class="category-badge">REFRESCOS Y CÓCTELES</span>
+        <button class="category-badge" type="button" (click)="toggleSection('bebidas')">
+          REFRESCOS Y CÓCTELES
+        </button>
 
-        <div class="menu-items">
+        <div class="menu-items" *ngIf="openSections['bebidas']">
 
           <div class="menu-item">
             <span>Coca Cola</span>
@@ -341,40 +351,42 @@
             <span>Fanta Kolita</span>
             <strong>₡800</strong>
           </div>
-<div class="menu-item">
-  <span>Café</span>
-  <strong>₡1.000</strong>
-</div>
 
-<div class="menu-item">
-  <span>Café con leche</span>
-  <strong>₡1.500</strong>
-</div>
+          <div class="menu-item">
+            <span>Café</span>
+            <strong>₡1.000</strong>
+          </div>
 
-<div class="menu-item">
-  <span>Chocolate frío/Caliente</span>
-  <strong>₡2.000</strong>
-</div>
+          <div class="menu-item">
+            <span>Café con leche</span>
+            <strong>₡1.500</strong>
+          </div>
 
-<div class="menu-item">
-  <span>Piña Colada</span>
-  <strong>₡3.000</strong>
-</div>
+          <div class="menu-item">
+            <span>Chocolate frío/Caliente</span>
+            <strong>₡2.000</strong>
+          </div>
 
-<div class="menu-item">
-  <span>Margarita de mango</span>
-  <strong>₡3.000</strong>
-</div>
+          <div class="menu-item">
+            <span>Piña Colada</span>
+            <strong>₡3.000</strong>
+          </div>
 
-<div class="menu-item">
-  <span>Limonada de coco</span>
-  <strong>₡3.000</strong>
-</div>
+          <div class="menu-item">
+            <span>Margarita de mango</span>
+            <strong>₡3.000</strong>
+          </div>
 
-<div class="menu-item">
-  <span>Café Cremoso</span>
-  <strong>₡2.500</strong>
-</div>
+          <div class="menu-item">
+            <span>Limonada de coco</span>
+            <strong>₡3.000</strong>
+          </div>
+
+          <div class="menu-item">
+            <span>Café Cremoso</span>
+            <strong>₡2.500</strong>
+          </div>
+
         </div>
       </div>
     </div>
