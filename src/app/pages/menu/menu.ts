@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 type OrderType = 'pickup' | 'express';
 
@@ -10,10 +11,21 @@ interface CartItem {
   quantity: number;
 }
 
+interface CreateWhatsappOrderPayload {
+  customer_name?: string | null;
+  customer_phone?: string | null;
+  order_type: OrderType;
+  location_text?: string | null;
+  items: CartItem[];
+  food_total: number;
+  packaging_total: number;
+  total: number;
+}
+
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './menu.html',
   styleUrl: './menu.css',
 })
@@ -22,11 +34,17 @@ export class Menu {
 
   readonly whatsappNumber = '50688335888';
   readonly packagingFee = 200;
+  readonly apiUrl = 'http://127.0.0.1:8000/api/orders/';
 
   orderType: OrderType = 'pickup';
   customerLocation = '';
 
+  isSendingOrder = false;
+  orderError = '';
+
   cart: CartItem[] = [];
+
+  constructor(private http: HttpClient) {}
 
   toggleSection(section: string): void {
     this.openSection = this.openSection === section ? null : section;
@@ -73,6 +91,8 @@ export class Menu {
     this.cart = [];
     this.orderType = 'pickup';
     this.customerLocation = '';
+    this.orderError = '';
+    this.isSendingOrder = false;
   }
 
   isInCart(name: string): boolean {
@@ -107,10 +127,41 @@ export class Menu {
   }
 
   sendOrderToWhatsApp(): void {
-    if (!this.hasCartItems) {
+    if (!this.hasCartItems || this.isSendingOrder) {
       return;
     }
 
+    this.isSendingOrder = true;
+    this.orderError = '';
+
+    const payload: CreateWhatsappOrderPayload = {
+      customer_name: null,
+      customer_phone: null,
+      order_type: this.orderType,
+      location_text:
+        this.orderType === 'express'
+          ? this.customerLocation.trim() || null
+          : null,
+      items: this.cart,
+      food_total: this.foodTotal,
+      packaging_total: this.packagingTotal,
+      total: this.total,
+    };
+
+    this.http.post(this.apiUrl, payload).subscribe({
+      next: () => {
+        this.openWhatsApp();
+        this.isSendingOrder = false;
+      },
+      error: () => {
+        this.orderError =
+          'No pudimos registrar el pedido todavía. Inténtalo de nuevo.';
+        this.isSendingOrder = false;
+      },
+    });
+  }
+
+  private openWhatsApp(): void {
     const orderLines = this.cart
       .map(
         (item) =>
@@ -128,7 +179,8 @@ export class Menu {
     const locationText =
       this.orderType === 'express'
         ? `\nUbicación para express: ${
-            this.customerLocation.trim() || 'Por favor enviar ubicación por WhatsApp.'
+            this.customerLocation.trim() ||
+            'Por favor enviar ubicación por WhatsApp.'
           }`
         : '';
 

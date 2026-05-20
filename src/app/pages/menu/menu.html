@@ -257,7 +257,7 @@
         <h2>Tu carrito</h2>
       </div>
 
-      <button type="button" class="cart-clear" (click)="clearCart()">
+      <button type="button" class="cart-clear" (click)="clearCart()" [disabled]="isSendingOrder">
         Vaciar
       </button>
     </div>
@@ -272,7 +272,7 @@
         <div class="cart-actions">
           <strong>{{ formatPrice(item.price * item.quantity) }}</strong>
 
-          <button type="button" (click)="removeFromCart(item.name)">
+          <button type="button" (click)="removeFromCart(item.name)" [disabled]="isSendingOrder">
             −
           </button>
         </div>
@@ -283,11 +283,11 @@
       <span>Tipo de pedido</span>
 
       <div class="order-type-options">
-        <button type="button" [class.active]="orderType === 'pickup'" (click)="setOrderType('pickup')">
+        <button type="button" [class.active]="orderType === 'pickup'" (click)="setOrderType('pickup')" [disabled]="isSendingOrder">
           Recoger en el local
         </button>
 
-        <button type="button" [class.active]="orderType === 'express'" (click)="setOrderType('express')">
+        <button type="button" [class.active]="orderType === 'express'" (click)="setOrderType('express')" [disabled]="isSendingOrder">
           Express
         </button>
       </div>
@@ -301,6 +301,7 @@
           id="customerLocation"
           name="customerLocation"
           [(ngModel)]="customerLocation"
+          [disabled]="isSendingOrder"
           placeholder="Ejemplo: barrio, señas, color de casa o punto de referencia. También puede enviar ubicación por WhatsApp."
         ></textarea>
       </div>
@@ -318,14 +319,23 @@
       </div>
     </div>
 
+    <p class="order-error" *ngIf="orderError">
+      {{ orderError }}
+    </p>
+
     <div class="cart-footer">
       <div>
         <span>Total</span>
         <strong>{{ formatPrice(total) }}</strong>
       </div>
 
-      <button type="button" class="whatsapp-order" (click)="sendOrderToWhatsApp()">
-        Enviar pedido por WhatsApp
+      <button
+        type="button"
+        class="whatsapp-order"
+        (click)="sendOrderToWhatsApp()"
+        [disabled]="isSendingOrder"
+      >
+        {{ isSendingOrder ? 'Registrando pedido...' : 'Enviar pedido por WhatsApp' }}
       </button>
     </div>
   </div>
