@@ -43,6 +43,7 @@ interface RecentPurchase {
   amount: number;
   points_earned: number;
   created_at: string;
+
   customer: {
     code: string;
     name: string;
@@ -86,12 +87,17 @@ interface WhatsappOrdersResponse {
   styleUrl: './admin.css',
 })
 export class Admin implements OnInit {
-  private readonly apiBaseUrl = 'https://shirleys-backend.onrender.com/api/admin';
+
+  private readonly apiBaseUrl =
+    'https://shirleys-backend.onrender.com/api/admin';
 
   loading = true;
   loadingOrders = true;
+
   error = '';
   ordersError = '';
+
+  updatingOrderId: string | null = null;
 
   summary: AdminSummary = {
     total_customers: 0,
@@ -131,6 +137,7 @@ export class Admin implements OnInit {
     this.http.get<AdminSummary>(`${this.apiBaseUrl}/summary`).subscribe({
       next: (response) => {
         this.summary = response;
+
         this.loading = false;
         this.error = '';
 
@@ -146,7 +153,7 @@ export class Admin implements OnInit {
         this.loading = false;
 
         this.cdr.detectChanges();
-      },
+      }
     });
   }
 
@@ -155,10 +162,13 @@ export class Admin implements OnInit {
     this.ordersError = '';
 
     this.http
-      .get<WhatsappOrdersResponse>(`${this.apiBaseUrl}/whatsapp-orders`)
+      .get<WhatsappOrdersResponse>(
+        `${this.apiBaseUrl}/whatsapp-orders`
+      )
       .subscribe({
         next: (response) => {
           this.whatsappOrders = response.orders || [];
+
           this.loadingOrders = false;
           this.ordersError = '';
 
@@ -170,11 +180,13 @@ export class Admin implements OnInit {
         error: (error) => {
           console.error('❌ Error loading WhatsApp orders:', error);
 
-          this.ordersError = 'No se pudieron cargar los pedidos de WhatsApp.';
+          this.ordersError =
+            'No se pudieron cargar los pedidos de WhatsApp.';
+
           this.loadingOrders = false;
 
           this.cdr.detectChanges();
-        },
+        }
       });
   }
 
@@ -182,6 +194,14 @@ export class Admin implements OnInit {
     order: WhatsappOrder,
     status: WhatsappOrderStatus
   ): void {
+
+    if (this.updatingOrderId) {
+      return;
+    }
+
+    this.updatingOrderId = order.id;
+    this.ordersError = '';
+
     const payload = {
       status,
       total: order.total,
@@ -189,18 +209,52 @@ export class Admin implements OnInit {
     };
 
     this.http
-      .patch(`${this.apiBaseUrl}/whatsapp-orders/${order.id}`, payload)
+      .patch(
+        `${this.apiBaseUrl}/whatsapp-orders/${order.id}`,
+        payload
+      )
       .subscribe({
         next: () => {
+
+          order.status = status;
+
+          if (status === 'confirmed') {
+            this.summary.whatsapp_orders_confirmed += 1;
+
+            if (this.summary.whatsapp_orders_cancelled > 0) {
+              this.summary.whatsapp_orders_cancelled -= 1;
+            }
+
+            this.summary.whatsapp_total_confirmed += order.total;
+            this.summary.whatsapp_packaging_confirmed +=
+              order.packaging_total;
+          }
+
+          if (status === 'cancelled') {
+            this.summary.whatsapp_orders_cancelled += 1;
+          }
+
           this.loadAdminSummary();
           this.loadWhatsappOrders();
+
+          this.updatingOrderId = null;
+
+          this.cdr.detectChanges();
         },
 
         error: (error) => {
-          console.error('❌ Error updating WhatsApp order:', error);
-          this.ordersError = 'No se pudo actualizar el estado del pedido.';
+          console.error(
+            '❌ Error updating WhatsApp order:',
+            error
+          );
+
+          this.ordersError =
+            'No se pudo actualizar el estado del pedido.';
+
+          this.updatingOrderId = null;
+
           this.cdr.detectChanges();
-        },
+        }
       });
   }
 
@@ -216,6 +270,10 @@ export class Admin implements OnInit {
     this.updateWhatsappOrderStatus(order, 'modified');
   }
 
+  isUpdatingOrder(orderId: string): boolean {
+    return this.updatingOrderId === orderId;
+  }
+
   getStatusLabel(status: WhatsappOrderStatus): string {
     const labels: Record<WhatsappOrderStatus, string> = {
       pending_confirmation: 'Pendiente',
@@ -228,7 +286,9 @@ export class Admin implements OnInit {
   }
 
   getOrderTypeLabel(orderType: 'pickup' | 'express'): string {
-    return orderType === 'express' ? 'Express' : 'Recoger en el local';
+    return orderType === 'express'
+      ? 'Express'
+      : 'Recoger en el local';
   }
 
   formatCurrency(value: number): string {
