@@ -21,26 +21,24 @@
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('fastFood')">
-          FAST FOOD
-        </button>
+        <button class="category-badge" type="button" (click)="toggleSection('fastFood')">FAST FOOD</button>
 
         <div class="menu-items" *ngIf="isOpen('fastFood')">
-          <div class="menu-item"><span>Ceviche Pequeño</span><strong>₡2.500</strong></div>
-          <div class="menu-item"><span>Ceviche Grande</span><strong>₡3.500</strong></div>
-          <div class="menu-item"><span>Canasta de Patacón</span><strong>₡4.500</strong></div>
-          <div class="menu-item"><span>Orden de 4 Camarones</span><strong>₡4.500</strong></div>
-          <div class="menu-item"><span>Orden de 4 Carne-Pollo</span><strong>₡4.000</strong></div>
-          <div class="menu-item"><span>Fajitas de Pollo</span><strong>₡3.800</strong></div>
-          <div class="menu-item"><span>Fajitas de Pescado</span><strong>₡4.500</strong></div>
-          <div class="menu-item"><span>Nachos</span><strong>₡3.500</strong></div>
-          <div class="menu-item"><span>Papanachos</span><strong>₡4.000</strong></div>
-          <div class="menu-item"><span>Chifrijo</span><strong>₡3.500</strong></div>
-          <div class="menu-item"><span>Burrito</span><strong>₡3.500</strong></div>
-          <div class="menu-item"><span>Salchipapas</span><strong>₡3.500</strong></div>
-          <div class="menu-item"><span>Taco Corriente</span><strong>₡2.500</strong></div>
-          <div class="menu-item"><span>Quesadilla</span><strong>₡3.500</strong></div>
-          <div class="menu-item"><span>Orden de papas</span><strong>₡2.500</strong></div>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Ceviche Pequeño', 2500)"><span>Ceviche Pequeño</span><strong>₡2.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Ceviche Grande', 3500)"><span>Ceviche Grande</span><strong>₡3.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Canasta de Patacón', 4500)"><span>Canasta de Patacón</span><strong>₡4.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Orden de 4 Camarones', 4500)"><span>Orden de 4 Camarones</span><strong>₡4.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Orden de 4 Carne-Pollo', 4000)"><span>Orden de 4 Carne-Pollo</span><strong>₡4.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Fajitas de Pollo', 3800)"><span>Fajitas de Pollo</span><strong>₡3.800</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Fajitas de Pescado', 4500)"><span>Fajitas de Pescado</span><strong>₡4.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Nachos', 3500)"><span>Nachos</span><strong>₡3.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Papanachos', 4000)"><span>Papanachos</span><strong>₡4.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Chifrijo', 3500)"><span>Chifrijo</span><strong>₡3.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Burrito', 3500)"><span>Burrito</span><strong>₡3.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Salchipapas', 3500)"><span>Salchipapas</span><strong>₡3.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Taco Corriente', 2500)"><span>Taco Corriente</span><strong>₡2.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Quesadilla', 3500)"><span>Quesadilla</span><strong>₡3.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Orden de papas', 2500)"><span>Orden de papas</span><strong>₡2.500</strong></button>
         </div>
       </div>
     </div>
@@ -52,16 +50,14 @@
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('hamburguesas')">
-          HAMBURGUESAS / EMPANADAS
-        </button>
+        <button class="category-badge" type="button" (click)="toggleSection('hamburguesas')">HAMBURGUESAS / EMPANADAS</button>
 
         <div class="menu-items" *ngIf="isOpen('hamburguesas')">
-          <div class="menu-item"><span>Hamburguesa de Carne</span><strong>₡4.000</strong></div>
-          <div class="menu-item"><span>Hamburguesa de Pollo</span><strong>₡4.000</strong></div>
-          <div class="menu-item"><span>Hamburguesa de Birria</span><strong>₡4.000</strong></div>
-          <div class="menu-item"><span>Empanada Arreglada</span><strong>₡2.500</strong></div>
-          <div class="menu-item"><span>Empanada Sencilla</span><strong>₡2.000</strong></div>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Hamburguesa de Carne', 4000)"><span>Hamburguesa de Carne</span><strong>₡4.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Hamburguesa de Pollo', 4000)"><span>Hamburguesa de Pollo</span><strong>₡4.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Hamburguesa de Birria', 4000)"><span>Hamburguesa de Birria</span><strong>₡4.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Empanada Arreglada', 2500)"><span>Empanada Arreglada</span><strong>₡2.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Empanada Sencilla', 2000)"><span>Empanada Sencilla</span><strong>₡2.000</strong></button>
         </div>
       </div>
     </div>
@@ -73,15 +69,13 @@
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('arroces')">
-          ARROCES
-        </button>
+        <button class="category-badge" type="button" (click)="toggleSection('arroces')">ARROCES</button>
 
         <div class="menu-items" *ngIf="isOpen('arroces')">
-          <div class="menu-item"><span>Arroz con Pollo</span><strong>₡3.800</strong></div>
-          <div class="menu-item"><span>Arroz Cantonés</span><strong>₡3.800</strong></div>
-          <div class="menu-item"><span>Arroz con Camarones</span><strong>₡4.500</strong></div>
-          <div class="menu-item"><span>Arroz de la casa</span><strong>₡3.800</strong></div>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Arroz con Pollo', 3800)"><span>Arroz con Pollo</span><strong>₡3.800</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Arroz Cantonés', 3800)"><span>Arroz Cantonés</span><strong>₡3.800</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Arroz con Camarones', 4500)"><span>Arroz con Camarones</span><strong>₡4.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Arroz de la casa', 3800)"><span>Arroz de la casa</span><strong>₡3.800</strong></button>
         </div>
       </div>
     </div>
@@ -93,17 +87,15 @@
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('especiales')">
-          ESPECIALES
-        </button>
+        <button class="category-badge" type="button" (click)="toggleSection('especiales')">ESPECIALES</button>
 
         <div class="menu-items" *ngIf="isOpen('especiales')">
-          <div class="menu-item"><span>Papanachos Shirley’s</span><strong>₡4.900</strong></div>
-          <div class="menu-item"><span>Ensalada Shirley’s plancha</span><strong>₡4.000</strong></div>
-          <div class="menu-item"><span>Ensalada Shirley’s empanizado</span><strong>₡4.300</strong></div>
-          <div class="menu-item"><span>Hamburguesa Shirley’s</span><strong>₡4.800</strong></div>
-          <div class="menu-item"><span>Pizza Birria</span><strong>₡8.950</strong></div>
-          <div class="menu-item"><span>Empabirria</span><strong>₡3.500</strong></div>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Papanachos Shirley’s', 4900)"><span>Papanachos Shirley’s</span><strong>₡4.900</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Ensalada Shirley’s plancha', 4000)"><span>Ensalada Shirley’s plancha</span><strong>₡4.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Ensalada Shirley’s empanizado', 4300)"><span>Ensalada Shirley’s empanizado</span><strong>₡4.300</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Hamburguesa Shirley’s', 4800)"><span>Hamburguesa Shirley’s</span><strong>₡4.800</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Pizza Birria', 8950)"><span>Pizza Birria</span><strong>₡8.950</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Empabirria', 3500)"><span>Empabirria</span><strong>₡3.500</strong></button>
         </div>
       </div>
     </div>
@@ -115,16 +107,14 @@
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('tacos')">
-          TACOS DE BIRRIA
-        </button>
+        <button class="category-badge" type="button" (click)="toggleSection('tacos')">TACOS DE BIRRIA</button>
 
         <div class="menu-items" *ngIf="isOpen('tacos')">
-          <div class="menu-item"><span>Orden de 3</span><strong>₡4.000</strong></div>
-          <div class="menu-item"><span>Orden de 4</span><strong>₡4.500</strong></div>
-          <div class="menu-item"><span>Orden de 5</span><strong>₡5.000</strong></div>
-          <div class="menu-item"><span>Orden Familiar (20 tacos)</span><strong>₡18.900</strong></div>
-          <div class="menu-item"><span>Taco adicional</span><strong>₡1.500</strong></div>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Orden de 3', 4000)"><span>Orden de 3</span><strong>₡4.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Orden de 4', 4500)"><span>Orden de 4</span><strong>₡4.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Orden de 5', 5000)"><span>Orden de 5</span><strong>₡5.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Orden Familiar (20 tacos)', 18900)"><span>Orden Familiar (20 tacos)</span><strong>₡18.900</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Taco adicional', 1500)"><span>Taco adicional</span><strong>₡1.500</strong></button>
         </div>
       </div>
     </div>
@@ -136,30 +126,69 @@
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('bebidas')">
-          REFRESCOS Y CÓCTELES
-        </button>
+        <button class="category-badge" type="button" (click)="toggleSection('bebidas')">REFRESCOS Y CÓCTELES</button>
 
         <div class="menu-items" *ngIf="isOpen('bebidas')">
-          <div class="menu-item"><span>Coca Cola</span><strong>₡800</strong></div>
-          <div class="menu-item"><span>Coca Cola Zero</span><strong>₡1000</strong></div>
-          <div class="menu-item"><span>Fresca</span><strong>₡800</strong></div>
-          <div class="menu-item"><span>Gin</span><strong>₡800</strong></div>
-          <div class="menu-item"><span>Fanta Naranja</span><strong>₡800</strong></div>
-          <div class="menu-item"><span>Fanta Uva</span><strong>₡800</strong></div>
-          <div class="menu-item"><span>Té Melocotón o té Blanco</span><strong>₡800</strong></div>
-          <div class="menu-item"><span>Fanta Kolita</span><strong>₡800</strong></div>
-          <div class="menu-item"><span>Café</span><strong>₡1.000</strong></div>
-          <div class="menu-item"><span>Café con leche</span><strong>₡1.500</strong></div>
-          <div class="menu-item"><span>Chocolate frío/Caliente</span><strong>₡2.000</strong></div>
-          <div class="menu-item"><span>Piña Colada</span><strong>₡3.000</strong></div>
-          <div class="menu-item"><span>Margarita de mango</span><strong>₡3.000</strong></div>
-          <div class="menu-item"><span>Limonada de coco</span><strong>₡3.000</strong></div>
-          <div class="menu-item"><span>Café Cremoso</span><strong>₡2.500</strong></div>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Coca Cola', 800)"><span>Coca Cola</span><strong>₡800</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Coca Cola Zero', 1000)"><span>Coca Cola Zero</span><strong>₡1000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Fresca', 800)"><span>Fresca</span><strong>₡800</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Gin', 800)"><span>Gin</span><strong>₡800</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Fanta Naranja', 800)"><span>Fanta Naranja</span><strong>₡800</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Fanta Uva', 800)"><span>Fanta Uva</span><strong>₡800</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Té Melocotón o té Blanco', 800)"><span>Té Melocotón o té Blanco</span><strong>₡800</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Fanta Kolita', 800)"><span>Fanta Kolita</span><strong>₡800</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Café', 1000)"><span>Café</span><strong>₡1.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Café con leche', 1500)"><span>Café con leche</span><strong>₡1.500</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Chocolate frío/Caliente', 2000)"><span>Chocolate frío/Caliente</span><strong>₡2.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Piña Colada', 3000)"><span>Piña Colada</span><strong>₡3.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Margarita de mango', 3000)"><span>Margarita de mango</span><strong>₡3.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Limonada de coco', 3000)"><span>Limonada de coco</span><strong>₡3.000</strong></button>
+          <button class="menu-item clickable" type="button" (click)="addToCart('Café Cremoso', 2500)"><span>Café Cremoso</span><strong>₡2.500</strong></button>
         </div>
       </div>
     </div>
 
+  </div>
+
+  <div class="cart-panel" *ngIf="hasCartItems">
+    <div class="cart-header">
+      <div>
+        <span>Pedido</span>
+        <h2>Tu carrito</h2>
+      </div>
+
+      <button type="button" class="cart-clear" (click)="clearCart()">
+        Vaciar
+      </button>
+    </div>
+
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of cart">
+        <div>
+          <strong>{{ item.name }}</strong>
+          <span>{{ item.quantity }} x {{ formatPrice(item.price) }}</span>
+        </div>
+
+        <div class="cart-actions">
+          <strong>{{ formatPrice(item.price * item.quantity) }}</strong>
+
+          <button type="button" (click)="removeFromCart(item.name)">
+            −
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-footer">
+      <div>
+        <span>Total</span>
+        <strong>{{ formatPrice(total) }}</strong>
+      </div>
+
+      <button type="button" class="whatsapp-order" (click)="sendOrderToWhatsApp()">
+        Enviar pedido por WhatsApp
+      </button>
+    </div>
   </div>
 
   <div class="menu-footer-note">
