@@ -13,370 +13,111 @@
     </p>
   </div>
 
+  <!-- BOTONES DE CATEGORÍAS -->
+  <div class="menu-tabs">
+
+    <button
+      *ngFor="let section of sections"
+      class="menu-tab-button"
+      [class.active]="activeSectionId === section.id"
+      (click)="setActiveSection(section.id)"
+    >
+      {{ section.title }}
+    </button>
+
+  </div>
+
+  <!-- CATEGORÍA ACTIVA -->
   <div class="menu-showcase">
 
-    <!-- FAST FOOD -->
     <div class="menu-category large-card">
 
-      <div class="menu-image">
-        <img
-          src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1200&auto=format&fit=crop"
-          alt="Fast Food Shirley's"
-        />
-      </div>
-
       <div class="menu-content">
-        <span class="category-badge">FAST FOOD</span>
 
-        <div class="menu-items">
-
-          <div class="menu-item">
-            <span>Ceviche Pequeño</span>
-            <strong>₡2.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Ceviche Grande</span>
-            <strong>₡3.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Canasta de Patacón</span>
-            <strong>₡4.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Orden de 4 Camarones</span>
-            <strong>₡4.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Orden de 4 Carne-Pollo</span>
-            <strong>₡4.000</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Fajitas de Pollo</span>
-            <strong>₡3.800</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Fajitas de Pescado</span>
-            <strong>₡4.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Nachos</span>
-            <strong>₡3.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Papanachos</span>
-            <strong>₡4.000</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Chifrijo</span>
-            <strong>₡3.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Burrito</span>
-            <strong>₡3.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Salchipapas</span>
-            <strong>₡3.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Taco Corriente</span>
-            <strong>₡2.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Quesadilla</span>
-            <strong>₡3.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Orden de papas</span>
-            <strong>₡2.500</strong>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- HAMBURGUESAS -->
-    <div class="menu-category">
-
-      <div class="menu-image">
-        <img
-          src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200&auto=format&fit=crop"
-          alt="Hamburguesas Shirley's"
-        />
-      </div>
-
-      <div class="menu-content">
         <span class="category-badge">
-          HAMBURGUESAS / EMPANADAS
+          {{ activeSection.title }}
         </span>
 
         <div class="menu-items">
 
-          <div class="menu-item">
-            <span>Hamburguesa de Carne</span>
-            <strong>₡4.000</strong>
-          </div>
+          <button
+            class="menu-item interactive"
+            *ngFor="let item of activeSection.items"
+            (click)="addToCart(item)"
+          >
+            <span>{{ item.name }}</span>
 
-          <div class="menu-item">
-            <span>Hamburguesa de Pollo</span>
-            <strong>₡4.000</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Hamburguesa de Birria</span>
-            <strong>₡4.000</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Empanada Arreglada</span>
-            <strong>₡2.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Empanada Sencilla</span>
-            <strong>₡2.000</strong>
-          </div>
+            <div class="menu-item-right">
+              <small>Agregar</small>
+              <strong>{{ formatPrice(item.price) }}</strong>
+            </div>
+          </button>
 
         </div>
+
       </div>
     </div>
 
-    <!-- ARROCES -->
-    <div class="menu-category">
+  </div>
 
-      <div class="menu-image">
-        <img
-          src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=1200&auto=format&fit=crop"
-          alt="Arroces Shirley's"
-        />
+  <!-- CARRITO -->
+  <div class="cart-panel" *ngIf="hasCartItems">
+
+    <div class="cart-header">
+
+      <div>
+        <span class="cart-label">TU PEDIDO</span>
+        <h2>Pedido Shirley’s</h2>
       </div>
 
-      <div class="menu-content">
-        <span class="category-badge">ARROCES</span>
+      <button class="clear-cart-btn" (click)="clearCart()">
+        Vaciar
+      </button>
 
-        <div class="menu-items">
-
-          <div class="menu-item">
-            <span>Arroz con Pollo</span>
-            <strong>₡3.800</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Arroz Cantonés</span>
-            <strong>₡3.800</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Arroz con Camarones</span>
-            <strong>₡4.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Arroz de la casa</span>
-            <strong>₡3.800</strong>
-          </div>
-
-        </div>
-      </div>
     </div>
 
-    <!-- ESPECIALES -->
-    <div class="menu-category">
+    <div class="cart-items">
 
-      <div class="menu-image">
-        <img
-          src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1200&auto=format&fit=crop"
-          alt="Especiales Shirley's"
-        />
-      </div>
+      <div class="cart-item" *ngFor="let item of cart">
 
-      <div class="menu-content">
-        <span class="category-badge">ESPECIALES</span>
+        <div class="cart-item-info">
+          <span>{{ item.name }}</span>
 
-        <div class="menu-items">
+          <small>
+            {{ item.quantity }} x {{ formatPrice(item.price) }}
+          </small>
+        </div>
 
-          <div class="menu-item">
-            <span>Papanachos Shirley’s</span>
-            <strong>₡4.900</strong>
-          </div>
+        <div class="cart-item-actions">
 
-          <div class="menu-item">
-            <span>Ensalada Shirley’s plancha</span>
-            <strong>₡4.000</strong>
-          </div>
+          <strong>
+            {{ formatPrice(item.price * item.quantity) }}
+          </strong>
 
-          <div class="menu-item">
-            <span>Ensalada Shirley’s empanizado</span>
-            <strong>₡4.300</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Hamburguesa Shirley’s</span>
-            <strong>₡4.800</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Pizza Birria</span>
-            <strong>₡8.950</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Empabirria</span>
-            <strong>₡3.500</strong>
-          </div>
+          <button (click)="removeFromCart(item.name)">
+            −
+          </button>
 
         </div>
+
       </div>
+
     </div>
 
-    <!-- TACOS -->
-    <div class="menu-category">
+    <div class="cart-footer">
 
-      <div class="menu-image">
-        <img
-          src="https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?q=80&w=1200&auto=format&fit=crop"
-          alt="Tacos Shirley's"
-        />
+      <div class="cart-total">
+        <span>Total</span>
+        <strong>{{ formatPrice(total) }}</strong>
       </div>
 
-      <div class="menu-content">
-        <span class="category-badge">TACOS DE BIRRIA</span>
+      <button
+        class="send-order-btn"
+        (click)="sendOrderToWhatsApp()"
+      >
+        Enviar pedido por WhatsApp
+      </button>
 
-        <div class="menu-items">
-
-          <div class="menu-item">
-            <span>Orden de 3</span>
-            <strong>₡4.000</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Orden de 4</span>
-            <strong>₡4.500</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Orden de 5</span>
-            <strong>₡5.000</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Orden Familiar (20 tacos)</span>
-            <strong>₡18.900</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Taco adicional</span>
-            <strong>₡1.500</strong>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- BEBIDAS -->
-    <div class="menu-category">
-
-      <div class="menu-image">
-        <img
-          src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1200&auto=format&fit=crop"
-          alt="Bebidas Shirley's"
-        />
-      </div>
-
-      <div class="menu-content">
-        <span class="category-badge">REFRESCOS Y CÓCTELES</span>
-
-        <div class="menu-items">
-
-          <div class="menu-item">
-            <span>Coca Cola</span>
-            <strong>₡800</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Coca Cola Zero</span>
-            <strong>₡1000</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Fresca</span>
-            <strong>₡800</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Gin</span>
-            <strong>₡800</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Fanta Naranja</span>
-            <strong>₡800</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Fanta Uva</span>
-            <strong>₡800</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Té Melocotón o té Blanco</span>
-            <strong>₡800</strong>
-          </div>
-
-          <div class="menu-item">
-            <span>Fanta Kolita</span>
-            <strong>₡800</strong>
-          </div>
-<div class="menu-item">
-  <span>Café</span>
-  <strong>₡1.000</strong>
-</div>
-
-<div class="menu-item">
-  <span>Café con leche</span>
-  <strong>₡1.500</strong>
-</div>
-
-<div class="menu-item">
-  <span>Chocolate frío/Caliente</span>
-  <strong>₡2.000</strong>
-</div>
-
-<div class="menu-item">
-  <span>Piña Colada</span>
-  <strong>₡3.000</strong>
-</div>
-
-<div class="menu-item">
-  <span>Margarita de mango</span>
-  <strong>₡3.000</strong>
-</div>
-
-<div class="menu-item">
-  <span>Limonada de coco</span>
-  <strong>₡3.000</strong>
-</div>
-
-<div class="menu-item">
-  <span>Café Cremoso</span>
-  <strong>₡2.500</strong>
-</div>
-        </div>
-      </div>
     </div>
 
   </div>
