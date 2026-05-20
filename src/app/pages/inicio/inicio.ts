@@ -1,6 +1,15 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+interface RegisterCustomerResponse {
+  success: boolean;
+  message: string;
+  customer_code: string;
+  email_sent: boolean;
+  customer_whatsapp_url?: string;
+  shirleys_whatsapp_url?: string;
+}
+
 @Component({
   selector: 'app-inicio',
   imports: [RouterLink],
@@ -39,6 +48,9 @@ export class Inicio {
     this.showQrPopup = false;
     this.cdr.detectChanges();
 
+    const customerWhatsappWindow = window.open('', '_blank');
+    const shirleysWhatsappWindow = window.open('', '_blank');
+
     try {
       const response = await fetch(
         'https://shirleys-backend.onrender.com/api/customers/register',
@@ -55,20 +67,41 @@ export class Inicio {
         }
       );
 
-      const data = await response.json().catch(() => null);
+      const data = (await response
+        .json()
+        .catch(() => null)) as RegisterCustomerResponse | null;
 
-      if (!response.ok) {
+      if (!response.ok || !data) {
+        customerWhatsappWindow?.close();
+        shirleysWhatsappWindow?.close();
+
         throw new Error(
-          data?.message || data?.error || 'No se pudo completar el registro.'
+          data?.message ||
+            'No se pudo completar el registro.'
         );
       }
 
+      if (data.customer_whatsapp_url && customerWhatsappWindow) {
+        customerWhatsappWindow.location.href = data.customer_whatsapp_url;
+      } else {
+        customerWhatsappWindow?.close();
+      }
+
+      if (data.shirleys_whatsapp_url && shirleysWhatsappWindow) {
+        shirleysWhatsappWindow.location.href = data.shirleys_whatsapp_url;
+      } else {
+        shirleysWhatsappWindow?.close();
+      }
+
       this.popupMessage =
-        `${data.message}. Código de cliente: ${data.customer.code}. ` +
-        `Confirmación enviada al correo: ${data.customer.email}.`;
+        `${data.message} Código de cliente: ${data.customer_code}. ` +
+        `También enviamos el QR al correo: ${cleanEmail}.`;
 
       this.showQrPopup = true;
     } catch (error) {
+      customerWhatsappWindow?.close();
+      shirleysWhatsappWindow?.close();
+
       this.popupMessage =
         error instanceof Error
           ? error.message
