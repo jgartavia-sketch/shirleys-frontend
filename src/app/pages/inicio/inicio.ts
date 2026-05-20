@@ -3,9 +3,10 @@ import { RouterLink } from '@angular/router';
 
 interface RegisterCustomerResponse {
   success: boolean;
-  message: string;
-  customer_code: string;
-  email_sent: boolean;
+  message?: string;
+  detail?: string;
+  customer_code?: string;
+  email_sent?: boolean;
   customer_whatsapp_url?: string;
   shirleys_whatsapp_url?: string;
 }
@@ -21,6 +22,7 @@ export class Inicio {
 
   showQrPopup = false;
   popupMessage = '';
+  popupTitle = 'QR enviado exitosamente';
   isSendingQr = false;
 
   async sendMockQr(
@@ -37,6 +39,7 @@ export class Inicio {
     const cleanWhatsapp = whatsapp.trim();
 
     if (!cleanName || !cleanEmail || !cleanWhatsapp) {
+      this.popupTitle = 'Faltan datos';
       this.popupMessage =
         'Por favor complete nombre, correo y WhatsApp para generar su QR.';
       this.showQrPopup = true;
@@ -71,14 +74,31 @@ export class Inicio {
         .json()
         .catch(() => null)) as RegisterCustomerResponse | null;
 
+      if (response.status === 409) {
+        customerWhatsappWindow?.close();
+        shirleysWhatsappWindow?.close();
+
+        this.popupTitle = 'Cliente ya registrado';
+        this.popupMessage =
+          data?.detail ||
+          'Este cliente ya está registrado. Use otro correo o consulte su tarjeta digital.';
+
+        this.showQrPopup = true;
+        return;
+      }
+
       if (!response.ok || !data) {
         customerWhatsappWindow?.close();
         shirleysWhatsappWindow?.close();
 
-        throw new Error(
+        this.popupTitle = 'No se pudo completar el registro';
+        this.popupMessage =
+          data?.detail ||
           data?.message ||
-            'No se pudo completar el registro.'
-        );
+          'No se pudo completar el registro.';
+
+        this.showQrPopup = true;
+        return;
       }
 
       if (data.customer_whatsapp_url && customerWhatsappWindow) {
@@ -93,8 +113,10 @@ export class Inicio {
         shirleysWhatsappWindow?.close();
       }
 
+      this.popupTitle = 'QR enviado exitosamente';
       this.popupMessage =
-        `${data.message} Código de cliente: ${data.customer_code}. ` +
+        `${data.message || 'Cliente registrado correctamente.'} ` +
+        `Código de cliente: ${data.customer_code}. ` +
         `También enviamos el QR al correo: ${cleanEmail}.`;
 
       this.showQrPopup = true;
@@ -102,6 +124,7 @@ export class Inicio {
       customerWhatsappWindow?.close();
       shirleysWhatsappWindow?.close();
 
+      this.popupTitle = 'Error de conexión';
       this.popupMessage =
         error instanceof Error
           ? error.message
