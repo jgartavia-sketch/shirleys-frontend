@@ -17,49 +17,72 @@
     <!-- FAST FOOD -->
     <div class="menu-category" [class.is-open]="isOpen('fastFood')">
       <div class="menu-image">
-        <img
-          src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1200&auto=format&fit=crop"
-          alt="Fast Food Shirley's"
-        />
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1200&auto=format&fit=crop" alt="Fast Food Shirley's" />
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('fastFood')">
-          FAST FOOD
-        </button>
+        <button class="category-badge" type="button" (click)="toggleSection('fastFood')">FAST FOOD</button>
 
         <div class="menu-items" *ngIf="isOpen('fastFood')">
-
           <button class="menu-item clickable" [class.selected]="isInCart('Ceviche Pequeño')" type="button" (click)="addToCart('Ceviche Pequeño', 2500)">
-            <span>Ceviche Pequeño</span>
-            <strong>₡2.500</strong>
-            <small class="item-check" *ngIf="isInCart('Ceviche Pequeño')">✓</small>
+            <span>Ceviche Pequeño</span><strong>₡2.500</strong><small class="item-check" *ngIf="isInCart('Ceviche Pequeño')">✓</small>
           </button>
 
           <button class="menu-item clickable" [class.selected]="isInCart('Ceviche Grande')" type="button" (click)="addToCart('Ceviche Grande', 3500)">
-            <span>Ceviche Grande</span>
-            <strong>₡3.500</strong>
-            <small class="item-check" *ngIf="isInCart('Ceviche Grande')">✓</small>
+            <span>Ceviche Grande</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Ceviche Grande')">✓</small>
           </button>
 
           <button class="menu-item clickable" [class.selected]="isInCart('Canasta de Patacón')" type="button" (click)="addToCart('Canasta de Patacón', 4500)">
-            <span>Canasta de Patacón</span>
-            <strong>₡4.500</strong>
-            <small class="item-check" *ngIf="isInCart('Canasta de Patacón')">✓</small>
+            <span>Canasta de Patacón</span><strong>₡4.500</strong><small class="item-check" *ngIf="isInCart('Canasta de Patacón')">✓</small>
           </button>
 
           <button class="menu-item clickable" [class.selected]="isInCart('Orden de 4 Camarones')" type="button" (click)="addToCart('Orden de 4 Camarones', 4500)">
-            <span>Orden de 4 Camarones</span>
-            <strong>₡4.500</strong>
-            <small class="item-check" *ngIf="isInCart('Orden de 4 Camarones')">✓</small>
+            <span>Orden de 4 Camarones</span><strong>₡4.500</strong><small class="item-check" *ngIf="isInCart('Orden de 4 Camarones')">✓</small>
           </button>
 
           <button class="menu-item clickable" [class.selected]="isInCart('Orden de 4 Carne-Pollo')" type="button" (click)="addToCart('Orden de 4 Carne-Pollo', 4000)">
-            <span>Orden de 4 Carne-Pollo</span>
-            <strong>₡4.000</strong>
-            <small class="item-check" *ngIf="isInCart('Orden de 4 Carne-Pollo')">✓</small>
+            <span>Orden de 4 Carne-Pollo</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Orden de 4 Carne-Pollo')">✓</small>
           </button>
 
+          <button class="menu-item clickable" [class.selected]="isInCart('Fajitas de Pollo')" type="button" (click)="addToCart('Fajitas de Pollo', 3800)">
+            <span>Fajitas de Pollo</span><strong>₡3.800</strong><small class="item-check" *ngIf="isInCart('Fajitas de Pollo')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Fajitas de Pescado')" type="button" (click)="addToCart('Fajitas de Pescado', 4500)">
+            <span>Fajitas de Pescado</span><strong>₡4.500</strong><small class="item-check" *ngIf="isInCart('Fajitas de Pescado')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Nachos')" type="button" (click)="addToCart('Nachos', 3500)">
+            <span>Nachos</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Nachos')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Papanachos')" type="button" (click)="addToCart('Papanachos', 4000)">
+            <span>Papanachos</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Papanachos')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Chifrijo')" type="button" (click)="addToCart('Chifrijo', 3500)">
+            <span>Chifrijo</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Chifrijo')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Burrito')" type="button" (click)="addToCart('Burrito', 3500)">
+            <span>Burrito</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Burrito')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Salchipapas')" type="button" (click)="addToCart('Salchipapas', 3500)">
+            <span>Salchipapas</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Salchipapas')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Taco Corriente')" type="button" (click)="addToCart('Taco Corriente', 2500)">
+            <span>Taco Corriente</span><strong>₡2.500</strong><small class="item-check" *ngIf="isInCart('Taco Corriente')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Quesadilla')" type="button" (click)="addToCart('Quesadilla', 3500)">
+            <span>Quesadilla</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Quesadilla')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Orden de papas')" type="button" (click)="addToCart('Orden de papas', 2500)">
+            <span>Orden de papas</span><strong>₡2.500</strong><small class="item-check" *ngIf="isInCart('Orden de papas')">✓</small>
+          </button>
         </div>
       </div>
     </div>
@@ -67,31 +90,32 @@
     <!-- HAMBURGUESAS -->
     <div class="menu-category" [class.is-open]="isOpen('hamburguesas')">
       <div class="menu-image">
-        <img
-          src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200&auto=format&fit=crop"
-          alt="Hamburguesas Shirley's"
-        />
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200&auto=format&fit=crop" alt="Hamburguesas Shirley's" />
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('hamburguesas')">
-          HAMBURGUESAS / EMPANADAS
-        </button>
+        <button class="category-badge" type="button" (click)="toggleSection('hamburguesas')">HAMBURGUESAS / EMPANADAS</button>
 
         <div class="menu-items" *ngIf="isOpen('hamburguesas')">
-
           <button class="menu-item clickable" [class.selected]="isInCart('Hamburguesa de Carne')" type="button" (click)="addToCart('Hamburguesa de Carne', 4000)">
-            <span>Hamburguesa de Carne</span>
-            <strong>₡4.000</strong>
-            <small class="item-check" *ngIf="isInCart('Hamburguesa de Carne')">✓</small>
+            <span>Hamburguesa de Carne</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Hamburguesa de Carne')">✓</small>
           </button>
 
           <button class="menu-item clickable" [class.selected]="isInCart('Hamburguesa de Pollo')" type="button" (click)="addToCart('Hamburguesa de Pollo', 4000)">
-            <span>Hamburguesa de Pollo</span>
-            <strong>₡4.000</strong>
-            <small class="item-check" *ngIf="isInCart('Hamburguesa de Pollo')">✓</small>
+            <span>Hamburguesa de Pollo</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Hamburguesa de Pollo')">✓</small>
           </button>
 
+          <button class="menu-item clickable" [class.selected]="isInCart('Hamburguesa de Birria')" type="button" (click)="addToCart('Hamburguesa de Birria', 4000)">
+            <span>Hamburguesa de Birria</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Hamburguesa de Birria')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Empanada Arreglada')" type="button" (click)="addToCart('Empanada Arreglada', 2500)">
+            <span>Empanada Arreglada</span><strong>₡2.500</strong><small class="item-check" *ngIf="isInCart('Empanada Arreglada')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Empanada Sencilla')" type="button" (click)="addToCart('Empanada Sencilla', 2000)">
+            <span>Empanada Sencilla</span><strong>₡2.000</strong><small class="item-check" *ngIf="isInCart('Empanada Sencilla')">✓</small>
+          </button>
         </div>
       </div>
     </div>
@@ -99,31 +123,127 @@
     <!-- ARROCES -->
     <div class="menu-category" [class.is-open]="isOpen('arroces')">
       <div class="menu-image">
-        <img
-          src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=1200&auto=format&fit=crop"
-          alt="Arroces Shirley's"
-        />
+        <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=1200&auto=format&fit=crop" alt="Arroces Shirley's" />
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('arroces')">
-          ARROCES
-        </button>
+        <button class="category-badge" type="button" (click)="toggleSection('arroces')">ARROCES</button>
 
         <div class="menu-items" *ngIf="isOpen('arroces')">
-
           <button class="menu-item clickable" [class.selected]="isInCart('Arroz con Pollo')" type="button" (click)="addToCart('Arroz con Pollo', 3800)">
-            <span>Arroz con Pollo</span>
-            <strong>₡3.800</strong>
-            <small class="item-check" *ngIf="isInCart('Arroz con Pollo')">✓</small>
+            <span>Arroz con Pollo</span><strong>₡3.800</strong><small class="item-check" *ngIf="isInCart('Arroz con Pollo')">✓</small>
           </button>
 
           <button class="menu-item clickable" [class.selected]="isInCart('Arroz Cantonés')" type="button" (click)="addToCart('Arroz Cantonés', 3800)">
-            <span>Arroz Cantonés</span>
-            <strong>₡3.800</strong>
-            <small class="item-check" *ngIf="isInCart('Arroz Cantonés')">✓</small>
+            <span>Arroz Cantonés</span><strong>₡3.800</strong><small class="item-check" *ngIf="isInCart('Arroz Cantonés')">✓</small>
           </button>
 
+          <button class="menu-item clickable" [class.selected]="isInCart('Arroz con Camarones')" type="button" (click)="addToCart('Arroz con Camarones', 4500)">
+            <span>Arroz con Camarones</span><strong>₡4.500</strong><small class="item-check" *ngIf="isInCart('Arroz con Camarones')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Arroz de la casa')" type="button" (click)="addToCart('Arroz de la casa', 3800)">
+            <span>Arroz de la casa</span><strong>₡3.800</strong><small class="item-check" *ngIf="isInCart('Arroz de la casa')">✓</small>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESPECIALES -->
+    <div class="menu-category" [class.is-open]="isOpen('especiales')">
+      <div class="menu-image">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1200&auto=format&fit=crop" alt="Especiales Shirley's" />
+      </div>
+
+      <div class="menu-content">
+        <button class="category-badge" type="button" (click)="toggleSection('especiales')">ESPECIALES</button>
+
+        <div class="menu-items" *ngIf="isOpen('especiales')">
+          <button class="menu-item clickable" [class.selected]="isInCart('Papanachos Shirley’s')" type="button" (click)="addToCart('Papanachos Shirley’s', 4900)">
+            <span>Papanachos Shirley’s</span><strong>₡4.900</strong><small class="item-check" *ngIf="isInCart('Papanachos Shirley’s')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Ensalada Shirley’s plancha')" type="button" (click)="addToCart('Ensalada Shirley’s plancha', 4000)">
+            <span>Ensalada Shirley’s plancha</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Ensalada Shirley’s plancha')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Ensalada Shirley’s empanizado')" type="button" (click)="addToCart('Ensalada Shirley’s empanizado', 4300)">
+            <span>Ensalada Shirley’s empanizado</span><strong>₡4.300</strong><small class="item-check" *ngIf="isInCart('Ensalada Shirley’s empanizado')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Hamburguesa Shirley’s')" type="button" (click)="addToCart('Hamburguesa Shirley’s', 4800)">
+            <span>Hamburguesa Shirley’s</span><strong>₡4.800</strong><small class="item-check" *ngIf="isInCart('Hamburguesa Shirley’s')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Pizza Birria')" type="button" (click)="addToCart('Pizza Birria', 8950)">
+            <span>Pizza Birria</span><strong>₡8.950</strong><small class="item-check" *ngIf="isInCart('Pizza Birria')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Empabirria')" type="button" (click)="addToCart('Empabirria', 3500)">
+            <span>Empabirria</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Empabirria')">✓</small>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TACOS -->
+    <div class="menu-category" [class.is-open]="isOpen('tacos')">
+      <div class="menu-image">
+        <img src="https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?q=80&w=1200&auto=format&fit=crop" alt="Tacos Shirley's" />
+      </div>
+
+      <div class="menu-content">
+        <button class="category-badge" type="button" (click)="toggleSection('tacos')">TACOS DE BIRRIA</button>
+
+        <div class="menu-items" *ngIf="isOpen('tacos')">
+          <button class="menu-item clickable" [class.selected]="isInCart('Orden de 3')" type="button" (click)="addToCart('Orden de 3', 4000)">
+            <span>Orden de 3</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Orden de 3')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Orden de 4')" type="button" (click)="addToCart('Orden de 4', 4500)">
+            <span>Orden de 4</span><strong>₡4.500</strong><small class="item-check" *ngIf="isInCart('Orden de 4')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Orden de 5')" type="button" (click)="addToCart('Orden de 5', 5000)">
+            <span>Orden de 5</span><strong>₡5.000</strong><small class="item-check" *ngIf="isInCart('Orden de 5')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Orden Familiar (20 tacos)')" type="button" (click)="addToCart('Orden Familiar (20 tacos)', 18900)">
+            <span>Orden Familiar (20 tacos)</span><strong>₡18.900</strong><small class="item-check" *ngIf="isInCart('Orden Familiar (20 tacos)')">✓</small>
+          </button>
+
+          <button class="menu-item clickable" [class.selected]="isInCart('Taco adicional')" type="button" (click)="addToCart('Taco adicional', 1500)">
+            <span>Taco adicional</span><strong>₡1.500</strong><small class="item-check" *ngIf="isInCart('Taco adicional')">✓</small>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEBIDAS -->
+    <div class="menu-category" [class.is-open]="isOpen('bebidas')">
+      <div class="menu-image">
+        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1200&auto=format&fit=crop" alt="Bebidas Shirley's" />
+      </div>
+
+      <div class="menu-content">
+        <button class="category-badge" type="button" (click)="toggleSection('bebidas')">REFRESCOS Y CÓCTELES</button>
+
+        <div class="menu-items" *ngIf="isOpen('bebidas')">
+          <div class="menu-item no-action"><span>Coca Cola</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Coca Cola Zero</span><strong>₡1.000</strong></div>
+          <div class="menu-item no-action"><span>Fresca</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Gin</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Fanta Naranja</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Fanta Uva</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Té Melocotón o té Blanco</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Fanta Kolita</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Café</span><strong>₡1.000</strong></div>
+          <div class="menu-item no-action"><span>Café con leche</span><strong>₡1.500</strong></div>
+          <div class="menu-item no-action"><span>Chocolate frío/Caliente</span><strong>₡2.000</strong></div>
+          <div class="menu-item no-action"><span>Piña Colada</span><strong>₡3.000</strong></div>
+          <div class="menu-item no-action"><span>Margarita de mango</span><strong>₡3.000</strong></div>
+          <div class="menu-item no-action"><span>Limonada de coco</span><strong>₡3.000</strong></div>
+          <div class="menu-item no-action"><span>Café Cremoso</span><strong>₡2.500</strong></div>
         </div>
       </div>
     </div>
@@ -131,7 +251,6 @@
   </div>
 
   <div class="cart-panel" *ngIf="hasCartItems">
-
     <div class="cart-header">
       <div>
         <span>Pedido</span>
@@ -164,19 +283,11 @@
       <span>Tipo de pedido</span>
 
       <div class="order-type-options">
-        <button
-          type="button"
-          [class.active]="orderType === 'pickup'"
-          (click)="setOrderType('pickup')"
-        >
+        <button type="button" [class.active]="orderType === 'pickup'" (click)="setOrderType('pickup')">
           Recoger en el local
         </button>
 
-        <button
-          type="button"
-          [class.active]="orderType === 'express'"
-          (click)="setOrderType('express')"
-        >
+        <button type="button" [class.active]="orderType === 'express'" (click)="setOrderType('express')">
           Express
         </button>
       </div>
@@ -217,11 +328,9 @@
         Enviar pedido por WhatsApp
       </button>
     </div>
-
   </div>
 
   <div class="menu-footer-note">
     **Cada platillo incluye ₡200 de empaque en el total del pedido.
   </div>
-
 </section>

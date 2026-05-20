@@ -553,3 +553,15 @@
     font-size: 0.95rem;
   }
 }
+.menu-item.no-action {
+  cursor: default;
+  opacity: 0.82;
+}
+
+.menu-item.no-action:hover {
+  padding: 0 0 10px;
+  border-bottom: 1px dashed rgba(244, 208, 111, 0.14);
+  border-radius: 0;
+  background: transparent;
+  transform: none;
+}
