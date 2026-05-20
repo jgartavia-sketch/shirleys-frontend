@@ -34,7 +34,9 @@ export class Menu {
 
   readonly whatsappNumber = '50688335888';
   readonly packagingFee = 200;
-  readonly apiUrl = 'http://127.0.0.1:8000/api/orders/';
+
+  readonly apiUrl =
+    'https://shirleys-backend.onrender.com/api/orders/';
 
   orderType: OrderType = 'pickup';
   customerLocation = '';
@@ -153,9 +155,13 @@ export class Menu {
         this.openWhatsApp();
         this.isSendingOrder = false;
       },
-      error: () => {
+
+      error: (error) => {
+        console.error('❌ Error creating WhatsApp order:', error);
+
         this.orderError =
           'No pudimos registrar el pedido todavía. Inténtalo de nuevo.';
+
         this.isSendingOrder = false;
       },
     });
