@@ -5,7 +5,7 @@
     <h1>Centro administrativo</h1>
     <p>
       Datos reales del programa Shirley’s Customers para tomar decisiones sobre clientes,
-      compras, puntos y recurrencia.
+      compras, puntos, recurrencia y pedidos recibidos por WhatsApp.
     </p>
   </div>
 
@@ -45,7 +45,131 @@
         <p>Puntos emitidos a clientes</p>
       </article>
 
+      <article class="stat-card whatsapp-stat">
+        <span>Pedidos WhatsApp recibidos</span>
+        <strong>{{ summary.whatsapp_orders_received }}</strong>
+        <p>Pedidos enviados desde el menú digital</p>
+      </article>
+
+      <article class="stat-card whatsapp-stat">
+        <span>Pedidos confirmados</span>
+        <strong>{{ summary.whatsapp_orders_confirmed }}</strong>
+        <p>Ventas confirmadas por el encargado</p>
+      </article>
+
+      <article class="stat-card whatsapp-stat">
+        <span>Pedidos cancelados</span>
+        <strong>{{ summary.whatsapp_orders_cancelled }}</strong>
+        <p>Historial operativo no financiero</p>
+      </article>
+
+      <article class="stat-card whatsapp-stat">
+        <span>Total confirmado</span>
+        <strong>{{ formatCurrency(summary.whatsapp_total_confirmed) }}</strong>
+        <p>
+          Empaque: {{ formatCurrency(summary.whatsapp_packaging_confirmed) }} ·
+          Ticket promedio: {{ formatCurrency(summary.whatsapp_average_confirmed_ticket) }}
+        </p>
+      </article>
+
     </div>
+
+    <section class="admin-card whatsapp-orders-card">
+      <div class="card-header">
+        <h2>Pedidos WhatsApp</h2>
+        <span>Pedidos recibidos desde el menú interactivo</span>
+      </div>
+
+      <div class="admin-alert" *ngIf="loadingOrders">
+        Cargando pedidos de WhatsApp...
+      </div>
+
+      <div class="admin-alert error" *ngIf="!loadingOrders && ordersError">
+        {{ ordersError }}
+      </div>
+
+      <div class="empty-state" *ngIf="!loadingOrders && !ordersError && whatsappOrders.length === 0">
+        Aún no hay pedidos recibidos desde el menú.
+      </div>
+
+      <div class="whatsapp-orders-list" *ngIf="!loadingOrders && !ordersError && whatsappOrders.length > 0">
+
+        <article class="whatsapp-order-card" *ngFor="let order of whatsappOrders">
+          <div class="whatsapp-order-top">
+            <div>
+              <strong>Pedido WhatsApp</strong>
+              <p>
+                {{ getOrderTypeLabel(order.order_type) }} ·
+                {{ formatCurrency(order.total) }}
+              </p>
+            </div>
+
+            <span class="order-status" [class]="order.status">
+              {{ getStatusLabel(order.status) }}
+            </span>
+          </div>
+
+          <div class="whatsapp-order-items">
+            <div class="whatsapp-order-item" *ngFor="let item of order.items">
+              <span>{{ item.quantity }} x {{ item.name }}</span>
+              <strong>{{ formatCurrency(item.price * item.quantity) }}</strong>
+            </div>
+          </div>
+
+          <div class="whatsapp-order-meta">
+            <p>
+              <strong>Subtotal:</strong>
+              {{ formatCurrency(order.food_total) }}
+            </p>
+
+            <p>
+              <strong>Empaque:</strong>
+              {{ formatCurrency(order.packaging_total) }}
+            </p>
+
+            <p *ngIf="order.location_text">
+              <strong>Ubicación:</strong>
+              {{ order.location_text }}
+            </p>
+
+            <p *ngIf="order.notes">
+              <strong>Notas:</strong>
+              {{ order.notes }}
+            </p>
+          </div>
+
+          <div class="whatsapp-order-actions">
+            <button
+              type="button"
+              class="confirm"
+              (click)="confirmWhatsappOrder(order)"
+              [disabled]="order.status === 'confirmed'"
+            >
+              Confirmar venta
+            </button>
+
+            <button
+              type="button"
+              class="cancel"
+              (click)="cancelWhatsappOrder(order)"
+              [disabled]="order.status === 'cancelled'"
+            >
+              Marcar cancelada
+            </button>
+
+            <button
+              type="button"
+              class="modify"
+              (click)="markWhatsappOrderModified(order)"
+              [disabled]="order.status === 'modified'"
+            >
+              Marcar modificada
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </section>
 
     <div class="admin-grid">
 
