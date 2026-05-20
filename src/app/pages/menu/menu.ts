@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+type OrderType = 'pickup' | 'express';
 
 interface CartItem {
   name: string;
@@ -10,7 +13,7 @@ interface CartItem {
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './menu.html',
   styleUrl: './menu.css',
 })
@@ -18,6 +21,10 @@ export class Menu {
   openSection: string | null = null;
 
   readonly whatsappNumber = '50688335888';
+  readonly packagingFee = 200;
+
+  orderType: OrderType = 'pickup';
+  customerLocation = '';
 
   cart: CartItem[] = [];
 
@@ -27,6 +34,14 @@ export class Menu {
 
   isOpen(section: string): boolean {
     return this.openSection === section;
+  }
+
+  setOrderType(type: OrderType): void {
+    this.orderType = type;
+
+    if (type === 'pickup') {
+      this.customerLocation = '';
+    }
   }
 
   addToCart(name: string, price: number): void {
@@ -56,17 +71,35 @@ export class Menu {
 
   clearCart(): void {
     this.cart = [];
+    this.orderType = 'pickup';
+    this.customerLocation = '';
+  }
+
+  isInCart(name: string): boolean {
+    return this.cart.some((item) => item.name === name);
   }
 
   get hasCartItems(): boolean {
     return this.cart.length > 0;
   }
 
-  get total(): number {
+  get totalItemsQuantity(): number {
+    return this.cart.reduce((sum, item) => sum + item.quantity, 0);
+  }
+
+  get foodTotal(): number {
     return this.cart.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
     );
+  }
+
+  get packagingTotal(): number {
+    return this.totalItemsQuantity * this.packagingFee;
+  }
+
+  get total(): number {
+    return this.foodTotal + this.packagingTotal;
   }
 
   formatPrice(price: number): string {
@@ -87,9 +120,28 @@ export class Menu {
       )
       .join('\n');
 
-    const message = `Hola Shirley's, quiero hacer este pedido:\n\n${orderLines}\n\nTotal: ${this.formatPrice(
-      this.total
-    )}\n\n*Precios no incluyen 10% de servicio.*`;
+    const orderTypeText =
+      this.orderType === 'express'
+        ? 'Express'
+        : 'Recoger en el local';
+
+    const locationText =
+      this.orderType === 'express'
+        ? `\nUbicación para express: ${
+            this.customerLocation.trim() || 'Por favor enviar ubicación por WhatsApp.'
+          }`
+        : '';
+
+    const message =
+      `Hola Shirley's, quiero hacer este pedido:\n\n` +
+      `${orderLines}\n\n` +
+      `Tipo de pedido: ${orderTypeText}` +
+      `${locationText}\n\n` +
+      `Subtotal platillos: ${this.formatPrice(this.foodTotal)}\n` +
+      `Empaque (${this.totalItemsQuantity} x ${this.formatPrice(
+        this.packagingFee
+      )}): ${this.formatPrice(this.packagingTotal)}\n` +
+      `Total: ${this.formatPrice(this.total)}`;
 
     const whatsappUrl = `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(
       message
