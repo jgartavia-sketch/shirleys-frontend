@@ -130,6 +130,18 @@ export class Admin implements OnInit {
     this.loadWhatsappOrders();
   }
 
+  get pendingWhatsappOrders(): WhatsappOrder[] {
+    return this.whatsappOrders.filter(
+      (order) => order.status === 'pending_confirmation'
+    );
+  }
+
+  get processedWhatsappOrders(): WhatsappOrder[] {
+    return this.whatsappOrders.filter(
+      (order) => order.status !== 'pending_confirmation'
+    );
+  }
+
   loadAdminSummary(): void {
     this.loading = true;
     this.error = '';
@@ -167,6 +179,7 @@ export class Admin implements OnInit {
       )
       .subscribe({
         next: (response) => {
+
           this.whatsappOrders = response.orders || [];
 
           this.loadingOrders = false;
@@ -217,22 +230,6 @@ export class Admin implements OnInit {
         next: () => {
 
           order.status = status;
-
-          if (status === 'confirmed') {
-            this.summary.whatsapp_orders_confirmed += 1;
-
-            if (this.summary.whatsapp_orders_cancelled > 0) {
-              this.summary.whatsapp_orders_cancelled -= 1;
-            }
-
-            this.summary.whatsapp_total_confirmed += order.total;
-            this.summary.whatsapp_packaging_confirmed +=
-              order.packaging_total;
-          }
-
-          if (status === 'cancelled') {
-            this.summary.whatsapp_orders_cancelled += 1;
-          }
 
           this.loadAdminSummary();
           this.loadWhatsappOrders();

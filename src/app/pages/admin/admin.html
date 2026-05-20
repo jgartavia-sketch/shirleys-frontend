@@ -2,10 +2,13 @@
 
   <div class="admin-hero">
     <span class="admin-kicker">Shirley’s Admin Panel</span>
+
     <h1>Centro administrativo</h1>
+
     <p>
-      Datos reales del programa Shirley’s Customers para tomar decisiones sobre clientes,
-      compras, puntos, recurrencia y pedidos recibidos por WhatsApp.
+      Datos reales del programa Shirley’s Customers para tomar decisiones
+      sobre clientes, compras, puntos, recurrencia y pedidos recibidos
+      por WhatsApp.
     </p>
   </div>
 
@@ -19,6 +22,7 @@
 
   <ng-container *ngIf="!loading && !error">
 
+    <!-- STATS -->
     <div class="admin-stats">
 
       <article class="stat-card">
@@ -36,7 +40,10 @@
       <article class="stat-card">
         <span>Ventas registradas</span>
         <strong>{{ formatCurrency(summary.total_sales) }}</strong>
-        <p>Ticket promedio: {{ formatCurrency(summary.average_ticket) }}</p>
+        <p>
+          Ticket promedio:
+          {{ formatCurrency(summary.average_ticket) }}
+        </p>
       </article>
 
       <article class="stat-card">
@@ -54,7 +61,7 @@
       <article class="stat-card whatsapp-stat">
         <span>Pedidos confirmados</span>
         <strong>{{ summary.whatsapp_orders_confirmed }}</strong>
-        <p>Ventas confirmadas por el encargado</p>
+        <p>Ventas confirmadas operativamente</p>
       </article>
 
       <article class="stat-card whatsapp-stat">
@@ -65,58 +72,112 @@
 
       <article class="stat-card whatsapp-stat">
         <span>Total confirmado</span>
-        <strong>{{ formatCurrency(summary.whatsapp_total_confirmed) }}</strong>
+
+        <strong>
+          {{ formatCurrency(summary.whatsapp_total_confirmed) }}
+        </strong>
+
         <p>
-          Empaque: {{ formatCurrency(summary.whatsapp_packaging_confirmed) }} ·
-          Ticket promedio: {{ formatCurrency(summary.whatsapp_average_confirmed_ticket) }}
+          Empaque:
+          {{ formatCurrency(summary.whatsapp_packaging_confirmed) }}
+          · Ticket promedio:
+          {{ formatCurrency(summary.whatsapp_average_confirmed_ticket) }}
         </p>
       </article>
 
     </div>
 
+    <!-- PEDIDOS PENDIENTES -->
     <section class="admin-card whatsapp-orders-card">
+
       <div class="card-header">
-        <h2>Pedidos WhatsApp</h2>
-        <span>Pedidos recibidos desde el menú interactivo</span>
+        <div>
+          <h2>Pedidos pendientes</h2>
+          <span>
+            Pedidos que aún necesitan validación del encargado
+          </span>
+        </div>
+
+        <span class="pending-counter">
+          {{ pendingWhatsappOrders.length }} pendientes
+        </span>
       </div>
 
       <div class="admin-alert" *ngIf="loadingOrders">
         Cargando pedidos de WhatsApp...
       </div>
 
-      <div class="admin-alert error" *ngIf="!loadingOrders && ordersError">
+      <div
+        class="admin-alert error"
+        *ngIf="!loadingOrders && ordersError"
+      >
         {{ ordersError }}
       </div>
 
-      <div class="empty-state" *ngIf="!loadingOrders && !ordersError && whatsappOrders.length === 0">
-        Aún no hay pedidos recibidos desde el menú.
+      <div
+        class="empty-state"
+        *ngIf="
+          !loadingOrders &&
+          !ordersError &&
+          pendingWhatsappOrders.length === 0
+        "
+      >
+        No hay pedidos pendientes por revisar.
       </div>
 
-      <div class="whatsapp-orders-list" *ngIf="!loadingOrders && !ordersError && whatsappOrders.length > 0">
+      <div
+        class="whatsapp-orders-list"
+        *ngIf="
+          !loadingOrders &&
+          !ordersError &&
+          pendingWhatsappOrders.length > 0
+        "
+      >
 
-        <article class="whatsapp-order-card" *ngFor="let order of whatsappOrders">
+        <article
+          class="whatsapp-order-card"
+          *ngFor="let order of pendingWhatsappOrders"
+        >
+
           <div class="whatsapp-order-top">
+
             <div>
               <strong>Pedido WhatsApp</strong>
+
               <p>
-                {{ getOrderTypeLabel(order.order_type) }} ·
+                {{ getOrderTypeLabel(order.order_type) }}
+                ·
                 {{ formatCurrency(order.total) }}
               </p>
             </div>
 
-            <span class="order-status" [class]="order.status">
+            <span
+              class="order-status"
+              [class]="order.status"
+            >
               {{ getStatusLabel(order.status) }}
             </span>
           </div>
 
           <div class="whatsapp-order-items">
-            <div class="whatsapp-order-item" *ngFor="let item of order.items">
-              <span>{{ item.quantity }} x {{ item.name }}</span>
-              <strong>{{ formatCurrency(item.price * item.quantity) }}</strong>
+
+            <div
+              class="whatsapp-order-item"
+              *ngFor="let item of order.items"
+            >
+              <span>
+                {{ item.quantity }} x {{ item.name }}
+              </span>
+
+              <strong>
+                {{ formatCurrency(item.price * item.quantity) }}
+              </strong>
             </div>
+
           </div>
 
           <div class="whatsapp-order-meta">
+
             <p>
               <strong>Subtotal:</strong>
               {{ formatCurrency(order.food_total) }}
@@ -132,60 +193,137 @@
               {{ order.location_text }}
             </p>
 
-            <p *ngIf="order.notes">
-              <strong>Notas:</strong>
-              {{ order.notes }}
-            </p>
           </div>
 
           <div class="whatsapp-order-actions">
+
             <button
               type="button"
               class="confirm"
               (click)="confirmWhatsappOrder(order)"
-              [disabled]="order.status === 'confirmed'"
+              [disabled]="isUpdatingOrder(order.id)"
             >
-              Confirmar venta
+              {{
+                isUpdatingOrder(order.id)
+                  ? 'Actualizando...'
+                  : 'Confirmar venta'
+              }}
             </button>
 
             <button
               type="button"
               class="cancel"
               (click)="cancelWhatsappOrder(order)"
-              [disabled]="order.status === 'cancelled'"
+              [disabled]="isUpdatingOrder(order.id)"
             >
-              Marcar cancelada
+              Cancelar
             </button>
 
             <button
               type="button"
               class="modify"
               (click)="markWhatsappOrderModified(order)"
-              [disabled]="order.status === 'modified'"
+              [disabled]="isUpdatingOrder(order.id)"
             >
-              Marcar modificada
+              Modificada
             </button>
+
           </div>
+
         </article>
 
       </div>
+
     </section>
 
+    <!-- HISTORIAL -->
+    <section
+      class="admin-card whatsapp-orders-card history-card"
+    >
+
+      <div class="card-header">
+        <div>
+          <h2>Historial operativo</h2>
+          <span>
+            Pedidos ya procesados por el restaurante
+          </span>
+        </div>
+
+        <span class="history-counter">
+          {{ processedWhatsappOrders.length }} procesados
+        </span>
+      </div>
+
+      <div
+        class="empty-state"
+        *ngIf="processedWhatsappOrders.length === 0"
+      >
+        Aún no hay pedidos procesados.
+      </div>
+
+      <div
+        class="whatsapp-orders-list compact-history"
+        *ngIf="processedWhatsappOrders.length > 0"
+      >
+
+        <article
+          class="whatsapp-order-card compact"
+          *ngFor="let order of processedWhatsappOrders"
+        >
+
+          <div class="whatsapp-order-top">
+
+            <div>
+              <strong>
+                {{ getOrderTypeLabel(order.order_type) }}
+              </strong>
+
+              <p>
+                {{ formatCurrency(order.total) }}
+              </p>
+            </div>
+
+            <span
+              class="order-status"
+              [class]="order.status"
+            >
+              {{ getStatusLabel(order.status) }}
+            </span>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- GRID -->
     <div class="admin-grid">
 
       <section class="admin-card">
+
         <div class="card-header">
           <h2>Top clientes</h2>
           <span>Por compras y recurrencia</span>
         </div>
 
-        <div class="empty-state" *ngIf="summary.top_customers.length === 0">
+        <div
+          class="empty-state"
+          *ngIf="summary.top_customers.length === 0"
+        >
           Aún no hay clientes con compras registradas.
         </div>
 
-        <div class="customer-row" *ngFor="let customer of summary.top_customers">
+        <div
+          class="customer-row"
+          *ngFor="let customer of summary.top_customers"
+        >
+
           <div>
-            <strong>{{ customer.name || 'Cliente sin nombre' }}</strong>
+            <strong>
+              {{ customer.name || 'Cliente sin nombre' }}
+            </strong>
+
             <p>
               {{ customer.purchases_count }} compras ·
               {{ formatCurrency(customer.total_spent) }}
@@ -194,29 +332,49 @@
 
           <span>{{ customer.points }} pts</span>
         </div>
+
       </section>
 
       <section class="admin-card">
+
         <div class="card-header">
           <h2>Compras recientes</h2>
           <span>Últimas facturas registradas</span>
         </div>
 
-        <div class="empty-state" *ngIf="summary.recent_purchases.length === 0">
+        <div
+          class="empty-state"
+          *ngIf="summary.recent_purchases.length === 0"
+        >
           Aún no hay compras registradas.
         </div>
 
-        <div class="customer-row" *ngFor="let purchase of summary.recent_purchases">
+        <div
+          class="customer-row"
+          *ngFor="let purchase of summary.recent_purchases"
+        >
+
           <div>
-            <strong>{{ purchase.customer.name || 'Cliente sin nombre' }}</strong>
+            <strong>
+              {{
+                purchase.customer.name ||
+                'Cliente sin nombre'
+              }}
+            </strong>
+
             <p>
-              Factura {{ purchase.invoice_number }} ·
+              Factura {{ purchase.invoice_number }}
+              ·
               {{ formatCurrency(purchase.amount) }}
             </p>
           </div>
 
-          <span>+{{ purchase.points_earned }} pts</span>
+          <span>
+            +{{ purchase.points_earned }} pts
+          </span>
+
         </div>
+
       </section>
 
     </div>
