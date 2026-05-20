@@ -9,17 +9,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './menu.css',
 })
 export class Menu {
-
-  openSections: Record<string, boolean> = {
-    fastFood: true,
-    hamburguesas: true,
-    arroces: true,
-    especiales: true,
-    tacos: true,
-    bebidas: true,
-  };
+  openSection: string | null = null;
 
   toggleSection(section: string): void {
-    this.openSections[section] = !this.openSections[section];
+    this.openSection = this.openSection === section ? null : section;
+  }
+
+  isOpen(section: string): boolean {
+    return this.openSection === section;
   }
 }
