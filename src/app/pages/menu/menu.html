@@ -13,7 +13,6 @@
   </div>
 
   <div class="menu-showcase">
-
     <!-- FAST FOOD -->
     <div class="menu-category" [class.is-open]="isOpen('fastFood')">
       <div class="menu-image">
@@ -24,65 +23,21 @@
         <button class="category-badge" type="button" (click)="toggleSection('fastFood')">FAST FOOD</button>
 
         <div class="menu-items" *ngIf="isOpen('fastFood')">
-          <button class="menu-item clickable" [class.selected]="isInCart('Ceviche Pequeño')" type="button" (click)="addToCart('Ceviche Pequeño', 2500)">
-            <span>Ceviche Pequeño</span><strong>₡2.500</strong><small class="item-check" *ngIf="isInCart('Ceviche Pequeño')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Ceviche Grande')" type="button" (click)="addToCart('Ceviche Grande', 3500)">
-            <span>Ceviche Grande</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Ceviche Grande')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Canasta de Patacón')" type="button" (click)="addToCart('Canasta de Patacón', 4500)">
-            <span>Canasta de Patacón</span><strong>₡4.500</strong><small class="item-check" *ngIf="isInCart('Canasta de Patacón')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Orden de 4 Camarones')" type="button" (click)="addToCart('Orden de 4 Camarones', 4500)">
-            <span>Orden de 4 Camarones</span><strong>₡4.500</strong><small class="item-check" *ngIf="isInCart('Orden de 4 Camarones')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Orden de 4 Carne-Pollo')" type="button" (click)="addToCart('Orden de 4 Carne-Pollo', 4000)">
-            <span>Orden de 4 Carne-Pollo</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Orden de 4 Carne-Pollo')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Fajitas de Pollo')" type="button" (click)="addToCart('Fajitas de Pollo', 3800)">
-            <span>Fajitas de Pollo</span><strong>₡3.800</strong><small class="item-check" *ngIf="isInCart('Fajitas de Pollo')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Fajitas de Pescado')" type="button" (click)="addToCart('Fajitas de Pescado', 4500)">
-            <span>Fajitas de Pescado</span><strong>₡4.500</strong><small class="item-check" *ngIf="isInCart('Fajitas de Pescado')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Nachos')" type="button" (click)="addToCart('Nachos', 3500)">
-            <span>Nachos</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Nachos')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Papanachos')" type="button" (click)="addToCart('Papanachos', 4000)">
-            <span>Papanachos</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Papanachos')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Chifrijo')" type="button" (click)="addToCart('Chifrijo', 3500)">
-            <span>Chifrijo</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Chifrijo')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Burrito')" type="button" (click)="addToCart('Burrito', 3500)">
-            <span>Burrito</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Burrito')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Salchipapas')" type="button" (click)="addToCart('Salchipapas', 3500)">
-            <span>Salchipapas</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Salchipapas')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Taco Corriente')" type="button" (click)="addToCart('Taco Corriente', 2500)">
-            <span>Taco Corriente</span><strong>₡2.500</strong><small class="item-check" *ngIf="isInCart('Taco Corriente')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Quesadilla')" type="button" (click)="addToCart('Quesadilla', 3500)">
-            <span>Quesadilla</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Quesadilla')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Orden de papas')" type="button" (click)="addToCart('Orden de papas', 2500)">
-            <span>Orden de papas</span><strong>₡2.500</strong><small class="item-check" *ngIf="isInCart('Orden de papas')">✓</small>
-          </button>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ceviche Pequeño', price: 2500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ceviche Grande', price: 3500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Canasta de Patacón', price: 4500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 4 Camarones', price: 4500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 4 Carne-Pollo', price: 4000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fajitas de Pollo', price: 3800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fajitas de Pescado', price: 4500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Nachos', price: 3500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Papanachos', price: 4000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Chifrijo', price: 3500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Burrito', price: 3500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Salchipapas', price: 3500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Taco Corriente', price: 2500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Quesadilla', price: 3500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de papas', price: 2500 }"></ng-container>
         </div>
       </div>
     </div>
@@ -97,25 +52,11 @@
         <button class="category-badge" type="button" (click)="toggleSection('hamburguesas')">HAMBURGUESAS / EMPANADAS</button>
 
         <div class="menu-items" *ngIf="isOpen('hamburguesas')">
-          <button class="menu-item clickable" [class.selected]="isInCart('Hamburguesa de Carne')" type="button" (click)="addToCart('Hamburguesa de Carne', 4000)">
-            <span>Hamburguesa de Carne</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Hamburguesa de Carne')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Hamburguesa de Pollo')" type="button" (click)="addToCart('Hamburguesa de Pollo', 4000)">
-            <span>Hamburguesa de Pollo</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Hamburguesa de Pollo')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Hamburguesa de Birria')" type="button" (click)="addToCart('Hamburguesa de Birria', 4000)">
-            <span>Hamburguesa de Birria</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Hamburguesa de Birria')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Empanada Arreglada')" type="button" (click)="addToCart('Empanada Arreglada', 2500)">
-            <span>Empanada Arreglada</span><strong>₡2.500</strong><small class="item-check" *ngIf="isInCart('Empanada Arreglada')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Empanada Sencilla')" type="button" (click)="addToCart('Empanada Sencilla', 2000)">
-            <span>Empanada Sencilla</span><strong>₡2.000</strong><small class="item-check" *ngIf="isInCart('Empanada Sencilla')">✓</small>
-          </button>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa de Carne', price: 4000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa de Pollo', price: 4000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa de Birria', price: 4000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Empanada Arreglada', price: 2500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Empanada Sencilla', price: 2000 }"></ng-container>
         </div>
       </div>
     </div>
@@ -130,21 +71,10 @@
         <button class="category-badge" type="button" (click)="toggleSection('arroces')">ARROCES</button>
 
         <div class="menu-items" *ngIf="isOpen('arroces')">
-          <button class="menu-item clickable" [class.selected]="isInCart('Arroz con Pollo')" type="button" (click)="addToCart('Arroz con Pollo', 3800)">
-            <span>Arroz con Pollo</span><strong>₡3.800</strong><small class="item-check" *ngIf="isInCart('Arroz con Pollo')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Arroz Cantonés')" type="button" (click)="addToCart('Arroz Cantonés', 3800)">
-            <span>Arroz Cantonés</span><strong>₡3.800</strong><small class="item-check" *ngIf="isInCart('Arroz Cantonés')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Arroz con Camarones')" type="button" (click)="addToCart('Arroz con Camarones', 4500)">
-            <span>Arroz con Camarones</span><strong>₡4.500</strong><small class="item-check" *ngIf="isInCart('Arroz con Camarones')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Arroz de la casa')" type="button" (click)="addToCart('Arroz de la casa', 3800)">
-            <span>Arroz de la casa</span><strong>₡3.800</strong><small class="item-check" *ngIf="isInCart('Arroz de la casa')">✓</small>
-          </button>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz con Pollo', price: 3800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz Cantonés', price: 3800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz con Camarones', price: 4500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz de la casa', price: 3800 }"></ng-container>
         </div>
       </div>
     </div>
@@ -159,29 +89,12 @@
         <button class="category-badge" type="button" (click)="toggleSection('especiales')">ESPECIALES</button>
 
         <div class="menu-items" *ngIf="isOpen('especiales')">
-          <button class="menu-item clickable" [class.selected]="isInCart('Papanachos Shirley’s')" type="button" (click)="addToCart('Papanachos Shirley’s', 4900)">
-            <span>Papanachos Shirley’s</span><strong>₡4.900</strong><small class="item-check" *ngIf="isInCart('Papanachos Shirley’s')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Ensalada Shirley’s plancha')" type="button" (click)="addToCart('Ensalada Shirley’s plancha', 4000)">
-            <span>Ensalada Shirley’s plancha</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Ensalada Shirley’s plancha')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Ensalada Shirley’s empanizado')" type="button" (click)="addToCart('Ensalada Shirley’s empanizado', 4300)">
-            <span>Ensalada Shirley’s empanizado</span><strong>₡4.300</strong><small class="item-check" *ngIf="isInCart('Ensalada Shirley’s empanizado')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Hamburguesa Shirley’s')" type="button" (click)="addToCart('Hamburguesa Shirley’s', 4800)">
-            <span>Hamburguesa Shirley’s</span><strong>₡4.800</strong><small class="item-check" *ngIf="isInCart('Hamburguesa Shirley’s')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Pizza Birria')" type="button" (click)="addToCart('Pizza Birria', 8950)">
-            <span>Pizza Birria</span><strong>₡8.950</strong><small class="item-check" *ngIf="isInCart('Pizza Birria')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Empabirria')" type="button" (click)="addToCart('Empabirria', 3500)">
-            <span>Empabirria</span><strong>₡3.500</strong><small class="item-check" *ngIf="isInCart('Empabirria')">✓</small>
-          </button>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Papanachos Shirley’s', price: 4900 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ensalada Shirley’s plancha', price: 4000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ensalada Shirley’s empanizado', price: 4300 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa Shirley’s', price: 4800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Pizza Birria', price: 8950 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Empabirria', price: 3500 }"></ng-container>
         </div>
       </div>
     </div>
@@ -196,25 +109,11 @@
         <button class="category-badge" type="button" (click)="toggleSection('tacos')">TACOS DE BIRRIA</button>
 
         <div class="menu-items" *ngIf="isOpen('tacos')">
-          <button class="menu-item clickable" [class.selected]="isInCart('Orden de 3')" type="button" (click)="addToCart('Orden de 3', 4000)">
-            <span>Orden de 3</span><strong>₡4.000</strong><small class="item-check" *ngIf="isInCart('Orden de 3')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Orden de 4')" type="button" (click)="addToCart('Orden de 4', 4500)">
-            <span>Orden de 4</span><strong>₡4.500</strong><small class="item-check" *ngIf="isInCart('Orden de 4')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Orden de 5')" type="button" (click)="addToCart('Orden de 5', 5000)">
-            <span>Orden de 5</span><strong>₡5.000</strong><small class="item-check" *ngIf="isInCart('Orden de 5')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Orden Familiar (20 tacos)')" type="button" (click)="addToCart('Orden Familiar (20 tacos)', 18900)">
-            <span>Orden Familiar (20 tacos)</span><strong>₡18.900</strong><small class="item-check" *ngIf="isInCart('Orden Familiar (20 tacos)')">✓</small>
-          </button>
-
-          <button class="menu-item clickable" [class.selected]="isInCart('Taco adicional')" type="button" (click)="addToCart('Taco adicional', 1500)">
-            <span>Taco adicional</span><strong>₡1.500</strong><small class="item-check" *ngIf="isInCart('Taco adicional')">✓</small>
-          </button>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 3', price: 4000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 4', price: 4500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 5', price: 5000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden Familiar (20 tacos)', price: 18900 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Taco adicional', price: 1500 }"></ng-container>
         </div>
       </div>
     </div>
@@ -229,25 +128,24 @@
         <button class="category-badge" type="button" (click)="toggleSection('bebidas')">REFRESCOS Y CÓCTELES</button>
 
         <div class="menu-items" *ngIf="isOpen('bebidas')">
-          <div class="menu-item no-action"><span>Coca Cola</span><strong>₡800</strong></div>
-          <div class="menu-item no-action"><span>Coca Cola Zero</span><strong>₡1.000</strong></div>
-          <div class="menu-item no-action"><span>Fresca</span><strong>₡800</strong></div>
-          <div class="menu-item no-action"><span>Gin</span><strong>₡800</strong></div>
-          <div class="menu-item no-action"><span>Fanta Naranja</span><strong>₡800</strong></div>
-          <div class="menu-item no-action"><span>Fanta Uva</span><strong>₡800</strong></div>
-          <div class="menu-item no-action"><span>Té Melocotón o té Blanco</span><strong>₡800</strong></div>
-          <div class="menu-item no-action"><span>Fanta Kolita</span><strong>₡800</strong></div>
-          <div class="menu-item no-action"><span>Café</span><strong>₡1.000</strong></div>
-          <div class="menu-item no-action"><span>Café con leche</span><strong>₡1.500</strong></div>
-          <div class="menu-item no-action"><span>Chocolate frío/Caliente</span><strong>₡2.000</strong></div>
-          <div class="menu-item no-action"><span>Piña Colada</span><strong>₡3.000</strong></div>
-          <div class="menu-item no-action"><span>Margarita de mango</span><strong>₡3.000</strong></div>
-          <div class="menu-item no-action"><span>Limonada de coco</span><strong>₡3.000</strong></div>
-          <div class="menu-item no-action"><span>Café Cremoso</span><strong>₡2.500</strong></div>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Coca Cola', price: 800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Coca Cola Zero', price: 1000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fresca', price: 800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Gin', price: 800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fanta Naranja', price: 800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fanta Uva', price: 800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Té Melocotón o té Blanco', price: 800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fanta Kolita', price: 800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Café', price: 1000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Café con leche', price: 1500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Chocolate frío/Caliente', price: 2000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Piña Colada', price: 3000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Margarita de mango', price: 3000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Limonada de coco', price: 3000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Café Cremoso', price: 2500 }"></ng-container>
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="cart-panel" *ngIf="hasCartItems">
@@ -343,4 +241,31 @@
   <div class="menu-footer-note">
     **Cada platillo incluye ₡200 de empaque en el total del pedido.
   </div>
+
+  <ng-template #menuItem let-name="name" let-price="price">
+    <div class="menu-item clickable quantity-menu-item" [class.selected]="isInCart(name)">
+      <div class="item-info">
+        <span>{{ name }}</span>
+        <strong>{{ formatPrice(price) }}</strong>
+      </div>
+
+      <div class="item-quantity-actions">
+        <button type="button" class="qty-btn" (click)="decreasePendingQuantity(name)" [disabled]="isSendingOrder">
+          −
+        </button>
+
+        <span class="qty-value">{{ getPendingQuantity(name) }}</span>
+
+        <button type="button" class="qty-btn" (click)="increasePendingQuantity(name)" [disabled]="isSendingOrder">
+          +
+        </button>
+
+        <button type="button" class="add-item-btn" (click)="addQuantityToCart(name, price)" [disabled]="isSendingOrder">
+          Agregar
+        </button>
+
+        <small class="item-check" *ngIf="isInCart(name)">✓</small>
+      </div>
+    </div>
+  </ng-template>
 </section>

@@ -35,8 +35,7 @@ export class Menu {
   readonly whatsappNumber = '50688335888';
   readonly packagingFee = 200;
 
-  readonly apiUrl =
-    'https://shirleys-backend.onrender.com/api/orders/';
+  readonly apiUrl = 'https://shirleys-backend.onrender.com/api/orders/';
 
   orderType: OrderType = 'pickup';
   customerLocation = '';
@@ -45,6 +44,8 @@ export class Menu {
   orderError = '';
 
   cart: CartItem[] = [];
+
+  pendingQuantities: Record<string, number> = {};
 
   constructor(private http: HttpClient) {}
 
@@ -64,33 +65,57 @@ export class Menu {
     }
   }
 
-  addToCart(name: string, price: number): void {
-    const existingItem = this.cart.find((item) => item.name === name);
+  getPendingQuantity(name: string): number {
+    return this.pendingQuantities[name] ?? 1;
+  }
 
-    if (existingItem) {
-      existingItem.quantity += 1;
+  increasePendingQuantity(name: string): void {
+    this.pendingQuantities[name] = this.getPendingQuantity(name) + 1;
+  }
+
+  decreasePendingQuantity(name: string): void {
+    const currentQuantity = this.getPendingQuantity(name);
+
+    if (currentQuantity <= 1) {
+      this.pendingQuantities[name] = 1;
       return;
     }
 
-    this.cart.push({
-      name,
-      price,
-      quantity: 1,
-    });
+    this.pendingQuantities[name] = currentQuantity - 1;
+  }
+
+  addQuantityToCart(name: string, price: number): void {
+    const quantity = this.getPendingQuantity(name);
+    const existingItem = this.cart.find((item) => item.name === name);
+
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      this.cart.push({
+        name,
+        price,
+        quantity,
+      });
+    }
+
+    this.pendingQuantities[name] = 1;
+  }
+
+  addToCart(name: string, price: number): void {
+    this.addQuantityToCart(name, price);
   }
 
   removeFromCart(name: string): void {
     this.cart = this.cart
       .map((item) =>
-        item.name === name
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
+        item.name === name ? { ...item, quantity: item.quantity - 1 } : item
       )
       .filter((item) => item.quantity > 0);
   }
 
   clearCart(): void {
     this.cart = [];
+    this.pendingQuantities = {};
     this.orderType = 'pickup';
     this.customerLocation = '';
     this.orderError = '';
@@ -178,9 +203,7 @@ export class Menu {
       .join('\n');
 
     const orderTypeText =
-      this.orderType === 'express'
-        ? 'Express'
-        : 'Recoger en el local';
+      this.orderType === 'express' ? 'Express' : 'Recoger en el local';
 
     const locationText =
       this.orderType === 'express'
@@ -201,9 +224,9 @@ export class Menu {
       )}): ${this.formatPrice(this.packagingTotal)}\n` +
       `Total: ${this.formatPrice(this.total)}`;
 
-    const whatsappUrl = `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(
-      message
-    )}`;
+    const whatsappUrl = `https://wa.me/${
+      this.whatsappNumber
+    }?text=${encodeURIComponent(message)}`;
 
     window.open(whatsappUrl, '_blank');
   }
