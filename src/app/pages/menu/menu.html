@@ -128,21 +128,21 @@
         <button class="category-badge" type="button" (click)="toggleSection('bebidas')">REFRESCOS Y CÓCTELES</button>
 
         <div class="menu-items" *ngIf="isOpen('bebidas')">
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Coca Cola', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Coca Cola Zero', price: 1000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fresca', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Gin', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fanta Naranja', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fanta Uva', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Té Melocotón o té Blanco', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fanta Kolita', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Café', price: 1000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Café con leche', price: 1500 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Chocolate frío/Caliente', price: 2000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Piña Colada', price: 3000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Margarita de mango', price: 3000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Limonada de coco', price: 3000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Café Cremoso', price: 2500 }"></ng-container>
+          <div class="menu-item no-action"><span>Coca Cola</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Coca Cola Zero</span><strong>₡1.000</strong></div>
+          <div class="menu-item no-action"><span>Fresca</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Gin</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Fanta Naranja</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Fanta Uva</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Té Melocotón o té Blanco</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Fanta Kolita</span><strong>₡800</strong></div>
+          <div class="menu-item no-action"><span>Café</span><strong>₡1.000</strong></div>
+          <div class="menu-item no-action"><span>Café con leche</span><strong>₡1.500</strong></div>
+          <div class="menu-item no-action"><span>Chocolate frío/Caliente</span><strong>₡2.000</strong></div>
+          <div class="menu-item no-action"><span>Piña Colada</span><strong>₡3.000</strong></div>
+          <div class="menu-item no-action"><span>Margarita de mango</span><strong>₡3.000</strong></div>
+          <div class="menu-item no-action"><span>Limonada de coco</span><strong>₡3.000</strong></div>
+          <div class="menu-item no-action"><span>Café Cremoso</span><strong>₡2.500</strong></div>
         </div>
       </div>
     </div>
