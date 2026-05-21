@@ -161,6 +161,10 @@ export class Menu {
     this.isSendingOrder = true;
     this.orderError = '';
 
+    const whatsappUrl = this.buildWhatsAppUrl();
+
+    const whatsappWindow = window.open('', '_blank');
+
     const payload: CreateWhatsappOrderPayload = {
       customer_name: null,
       customer_phone: null,
@@ -177,12 +181,16 @@ export class Menu {
 
     this.http.post(this.apiUrl, payload).subscribe({
       next: () => {
-        this.openWhatsApp();
+        this.redirectToWhatsApp(whatsappUrl, whatsappWindow);
         this.isSendingOrder = false;
       },
 
       error: (error) => {
         console.error('❌ Error creating WhatsApp order:', error);
+
+        if (whatsappWindow && !whatsappWindow.closed) {
+          whatsappWindow.close();
+        }
 
         this.orderError =
           'No pudimos registrar el pedido todavía. Inténtalo de nuevo.';
@@ -192,7 +200,7 @@ export class Menu {
     });
   }
 
-  private openWhatsApp(): void {
+  private buildWhatsAppUrl(): string {
     const orderLines = this.cart
       .map(
         (item) =>
@@ -224,10 +232,20 @@ export class Menu {
       )}): ${this.formatPrice(this.packagingTotal)}\n` +
       `Total: ${this.formatPrice(this.total)}`;
 
-    const whatsappUrl = `https://wa.me/${
-      this.whatsappNumber
-    }?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+  }
 
-    window.open(whatsappUrl, '_blank');
+  private redirectToWhatsApp(
+    whatsappUrl: string,
+    whatsappWindow: Window | null
+  ): void {
+    if (whatsappWindow && !whatsappWindow.closed) {
+      whatsappWindow.location.href = whatsappUrl;
+      return;
+    }
+
+    window.location.href = whatsappUrl;
   }
 }
