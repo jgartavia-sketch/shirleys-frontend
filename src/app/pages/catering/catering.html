@@ -39,8 +39,38 @@
       </div>
     </div>
 
-    <div class="form-section quote-panel">
+    <div class="form-section quote-checklist-section">
       <span class="section-label">PASO 2</span>
+
+      <h2>¿Qué le gustaría cotizar?</h2>
+
+      <p>
+        Marque las opciones que le llaman la atención para preparar una
+        cotización más precisa.
+      </p>
+
+      <div class="quote-options-grid">
+        <button
+          type="button"
+          class="quote-option"
+          *ngFor="let option of quoteOptions"
+          [class.selected]="isOptionSelected(option.id)"
+          (click)="toggleOption(option.id)"
+        >
+          <span class="check-mark">
+            {{ isOptionSelected(option.id) ? '✓' : '' }}
+          </span>
+
+          <span class="option-info">
+            <small>{{ option.category }}</small>
+            <strong>{{ option.label }}</strong>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-section quote-panel">
+      <span class="section-label">PASO 3</span>
 
       <h2>Datos para la cotización</h2>
 
@@ -110,6 +140,12 @@
         <strong>{{ selectedEventName }}</strong>
       </div>
 
+      <div class="selected-summary">
+        <span>Opciones seleccionadas</span>
+
+        <strong>{{ selectedOptions.length }}</strong>
+      </div>
+
       <div
         class="success-message"
         *ngIf="successMessage"
@@ -131,8 +167,8 @@
       >
         {{
           loading
-            ? 'Enviando solicitud...'
-            : 'Solicitar cotización'
+            ? 'Preparando cotización...'
+            : 'Enviar cotización por WhatsApp'
         }}
       </button>
     </div>

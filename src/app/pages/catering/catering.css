@@ -170,6 +170,83 @@
   line-height: 1.75;
 }
 
+.quote-checklist-section {
+  background:
+    radial-gradient(circle at top right, rgba(212,175,55,0.10), transparent 34%),
+    linear-gradient(145deg, rgba(7,13,8,0.56), rgba(7,13,8,0.32));
+}
+
+.quote-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.quote-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-height: 92px;
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(212, 175, 55, 0.16);
+  background: rgba(7, 13, 8, 0.42);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.quote-option:hover,
+.quote-option.selected {
+  transform: translateY(-3px);
+  border-color: rgba(212, 175, 55, 0.62);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(212,175,55,0.16),
+      rgba(7,13,8,0.36)
+    );
+}
+
+.check-mark {
+  display: grid;
+  place-items: center;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: #071007;
+  background: rgba(255, 247, 223, 0.08);
+  font-weight: 950;
+}
+
+.quote-option.selected .check-mark {
+  background: #d4af37;
+  border-color: #d4af37;
+}
+
+.option-info {
+  display: grid;
+  gap: 6px;
+}
+
+.option-info small {
+  color: rgba(240, 202, 87, 0.9);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+
+.option-info strong {
+  color: #fff7df;
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
 .quote-panel {
   background:
     radial-gradient(circle at top left, rgba(212,175,55,0.12), transparent 36%),
@@ -227,6 +304,10 @@ textarea:focus {
   border-radius: 22px;
   border: 1px solid rgba(212, 175, 55, 0.2);
   background: rgba(0,0,0,0.20);
+}
+
+.selected-summary + .selected-summary {
+  margin-top: -14px;
 }
 
 .selected-summary span {
@@ -357,7 +438,8 @@ textarea:focus {
     line-height: 1.08;
   }
 
-  .services-grid {
+  .services-grid,
+  .quote-options-grid {
     grid-template-columns: 1fr;
     gap: 16px;
     margin-top: 24px;
@@ -388,6 +470,12 @@ textarea:focus {
     font-size: 0.66rem;
   }
 
+  .quote-option {
+    min-height: auto;
+    padding: 16px;
+    border-radius: 18px;
+  }
+
   .inputs-grid {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -413,6 +501,10 @@ textarea:focus {
     margin: 22px 0;
     padding: 18px;
     border-radius: 18px;
+  }
+
+  .selected-summary + .selected-summary {
+    margin-top: -10px;
   }
 
   .reserve-btn {
