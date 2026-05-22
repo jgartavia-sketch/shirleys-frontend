@@ -1,10 +1,7 @@
 .about-page {
   position: relative;
-
   min-height: 100vh;
-
   overflow: hidden;
-
   padding: 220px 8% 100px;
 
   background:
@@ -18,27 +15,17 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-
   color: #f7f0df;
 }
 
 .about-page::before {
   content: "";
-
   position: absolute;
   inset: 0;
 
   background:
-    radial-gradient(
-      circle at top right,
-      rgba(212, 175, 55, 0.08),
-      transparent 36%
-    ),
-    radial-gradient(
-      circle at bottom left,
-      rgba(18, 84, 45, 0.08),
-      transparent 34%
-    );
+    radial-gradient(circle at top right, rgba(212, 175, 55, 0.08), transparent 36%),
+    radial-gradient(circle at bottom left, rgba(18, 84, 45, 0.08), transparent 34%);
 
   pointer-events: none;
 }
@@ -46,15 +33,10 @@
 .about-container {
   position: relative;
   z-index: 2;
-
-  max-width: 850px;
-
+  max-width: 980px;
   padding: 50px;
-
   border-left: 4px solid #d4af37;
-
   border-radius: 0 32px 32px 0;
-
   backdrop-filter: blur(4px);
 
   background:
@@ -69,13 +51,10 @@
     0 0 24px rgba(212,175,55,0.05);
 }
 
-.about-container span {
+.about-container > span {
   display: inline-block;
-
   margin-bottom: 16px;
-
   color: #d4af37;
-
   letter-spacing: 2px;
   font-size: 0.8rem;
   font-weight: 700;
@@ -84,24 +63,64 @@
 .about-container h1 {
   margin-top: 0;
   margin-bottom: 28px;
-
   color: #fff7df;
-
   font-size: clamp(2.8rem, 6vw, 5rem);
   line-height: 1;
-
   text-shadow: 0 10px 26px rgba(0,0,0,0.35);
 }
 
 .about-container p {
   margin-bottom: 22px;
-
   color: #f3ead6;
-
   font-size: 1.08rem;
   line-height: 1.9;
-
   text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+.social-proof {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 38px;
+}
+
+.proof-card {
+  padding: 22px 18px;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 247, 223, 0.10),
+      rgba(18, 84, 45, 0.18)
+    );
+
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.22),
+    inset 0 0 18px rgba(212, 175, 55, 0.04);
+}
+
+.proof-card strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #ffd978;
+  font-size: clamp(1.45rem, 2.4vw, 2.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+}
+
+.proof-card span {
+  display: block;
+  color: #f5ead3;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 920px) {
+  .social-proof {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 760px) {
@@ -134,10 +153,8 @@
 
   .about-container {
     padding: 26px 22px;
-
     border-left: 3px solid #d4af37;
     border-radius: 0 24px 24px 0;
-
     backdrop-filter: blur(6px);
 
     background:
@@ -152,28 +169,34 @@
       0 0 18px rgba(212,175,55,0.04);
   }
 
-  .about-container span {
+  .about-container > span {
     margin-bottom: 10px;
-
     font-size: 0.7rem;
     letter-spacing: 1.5px;
   }
 
   .about-container h1 {
     margin-bottom: 18px;
-
     font-size: clamp(2.15rem, 12vw, 3.35rem);
     line-height: 1.03;
-
     text-shadow: 0 9px 22px rgba(0,0,0,0.38);
   }
 
   .about-container p {
     margin-bottom: 16px;
-
     font-size: 0.96rem;
     line-height: 1.68;
-
     text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  }
+
+  .social-proof {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .proof-card {
+    padding: 18px 16px;
+    border-radius: 20px;
   }
 }
