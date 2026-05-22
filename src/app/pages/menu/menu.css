@@ -8,8 +8,8 @@
   background:
     linear-gradient(
       180deg,
-      rgba(3, 8, 5, 0.32),
-      rgba(3, 8, 5, 0.66)
+      rgba(3, 8, 5, 0.12),
+      rgba(3, 8, 5, 0.38)
     ),
     url("/images/hero/hero-7.png");
 
@@ -24,9 +24,9 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 18%, rgba(212, 175, 55, 0.08), transparent 28%),
-    radial-gradient(circle at 85% 32%, rgba(18, 84, 45, 0.12), transparent 30%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(2, 7, 4, 0.42));
+    radial-gradient(circle at 20% 18%, rgba(212, 175, 55, 0.05), transparent 28%),
+    radial-gradient(circle at 85% 32%, rgba(18, 84, 45, 0.08), transparent 30%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(2, 7, 4, 0.18));
   pointer-events: none;
 }
 
