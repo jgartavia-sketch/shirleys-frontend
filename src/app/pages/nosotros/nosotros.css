@@ -117,8 +117,47 @@
   line-height: 1.45;
 }
 
+.clients-section {
+  margin-top: 46px;
+  padding-top: 34px;
+  border-top: 1px solid rgba(212, 175, 55, 0.22);
+}
+
+.clients-section > span {
+  display: inline-block;
+  margin-bottom: 22px;
+  color: #d4af37;
+  letter-spacing: 2px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.client-card {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(247, 240, 223, 0.16);
+  background: rgba(5, 8, 5, 0.34);
+  color: #fff2cf;
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0.6px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.16);
+}
+
 @media (max-width: 920px) {
-  .social-proof {
+  .social-proof,
+  .clients-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -189,7 +228,8 @@
     text-shadow: 0 2px 8px rgba(0,0,0,0.18);
   }
 
-  .social-proof {
+  .social-proof,
+  .clients-grid {
     grid-template-columns: 1fr;
     gap: 14px;
     margin-top: 28px;
@@ -198,5 +238,14 @@
   .proof-card {
     padding: 18px 16px;
     border-radius: 20px;
+  }
+
+  .clients-section {
+    margin-top: 38px;
+    padding-top: 28px;
+  }
+
+  .client-card {
+    min-height: 52px;
   }
 }
