@@ -75,6 +75,24 @@
   animation: heroReveal 0.9s ease both;
 }
 
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  color: #f2c866;
+  border: 1px solid rgba(242, 200, 102, 0.36);
+  background: rgba(4, 8, 5, 0.46);
+  letter-spacing: 1.6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 0 28px rgba(212, 175, 55, 0.10);
+  backdrop-filter: blur(12px);
+}
+
 .customers-badge {
   display: inline-block;
   margin-bottom: 24px;
@@ -110,6 +128,14 @@
   font-size: 1.14rem;
   line-height: 1.85;
   text-shadow: 0 8px 24px rgba(0, 0, 0, 0.78);
+}
+
+.hero-commercial-copy {
+  margin-top: -10px;
+  color: #f2c866 !important;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  opacity: 0.95;
 }
 
 .hero-buttons {
@@ -507,6 +533,12 @@
     min-height: 100vh;
     padding: 215px 6% 72px;
     background-position: center;
+  }
+
+  .hero-kicker {
+    font-size: 0.68rem;
+    letter-spacing: 1.2px;
+    padding: 10px 16px;
   }
 
   .hero-content h1 {
