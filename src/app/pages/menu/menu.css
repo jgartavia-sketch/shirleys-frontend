@@ -43,7 +43,7 @@
       rgba(2, 7, 4, 0.42)
     );
 
-  backdrop-filter: blur(1.5px);
+ 
 
   pointer-events: none;
 }
