@@ -2,7 +2,7 @@
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  padding: var(--page-top-space, 220px) 8% 100px;
+  padding: var(--page-top-space, 220px) 8% 90px;
 
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.54)),
@@ -32,57 +32,65 @@
 }
 
 .page-header {
-  max-width: 760px;
-  margin-bottom: 60px;
+  max-width: 640px;
+  margin: 0 auto 34px;
+  text-align: center;
 }
 
 .page-header span,
 .how-to-arrive-content span {
   display: inline-block;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: #d4af37;
   letter-spacing: 2px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
 }
 
 .page-header h1,
 .how-to-arrive-content h2 {
-  margin: 0 0 22px;
+  margin: 0 0 18px;
   color: #fff7df;
-  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-size: clamp(2.3rem, 5vw, 4rem);
   line-height: 1;
 }
 
 .page-header p,
 .how-to-arrive-content p {
   color: #e8dec5;
-  line-height: 1.8;
-  font-size: 1.1rem;
+  line-height: 1.7;
+  font-size: 1rem;
 }
 
 .social-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 14px;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 .social-card {
+  width: 220px;
+  max-width: 220px;
+  min-height: 112px;
   display: flex;
-  gap: 22px;
+  gap: 10px;
   align-items: flex-start;
   position: relative;
   overflow: hidden;
-  padding: 36px;
-  border-radius: 30px;
+  padding: 14px;
+  border-radius: 18px;
   border: 1px solid rgba(212, 175, 55, 0.16);
-  background: linear-gradient(145deg, rgba(10, 14, 10, 0.62), rgba(10, 14, 10, 0.40));
+  background: linear-gradient(145deg, rgba(10, 14, 10, 0.68), rgba(10, 14, 10, 0.48));
   backdrop-filter: blur(6px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
   text-decoration: none;
   color: inherit;
-  transition: 0.3s ease;
+  transition: 0.28s ease;
 }
 
 .social-card::before {
@@ -90,13 +98,13 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.16), transparent 42%);
-  transition: 0.3s ease;
+  background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.14), transparent 42%);
+  transition: 0.28s ease;
 }
 
 .social-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(212, 175, 55, 0.42);
+  transform: translateY(-4px);
+  border-color: rgba(212, 175, 55, 0.4);
 }
 
 .social-card:hover::before {
@@ -106,15 +114,15 @@
 .social-icon {
   position: relative;
   z-index: 1;
-  flex: 0 0 54px;
-  height: 54px;
-  border-radius: 18px;
+  flex: 0 0 34px;
+  height: 34px;
+  border-radius: 11px;
   display: grid;
   place-items: center;
   background: rgba(212, 175, 55, 0.12);
   border: 1px solid rgba(212, 175, 55, 0.22);
   color: #ffe08a;
-  font-size: 1.6rem;
+  font-size: 0.92rem;
   font-weight: 800;
 }
 
@@ -124,32 +132,57 @@
 }
 
 .social-card h3 {
-  margin-top: 0;
-  margin-bottom: 14px;
+  margin: 0 0 5px;
   color: #d4af37;
-  font-size: 1.45rem;
+  font-size: 0.82rem;
+  line-height: 1.15;
 }
 
 .social-card p {
-  margin-bottom: 12px;
+  margin: 0;
   color: #e8dec5;
-  line-height: 1.8;
+  font-size: 0.72rem;
+  line-height: 1.34;
+}
+
+.mini-social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.mini-social-links a {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  color: #ffe8a6;
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.mini-social-links a:hover {
+  background: rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px);
 }
 
 .how-to-arrive {
-  margin-top: 80px;
+  margin-top: 58px;
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
-  gap: 34px;
+  gap: 28px;
   align-items: stretch;
-  padding: 34px;
-  border-radius: 34px;
+  padding: 28px;
+  border-radius: 30px;
   border: 1px solid rgba(212, 175, 55, 0.18);
   background:
     radial-gradient(circle at top left, rgba(212, 175, 55, 0.12), transparent 34%),
     linear-gradient(145deg, rgba(5, 9, 5, 0.74), rgba(10, 16, 10, 0.48));
   backdrop-filter: blur(8px);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.32);
 }
 
 .how-to-arrive-content {
@@ -159,7 +192,7 @@
 }
 
 .how-to-arrive-content h2 {
-  font-size: clamp(2.1rem, 4vw, 3.6rem);
+  font-size: clamp(2rem, 4vw, 3.1rem);
 }
 
 .map-buttons {
@@ -171,7 +204,7 @@
 
 .map-button {
   width: fit-content;
-  padding: 15px 22px;
+  padding: 14px 20px;
   border-radius: 999px;
   background: linear-gradient(135deg, #f4d06f, #c99622);
   color: #071007;
@@ -197,9 +230,9 @@
 }
 
 .map-frame {
-  min-height: 390px;
+  min-height: 340px;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 24px;
   border: 1px solid rgba(242, 200, 102, 0.18);
   box-shadow: inset 0 0 0 1px rgba(255, 247, 223, 0.06);
 }
@@ -207,10 +240,20 @@
 .map-frame iframe {
   width: 100%;
   height: 100%;
-  min-height: 390px;
+  min-height: 340px;
   border: 0;
   display: block;
   filter: saturate(0.88) contrast(1.06);
+}
+
+@media (max-width: 980px) {
+  .social-grid {
+    max-width: 520px;
+  }
+
+  .how-to-arrive {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 760px) {
@@ -231,63 +274,31 @@
   }
 
   .page-header {
-    margin-bottom: 32px;
-  }
-
-  .page-header span,
-  .how-to-arrive-content span {
-    margin-bottom: 10px;
-    font-size: 0.7rem;
-    letter-spacing: 1.5px;
+    margin-bottom: 28px;
   }
 
   .page-header h1,
   .how-to-arrive-content h2 {
-    margin-bottom: 16px;
-    font-size: clamp(2.15rem, 12vw, 3.35rem);
-    line-height: 1.03;
+    font-size: clamp(2rem, 12vw, 3.1rem);
   }
 
   .page-header p,
   .how-to-arrive-content p {
-    font-size: 0.96rem;
-    line-height: 1.65;
+    font-size: 0.95rem;
   }
 
   .social-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    max-width: 100%;
   }
 
   .social-card {
-    padding: 22px 20px;
-    border-radius: 24px;
-    gap: 16px;
-    background: linear-gradient(145deg, rgba(10, 14, 10, 0.66), rgba(10, 14, 10, 0.44));
-    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.22);
-  }
-
-  .social-card h3 {
-    margin-bottom: 10px;
-    font-size: 1.24rem;
-  }
-
-  .social-card p {
-    margin-bottom: 8px;
-    font-size: 0.94rem;
-    line-height: 1.55;
-  }
-
-  .social-icon {
-    flex: 0 0 44px;
-    height: 44px;
-    border-radius: 15px;
-    font-size: 1.25rem;
+    width: 100%;
+    max-width: 100%;
+    min-height: auto;
   }
 
   .how-to-arrive {
     margin-top: 42px;
-    grid-template-columns: 1fr;
     gap: 22px;
     padding: 22px;
     border-radius: 28px;
@@ -304,7 +315,7 @@
 
   .map-frame,
   .map-frame iframe {
-    min-height: 320px;
+    min-height: 300px;
     border-radius: 22px;
   }
 }
