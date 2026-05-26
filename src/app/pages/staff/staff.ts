@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { BrowserQRCodeReader, IScannerControls } from '@zxing/browser';
@@ -21,8 +21,13 @@ interface CustomerResponse {
 interface PurchaseResponse {
   success: boolean;
   message: string;
-  customer: Customer;
-  purchase: {
+  customer_code?: string;
+  invoice_number?: string;
+  amount?: number;
+  points_earned?: number;
+  total_points?: number;
+  customer?: Customer;
+  purchase?: {
     customer_code: string;
     invoice_number: string;
     amount: number;
@@ -150,16 +155,33 @@ export class Staff implements OnInit, OnDestroy {
       return;
     }
 
+    const staffToken = localStorage.getItem('shirleys_staff_token');
+
+    if (!staffToken) {
+      this.purchaseError = 'Sesión vencida. Inicia sesión nuevamente.';
+      this.router.navigate(['/staff/login']);
+      this.cdr.detectChanges();
+      return;
+    }
+
+    const headers = new HttpHeaders({
+      'x-admin-token': staffToken
+    });
+
     this.purchaseLoading = true;
     this.purchaseError = '';
     this.purchaseSuccess = '';
     this.cdr.detectChanges();
 
-    this.http.post<PurchaseResponse>(`${this.apiUrl}/purchase`, {
-      customer_code: this.customer.code,
-      invoice_number: cleanInvoice,
-      amount
-    })
+    this.http.post<PurchaseResponse>(
+      `${this.apiUrl}/purchase`,
+      {
+        customer_code: this.customer.code,
+        invoice_number: cleanInvoice,
+        amount
+      },
+      { headers }
+    )
       .pipe(
         finalize(() => {
           this.zone.run(() => {
@@ -171,10 +193,23 @@ export class Staff implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           this.zone.run(() => {
-            this.customer = response.customer;
-            this.customerCode = response.customer.code;
+            const pointsEarned =
+              response.points_earned ??
+              response.purchase?.points_earned ??
+              0;
 
-            this.purchaseSuccess = `Compra registrada. Se sumaron ${response.purchase.points_earned} puntos.`;
+            const totalPoints =
+              response.total_points ??
+              response.customer?.points ??
+              this.customer!.points + pointsEarned;
+
+            this.customer = {
+              ...this.customer!,
+              points: totalPoints
+            };
+
+            this.customerCode = this.customer.code;
+            this.purchaseSuccess = `Compra registrada. Se sumaron ${pointsEarned} puntos.`;
             this.invoiceNumber = '';
             this.purchaseAmount = null;
 
