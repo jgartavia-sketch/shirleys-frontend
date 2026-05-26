@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 interface StaffLoginResponse {
@@ -33,7 +33,9 @@ export class StaffLogin {
   ) {}
 
   login(): void {
-    if (!this.password.trim() || this.loading) {
+    const cleanPassword = this.password.trim();
+
+    if (!cleanPassword || this.loading) {
       return;
     }
 
@@ -41,19 +43,37 @@ export class StaffLogin {
     this.error = '';
 
     this.http.post<StaffLoginResponse>(this.apiUrl, {
-      password: this.password.trim()
+      password: cleanPassword
     }).subscribe({
       next: (response) => {
-        localStorage.setItem('shirleys_staff_token', response.token);
-
         this.loading = false;
 
+        if (!response?.success || !response?.token) {
+          this.error = response?.message || 'No se recibió un token válido.';
+          return;
+        }
+
+        localStorage.setItem('shirleys_staff_token', response.token);
         this.router.navigate(['/staff']);
       },
 
-      error: () => {
+      error: (err: HttpErrorResponse) => {
         this.loading = false;
-        this.error = 'Contraseña incorrecta o acceso no autorizado.';
+
+        if (err.status === 401) {
+          this.error = 'Contraseña incorrecta. Verifica la clave de acceso del staff.';
+          return;
+        }
+
+        if (err.status === 0) {
+          this.error = 'No se pudo conectar con el servidor. Revisa Render o la conexión.';
+          return;
+        }
+
+        this.error =
+          err.error?.detail ||
+          err.error?.message ||
+          'Ocurrió un error al validar el acceso.';
       }
     });
   }
