@@ -1,15 +1,34 @@
 <div class="staff-page">
   <section class="staff-panel">
     <div class="staff-header">
-      <p class="eyebrow">Shirley’s Customers</p>
-      <h1>Panel del mesero</h1>
-      <p>
-        Escanea el QR del cliente, consulta su perfil y registra compras para sumar puntos.
-      </p>
+      <div class="staff-title">
+        <p class="eyebrow">Shirley’s Customers</p>
+        <h1>Panel del mesero</h1>
+        <p>
+          Escanea el QR del cliente, consulta su perfil y registra compras para sumar puntos.
+        </p>
+      </div>
 
       <button type="button" class="logout-btn" (click)="logout()">
         Cerrar sesión
       </button>
+    </div>
+
+    <div class="staff-quick-card">
+      <div>
+        <span>Paso 1</span>
+        <strong>Escanear o buscar cliente</strong>
+      </div>
+
+      <div>
+        <span>Paso 2</span>
+        <strong>Verificar datos</strong>
+      </div>
+
+      <div>
+        <span>Paso 3</span>
+        <strong>Registrar compra</strong>
+      </div>
     </div>
 
     <div class="scanner-actions">
@@ -19,7 +38,7 @@
         *ngIf="!scanning"
         (click)="startQrScanner()"
       >
-        Escanear QR
+        Escanear QR del cliente
       </button>
 
       <button
@@ -51,7 +70,7 @@
         />
 
         <button type="submit" [disabled]="loading">
-          {{ loading ? 'Buscando...' : 'Buscar' }}
+          {{ loading ? 'Buscando...' : 'Buscar cliente' }}
         </button>
       </div>
     </form>
@@ -73,8 +92,10 @@
         <p class="eyebrow">Cliente identificado</p>
         <h2>{{ customer.name }}</h2>
 
-        <p>{{ customer.email }}</p>
-        <p>WhatsApp: {{ customer.whatsapp }}</p>
+        <div class="customer-details">
+          <p>{{ customer.email }}</p>
+          <p>WhatsApp: {{ customer.whatsapp }}</p>
+        </div>
 
         <div class="points-box">
           <span>Puntos disponibles</span>
@@ -96,6 +117,7 @@
       <div class="purchase-header">
         <p class="eyebrow">Registrar compra</p>
         <h3>Sumar puntos al cliente</h3>
+        <span>₡5.000 = 3 pts · ₡10.000 = 7 pts · ₡15.000+ = 9 pts</span>
       </div>
 
       <label for="invoiceNumber">Número de factura</label>
