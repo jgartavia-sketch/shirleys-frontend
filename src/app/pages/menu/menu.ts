@@ -33,7 +33,7 @@ export class Menu {
   openSection: string | null = null;
 
   readonly whatsappNumber = '50688335888';
-  readonly packagingFee = 200;
+  readonly packagingFee = 0;
 
   readonly apiUrl = 'https://shirleys-backend.onrender.com/api/orders/';
 
@@ -142,11 +142,11 @@ export class Menu {
   }
 
   get packagingTotal(): number {
-    return this.totalItemsQuantity * this.packagingFee;
+    return 0;
   }
 
   get total(): number {
-    return this.foodTotal + this.packagingTotal;
+    return this.foodTotal;
   }
 
   formatPrice(price: number): string {
@@ -226,10 +226,7 @@ export class Menu {
       `${orderLines}\n\n` +
       `Tipo de pedido: ${orderTypeText}` +
       `${locationText}\n\n` +
-      `Subtotal platillos: ${this.formatPrice(this.foodTotal)}\n` +
-      `Empaque (${this.totalItemsQuantity} x ${this.formatPrice(
-        this.packagingFee
-      )}): ${this.formatPrice(this.packagingTotal)}\n` +
+      `Subtotal: ${this.formatPrice(this.foodTotal)}\n` +
       `Total: ${this.formatPrice(this.total)}`;
 
     return `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(
