@@ -25,9 +25,8 @@
         <div class="menu-items" *ngIf="isOpen('fastFood')">
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ceviche Pequeño', price: 2500 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ceviche Grande', price: 3500 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Canasta de Patacón', price: 4500 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 4 Camarones', price: 4500 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 4 Carne-Pollo', price: 4000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Canasticas de camarón - orden de 4 camarones', price: 4500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Canastica de patacón de carne y pollo', price: 4000 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fajitas de Pollo', price: 3800 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fajitas de Pescado', price: 4500 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Nachos', price: 3500 }"></ng-container>
@@ -119,11 +118,10 @@
     </div>
 
     <!-- BEBIDAS -->
-   <!-- BEBIDAS -->
-<div class="menu-category" [class.is-open]="isOpen('bebidas')">
-  <div class="menu-image">
-    <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1200&auto=format&fit=crop" alt="Bebidas Shirley's" />
-  </div>
+    <div class="menu-category" [class.is-open]="isOpen('bebidas')">
+      <div class="menu-image">
+        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1200&auto=format&fit=crop" alt="Bebidas Shirley's" />
+      </div>
 
       <div class="menu-content">
         <button class="category-badge" type="button" (click)="toggleSection('bebidas')">REFRESCOS Y CÓCTELES</button>
