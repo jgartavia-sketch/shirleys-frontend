@@ -51,7 +51,13 @@ export class Menu {
   constructor(private http: HttpClient) {}
 
   toggleSection(section: string): void {
-    this.openSection = this.openSection === section ? null : section;
+    const willOpenSection = this.openSection !== section;
+
+    this.openSection = willOpenSection ? section : null;
+
+    if (willOpenSection) {
+      this.scrollSectionIntoView(section);
+    }
   }
 
   isOpen(section: string): boolean {
@@ -144,7 +150,8 @@ export class Menu {
 
   get packagingTotal(): number {
     return this.cart.reduce(
-      (sum, item) => sum + this.getPackagingFeeForItem(item.name) * item.quantity,
+      (sum, item) =>
+        sum + this.getPackagingFeeForItem(item.name) * item.quantity,
       0
     );
   }
@@ -217,6 +224,56 @@ export class Menu {
         this.isSendingOrder = false;
       },
     });
+  }
+
+  private scrollSectionIntoView(section: string): void {
+    window.setTimeout(() => {
+      const button = document.querySelector(
+        `button[onclick], .category-badge`
+      );
+
+      const sections = Array.from(
+        document.querySelectorAll<HTMLElement>('.menu-category')
+      );
+
+      const targetSection = sections.find((menuSection) => {
+        const categoryButton =
+          menuSection.querySelector<HTMLButtonElement>('.category-badge');
+
+        return categoryButton?.getAttribute('ng-reflect-ng-class') === section ||
+          categoryButton?.textContent
+            ?.trim()
+            .toLowerCase()
+            .includes(this.getSectionLabel(section));
+      });
+
+      const fallbackTarget = document.querySelector<HTMLElement>(
+        `.menu-category.is-open`
+      );
+
+      const target = targetSection || fallbackTarget;
+
+      target?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'nearest',
+      });
+    }, 120);
+  }
+
+  private getSectionLabel(section: string): string {
+    const sectionLabels: Record<string, string> = {
+      tacos: 'tacos',
+      fastFood: 'entradas',
+      especiales: 'especiales',
+      platosFuertes: 'platos fuertes',
+      arroces: 'arroces',
+      hamburguesas: 'hamburguesas',
+      postres: 'postres',
+      bebidas: 'bebidas',
+    };
+
+    return sectionLabels[section] ?? section.toLowerCase();
   }
 
   private buildWhatsAppUrl(): string {

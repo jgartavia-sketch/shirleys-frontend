@@ -6,11 +6,7 @@
   color: #f7f0df;
 
   background:
-    linear-gradient(
-      180deg,
-      rgba(3, 8, 5, 0.18),
-      rgba(3, 8, 5, 0.48)
-    ),
+    linear-gradient(180deg, rgba(3, 8, 5, 0.18), rgba(3, 8, 5, 0.48)),
     url("/images/hero/hero-8.png");
 
   background-size: cover;
@@ -23,24 +19,10 @@
 .menu-overlay {
   position: absolute;
   inset: 0;
-
   background:
-    radial-gradient(
-      circle at 20% 18%,
-      rgba(212, 175, 55, 0.06),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 85% 32%,
-      rgba(18, 84, 45, 0.08),
-      transparent 30%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.16),
-      rgba(2, 7, 4, 0.42)
-    );
-
+    radial-gradient(circle at 20% 18%, rgba(212, 175, 55, 0.06), transparent 28%),
+    radial-gradient(circle at 85% 32%, rgba(18, 84, 45, 0.08), transparent 30%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(2, 7, 4, 0.42));
   pointer-events: none;
 }
 
@@ -192,12 +174,12 @@
 }
 
 .menu-item {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 18px;
   width: 100%;
-  padding: 0 0 12px;
+  padding: 12px 0;
   border: 0;
   border-bottom: 1px dashed rgba(244, 208, 111, 0.14);
   color: #fff7df;
@@ -211,50 +193,42 @@
 
 .menu-item.clickable {
   cursor: default;
-  transition: padding 0.22s ease, background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+  transition: background 0.22s ease, outline-color 0.22s ease;
 }
 
 .menu-item.clickable:hover,
 .menu-item.selected {
-  padding: 11px 14px;
-  border-bottom-color: transparent;
-  border-radius: 18px;
-  background: rgba(244, 208, 111, 0.08);
-  transform: translateX(4px);
+  padding: 12px 0;
+  border-bottom: 1px dashed rgba(244, 208, 111, 0.14);
+  border-radius: 0;
+  background: transparent;
+  transform: none;
 }
 
 .menu-item.selected {
-  border: 1px solid rgba(244, 208, 111, 0.22);
-  box-shadow: inset 0 0 24px rgba(212, 175, 55, 0.08);
-}
-
-.menu-item span {
-  flex: 1;
-  line-height: 1.4;
-}
-
-.menu-item strong {
-  color: #f4d06f;
-  font-size: 1.05rem;
-  white-space: nowrap;
-}
-
-.quantity-menu-item {
-  align-items: center;
+  outline: 1px solid rgba(244, 208, 111, 0.34);
+  outline-offset: 6px;
 }
 
 .item-info {
   display: grid;
-  grid-template-columns: minmax(180px, 1fr) auto;
-  flex: 1;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
   min-width: 0;
 }
 
 .item-info span {
   color: #fff7df;
-  word-break: normal;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.item-info strong,
+.menu-item strong {
+  color: #f4d06f;
+  font-size: 1.05rem;
+  white-space: nowrap;
 }
 
 .item-quantity-actions {
@@ -273,7 +247,7 @@
   font-weight: 900;
   appearance: none;
   -webkit-appearance: none;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, filter 0.22s ease, opacity 0.22s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease, opacity 0.22s ease;
 }
 
 .qty-btn {
@@ -287,7 +261,6 @@
 }
 
 .qty-value {
-  flex: 0 0 auto !important;
   min-width: 30px;
   color: #fff7df;
   font-size: 0.98rem;
@@ -323,17 +296,7 @@
 }
 
 .item-check {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 999px;
-  color: #071007;
-  background: linear-gradient(135deg, #f7d86f, #c99622);
-  font-size: 0.85rem;
-  font-weight: 900;
-  box-shadow: 0 0 18px rgba(212, 175, 55, 0.24);
+  display: none;
 }
 
 .cart-panel {
@@ -609,18 +572,8 @@
     grid-column: span 2;
   }
 
-  .quantity-menu-item {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .item-info,
-  .item-quantity-actions {
-    width: 100%;
-  }
-
-  .item-info {
-    grid-template-columns: minmax(0, 1fr) auto;
+  .menu-item {
+    grid-template-columns: 1fr;
   }
 
   .item-quantity-actions {
@@ -693,29 +646,14 @@
     padding: 22px;
   }
 
-  .menu-item {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
-    font-size: 0.95rem;
-  }
-
-  .menu-item.clickable:hover,
-  .menu-item.selected {
-    transform: none;
-  }
-
   .item-info {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    width: 100%;
+    grid-template-columns: 1fr;
     gap: 6px;
   }
 
   .item-quantity-actions {
     display: grid;
-    grid-template-columns: 36px 38px 36px 1fr auto;
+    grid-template-columns: 36px 38px 36px 1fr;
     align-items: center;
     width: 100%;
     gap: 8px;
