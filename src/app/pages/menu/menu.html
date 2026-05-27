@@ -140,6 +140,21 @@
       </div>
     </div>
 
+    <!-- POSTRES -->
+    <div class="menu-category" [class.is-open]="isOpen('postres')">
+      <div class="menu-image">
+        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=1200&auto=format&fit=crop" alt="Postres Shirley's" />
+      </div>
+
+      <div class="menu-content">
+        <button class="category-badge" type="button" (click)="toggleSection('postres')">POSTRES</button>
+
+        <div class="menu-items" *ngIf="isOpen('postres')">
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Postre de la semana', price: 2200 }"></ng-container>
+        </div>
+      </div>
+    </div>
+
     <!-- BEBIDAS Y CÓCTELES -->
     <div class="menu-category" [class.is-open]="isOpen('bebidas')">
       <div class="menu-image">
@@ -176,20 +191,7 @@
       </div>
     </div>
   </div>
-<!-- POSTRES -->
-<div class="menu-category" [class.is-open]="isOpen('postres')">
-  <div class="menu-image">
-    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=1200&auto=format&fit=crop" alt="Postres Shirley's" />
-  </div>
 
-  <div class="menu-content">
-    <button class="category-badge" type="button" (click)="toggleSection('postres')">POSTRES</button>
-
-    <div class="menu-items" *ngIf="isOpen('postres')">
-      <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Postre de la semana', price: 2200 }"></ng-container>
-    </div>
-  </div>
-</div>
   <div class="cart-panel" *ngIf="hasCartItems">
     <div class="cart-header">
       <div>
