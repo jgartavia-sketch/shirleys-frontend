@@ -165,6 +165,13 @@
         <button class="category-badge" type="button" (click)="toggleSection('bebidas')">BEBIDAS Y CÓCTELES</button>
 
         <div class="menu-items" *ngIf="isOpen('bebidas')">
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Piña Colada', price: 3200 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Mojito Cubano', price: 3000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Daiquirí de Frutas', price: 2800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Margarita Clásica', price: 2800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Limonada de Coco', price: 3100 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Margarita Sabores (Maracuyá, Mango o Fresa)', price: 3100 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Promoción cócteles 2x', price: 5000 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Coca Cola', price: 900 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Coca Cola Zero', price: 900 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fresca', price: 900 }"></ng-container>
@@ -181,12 +188,17 @@
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Té caliente', price: 1000 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco en agua', price: 1700 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco con leche', price: 1900 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Piña Colada', price: 3200 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Mojito Cubano', price: 3000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Daiquirí de Frutas', price: 2800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Margarita Clásica', price: 2800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Limonada de Coco', price: 3100 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Margarita Sabores', price: 3100 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco sabor mango', price: 1700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco sabor fresa', price: 1700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco sabor carambola', price: 1700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco sabor sandía', price: 1700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco sabor maracuyá', price: 1700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco sabor cas', price: 1700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco sabor guanábana', price: 1700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco sabor mora', price: 1700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco sabor hierbabuena', price: 1700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco sabor limón', price: 1700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco sabor piña', price: 1700 }"></ng-container>
         </div>
       </div>
     </div>
