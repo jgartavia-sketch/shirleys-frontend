@@ -296,7 +296,18 @@
 }
 
 .item-check {
-  display: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  color: #071007;
+  background: linear-gradient(135deg, #f7d86f, #c99622);
+  font-size: 0.85rem;
+  font-weight: 900;
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.24);
+  flex-shrink: 0;
 }
 
 .cart-panel {
@@ -653,7 +664,7 @@
 
   .item-quantity-actions {
     display: grid;
-    grid-template-columns: 36px 38px 36px 1fr;
+    grid-template-columns: 36px 38px 36px 1fr auto;
     align-items: center;
     width: 100%;
     gap: 8px;
