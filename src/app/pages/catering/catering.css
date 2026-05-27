@@ -188,18 +188,18 @@
 
 .quote-options-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
-  gap: 16px;
-  margin-top: 34px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 26px;
 }
 
 .quote-option {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  min-height: 92px;
-  padding: 18px;
-  border-radius: 22px;
+  gap: 10px;
+  min-height: 76px;
+  padding: 14px 15px;
+  border-radius: 18px;
   border: 1px solid rgba(212, 175, 55, 0.16);
   background: rgba(7, 13, 8, 0.42);
   color: inherit;
@@ -223,10 +223,10 @@
 .check-mark {
   display: grid;
   place-items: center;
-  flex: 0 0 28px;
-  width: 28px;
-  height: 28px;
-  border-radius: 9px;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
   border: 1px solid rgba(212, 175, 55, 0.45);
   color: #071007;
   background: rgba(255, 247, 223, 0.08);
@@ -240,21 +240,21 @@
 
 .option-info {
   display: grid;
-  gap: 6px;
+  gap: 3px;
 }
 
 .option-info small {
   color: rgba(240, 202, 87, 0.9);
-  font-size: 0.68rem;
+  font-size: 0.60rem;
   font-weight: 900;
-  letter-spacing: 1.1px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
 .option-info strong {
   color: #fff7df;
-  font-size: 0.98rem;
-  line-height: 1.35;
+  font-size: 0.84rem;
+  line-height: 1.2;
 }
 
 .quote-panel {
@@ -472,14 +472,29 @@ textarea:focus {
 
   .quote-options-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 24px;
+    gap: 10px;
+    margin-top: 22px;
   }
 
   .quote-option {
     min-height: auto;
-    padding: 16px;
-    border-radius: 18px;
+    padding: 12px 13px;
+    border-radius: 15px;
+  }
+
+  .check-mark {
+    flex-basis: 22px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .option-info small {
+    font-size: 0.58rem;
+  }
+
+  .option-info strong {
+    font-size: 0.82rem;
+    line-height: 1.2;
   }
 
   .inputs-grid {
