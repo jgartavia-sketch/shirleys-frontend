@@ -13,67 +13,51 @@
   </div>
 
   <div class="menu-showcase">
-    <!-- FAST FOOD -->
+    <!-- TACOS -->
+    <div class="menu-category" [class.is-open]="isOpen('tacos')">
+      <div class="menu-image">
+        <img src="/images/tacos.webp" alt="Tacos Shirley's" />
+      </div>
+
+      <div class="menu-content">
+        <button class="category-badge" type="button" (click)="toggleSection('tacos')">TACOS DE BIRRIA</button>
+
+        <div class="menu-items" *ngIf="isOpen('tacos')">
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 3 tacos', price: 4200 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 4 tacos', price: 4700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 5 tacos', price: 5200 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden familiar (20 tacos)', price: 19600 }"></ng-container>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENTRADAS Y FAST FOOD -->
     <div class="menu-category" [class.is-open]="isOpen('fastFood')">
       <div class="menu-image">
         <img src="/images/fast.webp" alt="Fast Food Shirley's" />
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('fastFood')">FAST FOOD</button>
+        <button class="category-badge" type="button" (click)="toggleSection('fastFood')">ENTRADAS / FAST FOOD</button>
 
         <div class="menu-items" *ngIf="isOpen('fastFood')">
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ceviche Pequeño', price: 2700 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ceviche Grande', price: 3700 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Canasticas de camarón - orden de 4 camarones', price: 4700 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Canastica de patacón de carne y pollo', price: 4200 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fajitas de Pollo', price: 4000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fajitas de Pescado', price: 4700 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Nachos', price: 3700 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Papanachos', price: 4200 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Chifrijo', price: 3700 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Burrito', price: 3700 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Salchipapas', price: 3700 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Taco Corriente', price: 2700 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Quesadilla', price: 3700 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de papas', price: 2700 }"></ng-container>
-        </div>
-      </div>
-    </div>
-
-    <!-- HAMBURGUESAS -->
-    <div class="menu-category" [class.is-open]="isOpen('hamburguesas')">
-      <div class="menu-image">
-        <img src="/images/hamburguesa.webp" alt="Hamburguesas y empanadas Shirley's" />
-      </div>
-
-      <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('hamburguesas')">HAMBURGUESAS / EMPANADAS</button>
-
-        <div class="menu-items" *ngIf="isOpen('hamburguesas')">
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa de Carne', price: 4200 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa de Pollo', price: 4200 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa de Birria', price: 4200 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ceviche de pescado pequeño', price: 2500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ceviche de pescado', price: 3500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Mexicana', price: 3500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de papas', price: 2600 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de frijoles y tortillas tostadas', price: 2600 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Empanada Arreglada', price: 2700 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Empanada Sencilla', price: 2200 }"></ng-container>
-        </div>
-      </div>
-    </div>
-
-    <!-- ARROCES -->
-    <div class="menu-category" [class.is-open]="isOpen('arroces')">
-      <div class="menu-image">
-        <img src="/images/arroces.webp" alt="Arroces Shirley's" />
-      </div>
-
-      <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('arroces')">ARROCES</button>
-
-        <div class="menu-items" *ngIf="isOpen('arroces')">
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz con Pollo', price: 4000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz Cantonés', price: 4000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz con Camarones', price: 4700 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz de la casa', price: 4000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fajitas de Pollo Empanizadas', price: 3800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fajitas de Pescado Empanizadas', price: 4600 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Burrito', price: 3650 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Chifrijo Criollo', price: 3650 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Canasta de Patacón (Carne, Pollo o Mixto)', price: 4100 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Canasta de Patacón (Camarones en salsa de ostiones)', price: 4700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Papanachos', price: 4000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Nachos', price: 3800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Salchipapas', price: 3650 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Taco Corriente', price: 2700 }"></ng-container>
         </div>
       </div>
     </div>
@@ -88,31 +72,70 @@
         <button class="category-badge" type="button" (click)="toggleSection('especiales')">ESPECIALES</button>
 
         <div class="menu-items" *ngIf="isOpen('especiales')">
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Papanachos Shirley’s', price: 5100 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ensalada Shirley’s plancha', price: 4200 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ensalada Shirley’s empanizado', price: 4500 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa Shirley’s', price: 5000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Pizza Birria', price: 9150 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Empabirria', price: 3700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Papanachos Shirley’s (mar y tierra)', price: 5100 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ensalada Shirley’s (pollo o pescado)', price: 4100 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Ensalada Shirley’s empanizada', price: 4350 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa Shirley’s (mar y tierra)', price: 4800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Pizza Birria', price: 9300 }"></ng-container>
         </div>
       </div>
     </div>
 
-    <!-- TACOS -->
-    <div class="menu-category" [class.is-open]="isOpen('tacos')">
+    <!-- PLATOS FUERTES -->
+    <div class="menu-category" [class.is-open]="isOpen('platosFuertes')">
       <div class="menu-image">
-        <img src="/images/tacos.webp" alt="Tacos Shirley's" />
+        <img src="/images/especiales.webp" alt="Platos fuertes Shirley's" />
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('tacos')">TACOS DE BIRRIA</button>
+        <button class="category-badge" type="button" (click)="toggleSection('platosFuertes')">PLATOS FUERTES</button>
 
-        <div class="menu-items" *ngIf="isOpen('tacos')">
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 3', price: 4200 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 4', price: 4700 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden de 5', price: 5200 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Orden Familiar (20 tacos)', price: 19100 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Taco adicional', price: 1700 }"></ng-container>
+        <div class="menu-items" *ngIf="isOpen('platosFuertes')">
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Filete Mignon 200 g', price: 8900 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Churrasco 300 g', price: 9800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Churrasco Especial Shirley’s', price: 11950 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Rib Eye 300 g', price: 10900 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Lomo a la Jalapeña 300 g', price: 10400 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Camarones al ajillo', price: 6700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Cordon Bleu', price: 5800 }"></ng-container>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARROCES -->
+    <div class="menu-category" [class.is-open]="isOpen('arroces')">
+      <div class="menu-image">
+        <img src="/images/arroces.webp" alt="Arroces Shirley's" />
+      </div>
+
+      <div class="menu-content">
+        <button class="category-badge" type="button" (click)="toggleSection('arroces')">ARROCES</button>
+
+        <div class="menu-items" *ngIf="isOpen('arroces')">
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz con Camarones', price: 4600 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz de la Casa', price: 3950 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz con Pollo', price: 3950 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz Cantonés', price: 4100 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Camarones con arroz', price: 6450 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Arroz Cantonés con camarones', price: 5600 }"></ng-container>
+        </div>
+      </div>
+    </div>
+
+    <!-- HAMBURGUESAS -->
+    <div class="menu-category" [class.is-open]="isOpen('hamburguesas')">
+      <div class="menu-image">
+        <img src="/images/hamburguesa.webp" alt="Hamburguesas Shirley's" />
+      </div>
+
+      <div class="menu-content">
+        <button class="category-badge" type="button" (click)="toggleSection('hamburguesas')">HAMBURGUESAS</button>
+
+        <div class="menu-items" *ngIf="isOpen('hamburguesas')">
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa de Carne', price: 4100 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa de Pollo', price: 4200 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa de Birria', price: 4200 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Hamburguesa Angus', price: 6000 }"></ng-container>
         </div>
       </div>
     </div>
@@ -124,24 +147,60 @@
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('bebidas')">REFRESCOS Y CÓCTELES</button>
+        <button class="category-badge" type="button" (click)="toggleSection('bebidas')">BEBIDAS</button>
 
         <div class="menu-items" *ngIf="isOpen('bebidas')">
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Coca Cola', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Coca Cola Zero', price: 1000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fresca', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Gin', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fanta Naranja', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fanta Uva', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Té Melocotón o té Blanco', price: 800 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fanta Kolita', price: 800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Coca Cola', price: 900 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Coca Cola Zero', price: 900 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fresca', price: 900 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Gin', price: 1000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fanta Naranja', price: 900 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fanta Uva', price: 900 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Fanta Kolita', price: 900 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Soda', price: 1000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Té Melocotón', price: 1000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Té Blanco', price: 1000 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Café', price: 1000 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Café con leche', price: 1500 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Chocolate frío/Caliente', price: 2000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Piña Colada', price: 3000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Margarita de mango', price: 3000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Limonada de coco', price: 3000 }"></ng-container>
-          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Café Cremoso', price: 2500 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Chocolate frío o caliente', price: 2000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Té caliente', price: 1000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco en agua', price: 1700 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Natural fresco con leche', price: 1900 }"></ng-container>
+        </div>
+      </div>
+    </div>
+
+    <!-- CÓCTELES -->
+    <div class="menu-category" [class.is-open]="isOpen('cocteles')">
+      <div class="menu-image">
+        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1200&auto=format&fit=crop" alt="Cócteles Shirley's" />
+      </div>
+
+      <div class="menu-content">
+        <button class="category-badge" type="button" (click)="toggleSection('cocteles')">CÓCTELES</button>
+
+        <div class="menu-items" *ngIf="isOpen('cocteles')">
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Piña Colada', price: 3200 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Mojito Cubano', price: 3000 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Daiquirí de Frutas', price: 2800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Margarita Clásica', price: 2800 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Limonada de Coco', price: 3100 }"></ng-container>
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Margarita Sabores', price: 3100 }"></ng-container>
+        </div>
+      </div>
+    </div>
+
+    <!-- POSTRES -->
+    <div class="menu-category" [class.is-open]="isOpen('postres')">
+      <div class="menu-image">
+        <img src="/images/especiales.webp" alt="Postres Shirley's" />
+      </div>
+
+      <div class="menu-content">
+        <button class="category-badge" type="button" (click)="toggleSection('postres')">POSTRE DE LA SEMANA</button>
+
+        <div class="menu-items" *ngIf="isOpen('postres')">
+          <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Postre de la semana', price: 2200 }"></ng-container>
         </div>
       </div>
     </div>
@@ -206,8 +265,13 @@
 
     <div class="cart-summary">
       <div>
-        <span>Subtotal</span>
+        <span>Subtotal comida</span>
         <strong>{{ formatPrice(foodTotal) }}</strong>
+      </div>
+
+      <div>
+        <span>Empaque</span>
+        <strong>{{ formatPrice(packagingTotal) }}</strong>
       </div>
     </div>
 
@@ -233,7 +297,7 @@
   </div>
 
   <div class="menu-footer-note">
-    **Los precios de platillos ya incluyen ₡200 de empaque.
+    **Los precios no incluyen el 10% de servicio. El empaque se suma aparte en pedidos para llevar o express.
   </div>
 
   <ng-template #menuItem let-name="name" let-price="price">

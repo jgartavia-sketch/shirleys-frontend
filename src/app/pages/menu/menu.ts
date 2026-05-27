@@ -33,7 +33,8 @@ export class Menu {
   openSection: string | null = null;
 
   readonly whatsappNumber = '50688335888';
-  readonly packagingFee = 0;
+  readonly packagingFee = 200;
+  readonly doublePackagingFee = 400;
 
   readonly apiUrl = 'https://shirleys-backend.onrender.com/api/orders/';
 
@@ -142,15 +143,33 @@ export class Menu {
   }
 
   get packagingTotal(): number {
-    return 0;
+    return this.cart.reduce(
+      (sum, item) => sum + this.getPackagingFeeForItem(item.name) * item.quantity,
+      0
+    );
   }
 
   get total(): number {
-    return this.foodTotal;
+    return this.foodTotal + this.packagingTotal;
   }
 
   formatPrice(price: number): string {
     return `₡${price.toLocaleString('es-CR')}`;
+  }
+
+  getPackagingFeeForItem(name: string): number {
+    const normalizedName = name.trim().toLowerCase();
+
+    const doublePackagingItems = [
+      'orden familiar (20 tacos)',
+      'pizza birria',
+    ];
+
+    if (doublePackagingItems.includes(normalizedName)) {
+      return this.doublePackagingFee;
+    }
+
+    return this.packagingFee;
   }
 
   sendOrderToWhatsApp(): void {
@@ -202,12 +221,16 @@ export class Menu {
 
   private buildWhatsAppUrl(): string {
     const orderLines = this.cart
-      .map(
-        (item) =>
-          `• ${item.quantity} x ${item.name} - ${this.formatPrice(
-            item.price * item.quantity
-          )}`
-      )
+      .map((item) => {
+        const itemFoodTotal = item.price * item.quantity;
+        const itemPackagingTotal =
+          this.getPackagingFeeForItem(item.name) * item.quantity;
+
+        return (
+          `• ${item.quantity} x ${item.name} - ${this.formatPrice(itemFoodTotal)}` +
+          `\n  Empaque: ${this.formatPrice(itemPackagingTotal)}`
+        );
+      })
       .join('\n');
 
     const orderTypeText =
@@ -226,7 +249,8 @@ export class Menu {
       `${orderLines}\n\n` +
       `Tipo de pedido: ${orderTypeText}` +
       `${locationText}\n\n` +
-      `Subtotal: ${this.formatPrice(this.foodTotal)}\n` +
+      `Subtotal comida: ${this.formatPrice(this.foodTotal)}\n` +
+      `Empaque: ${this.formatPrice(this.packagingTotal)}\n` +
       `Total: ${this.formatPrice(this.total)}`;
 
     return `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(
