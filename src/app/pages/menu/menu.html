@@ -140,14 +140,14 @@
       </div>
     </div>
 
-    <!-- BEBIDAS Y CÓCTELES -->
+    <!-- BEBIDAS, CÓCTELES Y POSTRE -->
     <div class="menu-category" [class.is-open]="isOpen('bebidas')">
       <div class="menu-image">
-        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1200&auto=format&fit=crop" alt="Bebidas y cócteles Shirley's" />
+        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1200&auto=format&fit=crop" alt="Bebidas, cócteles y postre Shirley's" />
       </div>
 
       <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('bebidas')">BEBIDAS Y CÓCTELES</button>
+        <button class="category-badge" type="button" (click)="toggleSection('bebidas')">BEBIDAS, CÓCTELES Y POSTRE</button>
 
         <div class="menu-items" *ngIf="isOpen('bebidas')">
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Coca Cola', price: 900 }"></ng-container>
@@ -172,20 +172,6 @@
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Margarita Clásica', price: 2800 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Limonada de Coco', price: 3100 }"></ng-container>
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Margarita Sabores', price: 3100 }"></ng-container>
-        </div>
-      </div>
-    </div>
-
-    <!-- POSTRES -->
-    <div class="menu-category" [class.is-open]="isOpen('postres')">
-      <div class="menu-image">
-        <img src="/images/especiales.webp" alt="Postres Shirley's" />
-      </div>
-
-      <div class="menu-content">
-        <button class="category-badge" type="button" (click)="toggleSection('postres')">POSTRE DE LA SEMANA</button>
-
-        <div class="menu-items" *ngIf="isOpen('postres')">
           <ng-container *ngTemplateOutlet="menuItem; context: { name: 'Postre de la semana', price: 2200 }"></ng-container>
         </div>
       </div>
