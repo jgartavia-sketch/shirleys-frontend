@@ -1,11 +1,11 @@
-<section class="hero-section">
-  <div class="hero-overlay"></div>
-  <div class="hero-vignette"></div>
+<section class="hero-section" aria-labelledby="inicio-title">
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-vignette" aria-hidden="true"></div>
 
   <div class="hero-content">
     <span class="hero-kicker">Restaurante y Catering en San Carlos</span>
 
-    <h1>Donde la vista se vuelve parte de la cena.</h1>
+    <h1 id="inicio-title">Donde la vista se vuelve parte de la cena.</h1>
 
     <p>
       Más de 15 años creando experiencias memorables con sabor casero
@@ -16,20 +16,25 @@
       Reservá hoy o cotizá tu evento en cualquier parte de Costa Rica.
     </p>
 
-    <div class="hero-buttons">
-      <a routerLink="/menu" class="primary-btn">Ver menú</a>
-      <a routerLink="/catering" class="secondary-btn">Reservar catering</a>
+    <div class="hero-buttons" aria-label="Acciones principales">
+      <a routerLink="/menu" class="primary-btn" aria-label="Ver menú de Shirley's">
+        Ver menú
+      </a>
+
+      <a routerLink="/catering" class="secondary-btn" aria-label="Reservar catering de Shirley's">
+        Reservar catering
+      </a>
     </div>
   </div>
 </section>
 
-<section class="customers-section">
+<section class="customers-section" aria-labelledby="customers-title">
   <div class="customers-container">
 
     <div class="customers-text">
       <span class="customers-badge">Shirley’s Customers</span>
 
-      <h2>
+      <h2 id="customers-title">
         Cada visita también puede convertirse en recompensas.
       </h2>
 
@@ -39,7 +44,7 @@
         y acceder a beneficios exclusivos.
       </p>
 
-      <div class="points-preview">
+      <div class="points-preview" aria-label="Tabla de puntos Shirley's Customers">
         <div class="point-card">
           <span>₡5.000</span>
           <strong>3 puntos</strong>
@@ -65,7 +70,7 @@
       </div>
     </div>
 
-    <div class="customers-card">
+    <div class="customers-card" aria-label="Registro de Shirley's Customers">
 
       <div class="mock-phone">
 
@@ -73,15 +78,40 @@
           <span>Registro rápido</span>
         </div>
 
-        <form class="mock-form">
+        <form class="mock-form" autocomplete="on">
 
-          <input #customerName type="text" placeholder="Nombre completo" />
-          <input #customerEmail type="email" placeholder="Correo electrónico" />
-          <input #customerWhatsapp type="text" placeholder="Número de WhatsApp" />
+          <input
+            #customerName
+            type="text"
+            name="name"
+            placeholder="Nombre completo"
+            autocomplete="name"
+            aria-label="Nombre completo"
+          />
+
+          <input
+            #customerEmail
+            type="email"
+            name="email"
+            placeholder="Correo electrónico"
+            autocomplete="email"
+            aria-label="Correo electrónico"
+          />
+
+          <input
+            #customerWhatsapp
+            type="tel"
+            name="whatsapp"
+            placeholder="Número de WhatsApp"
+            autocomplete="tel"
+            inputmode="tel"
+            aria-label="Número de WhatsApp"
+          />
 
           <button
             type="button"
             [disabled]="isSendingQr"
+            [attr.aria-busy]="isSendingQr"
             (click)="sendMockQr(
               customerName.value,
               customerEmail.value,
@@ -93,9 +123,9 @@
 
         </form>
 
-        <div class="mock-success">
+        <div class="mock-success" aria-label="Vista previa de Shirley's Customers">
 
-          <div class="mock-qr">
+          <div class="mock-qr" aria-hidden="true">
             QR
           </div>
 
@@ -115,15 +145,15 @@
 </section>
 
 @if (showQrPopup) {
-  <div class="qr-popup-overlay">
+  <div class="qr-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="qr-popup-title">
 
     <div class="qr-popup">
 
-      <div class="popup-qr">
+      <div class="popup-qr" aria-hidden="true">
         QR
       </div>
 
-      <h3>{{ popupTitle }}</h3>
+      <h3 id="qr-popup-title">{{ popupTitle }}</h3>
 
       <p>
         {{ popupMessage }}
