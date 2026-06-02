@@ -47,12 +47,14 @@ export class Staff implements OnInit, OnDestroy {
   @ViewChild('qrVideo') qrVideo?: ElementRef<HTMLVideoElement>;
 
   customerCode = '';
+  customerEmail = '';
   invoiceNumber = '';
   purchaseAmount: number | null = null;
 
   loading = false;
   purchaseLoading = false;
   error = false;
+  errorMessage = '';
   purchaseError = '';
   purchaseSuccess = '';
 
@@ -90,19 +92,31 @@ export class Staff implements OnInit, OnDestroy {
 
   searchCustomer(): void {
     const cleanCode = this.customerCode.trim();
+    const cleanEmail = this.customerEmail.trim().toLowerCase();
 
-    if (!cleanCode || this.loading) {
+    if (this.loading) {
+      return;
+    }
+
+    if (!cleanCode && !cleanEmail) {
+      this.error = true;
+      this.errorMessage = 'Ingresa el código QR o el correo electrónico del cliente.';
+      this.customer = null;
+      this.cdr.detectChanges();
       return;
     }
 
     this.loading = true;
     this.error = false;
+    this.errorMessage = '';
     this.purchaseError = '';
     this.purchaseSuccess = '';
     this.customer = null;
     this.cdr.detectChanges();
 
-    const url = `${this.apiUrl}/${cleanCode}`;
+    const url = cleanCode
+      ? `${this.apiUrl}/${encodeURIComponent(cleanCode)}`
+      : `${this.apiUrl}/email/${encodeURIComponent(cleanEmail)}`;
 
     this.http.get<CustomerResponse>(url)
       .pipe(
@@ -118,14 +132,18 @@ export class Staff implements OnInit, OnDestroy {
           this.zone.run(() => {
             this.customer = response.customer;
             this.customerCode = response.customer.code;
+            this.customerEmail = response.customer.email;
             this.error = false;
+            this.errorMessage = '';
             this.cdr.detectChanges();
           });
         },
 
-        error: () => {
+        error: (error) => {
           this.zone.run(() => {
             this.error = true;
+            this.errorMessage =
+              error?.error?.detail || 'No encontramos un cliente con esos datos.';
             this.customer = null;
             this.cdr.detectChanges();
           });
@@ -209,6 +227,7 @@ export class Staff implements OnInit, OnDestroy {
             };
 
             this.customerCode = this.customer.code;
+            this.customerEmail = this.customer.email;
             this.purchaseSuccess = `Compra registrada. Se sumaron ${pointsEarned} puntos.`;
             this.invoiceNumber = '';
             this.purchaseAmount = null;
@@ -230,7 +249,9 @@ export class Staff implements OnInit, OnDestroy {
 
   async startQrScanner(): Promise<void> {
     this.error = false;
+    this.errorMessage = '';
     this.customer = null;
+    this.customerEmail = '';
     this.qrAlreadyProcessed = false;
     this.scannerMessage = 'Activando cámara...';
     this.scanning = true;
@@ -270,6 +291,7 @@ export class Staff implements OnInit, OnDestroy {
 
             this.zone.run(() => {
               this.customerCode = extractedCode;
+              this.customerEmail = '';
               this.scannerMessage = 'QR leído correctamente.';
               this.stopQrScanner();
               this.searchCustomer();

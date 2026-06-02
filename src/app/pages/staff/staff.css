@@ -202,6 +202,15 @@
   gap: 14px;
 }
 
+.search-box {
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(212, 175, 55, 0.08);
+  border-radius: 28px;
+
+  padding: 26px;
+}
+
 .search-box label,
 .purchase-form label {
   color: rgba(245, 241, 232, 0.78);
@@ -234,6 +243,11 @@
   transition: 0.25s ease;
 }
 
+.search-row input::placeholder,
+.purchase-form input::placeholder {
+  color: rgba(245, 241, 232, 0.38);
+}
+
 .search-row input:focus,
 .purchase-form input:focus {
   border-color: rgba(212, 175, 55, 0.55);
@@ -264,6 +278,38 @@
 .purchase-form button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.search-divider {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 8px 0 2px;
+
+  text-align: center;
+}
+
+.search-divider::before,
+.search-divider::after {
+  content: "";
+
+  flex: 1;
+  height: 1px;
+
+  background: rgba(212, 175, 55, 0.14);
+}
+
+.search-divider span {
+  padding: 0 14px;
+
+  color: rgba(245, 241, 232, 0.48);
+
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .loading-card,
@@ -451,6 +497,10 @@
     border-radius: 26px;
   }
 
+  .search-box {
+    padding: 20px;
+  }
+
   .search-row {
     flex-direction: column;
   }
@@ -459,6 +509,11 @@
   .purchase-form button {
     width: 100%;
     min-width: unset;
+  }
+
+  .search-divider span {
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
   }
 
   .customer-avatar {

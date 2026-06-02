@@ -68,6 +68,23 @@
           placeholder="Ej: SHR-20260510182740"
           autocomplete="off"
         />
+      </div>
+
+      <div class="search-divider">
+        <span>o buscar por correo</span>
+      </div>
+
+      <label for="customerEmail">Correo electrónico del cliente</label>
+
+      <div class="search-row">
+        <input
+          id="customerEmail"
+          name="customerEmail"
+          type="email"
+          [(ngModel)]="customerEmail"
+          placeholder="Ej: cliente@gmail.com"
+          autocomplete="off"
+        />
 
         <button type="submit" [disabled]="loading">
           {{ loading ? 'Buscando...' : 'Buscar cliente' }}
@@ -80,7 +97,7 @@
     </div>
 
     <div class="error-card" *ngIf="!loading && error">
-      Cliente no encontrado. Revisa el código e intenta de nuevo.
+      {{ errorMessage || 'Cliente no encontrado. Revisa los datos e intenta de nuevo.' }}
     </div>
 
     <div class="customer-result" *ngIf="!loading && customer">
