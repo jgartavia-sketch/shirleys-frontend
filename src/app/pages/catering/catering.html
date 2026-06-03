@@ -5,8 +5,8 @@
     <h1>Eventos que dejan recuerdos.</h1>
 
     <p>
-      Elija el tipo de evento, complete sus datos y solicite una cotización
-      personalizada para vivir la experiencia Shirley’s.
+      Elija los eventos o servicios que le interesan, complete sus datos y
+      solicite una cotización personalizada para vivir la experiencia Shirley’s.
     </p>
   </div>
 
@@ -17,35 +17,44 @@
       <h2>¿Qué tipo de evento desea cotizar?</h2>
 
       <p>
-        Seleccione una opción para personalizar su solicitud.
+        Seleccione una o varias opciones. Entre más claro sea el evento, mejor
+        podemos preparar su cotización.
       </p>
 
-      <div class="services-grid">
-        <button
-          type="button"
-          class="service-card"
-          *ngFor="let event of events"
-          [class.selected]="selectedEvent === event.id"
-          (click)="selectEvent(event.id)"
-        >
-          <span>{{ event.number }}</span>
+      <div class="event-category-block" *ngFor="let group of eventGroups">
+        <div class="event-category-header">
+          <span>{{ group.icon }}</span>
+          <h3>{{ group.title }}</h3>
+        </div>
 
-          <h3>{{ event.title }}</h3>
+        <div class="quote-options-grid">
+          <button
+            type="button"
+            class="quote-option"
+            *ngFor="let event of group.items"
+            [class.selected]="isOptionSelected(event.id)"
+            (click)="toggleOption(event.id)"
+          >
+            <span class="check-mark">
+              {{ isOptionSelected(event.id) ? '✓' : '' }}
+            </span>
 
-          <p>
-            {{ event.description }}
-          </p>
-        </button>
+            <span class="option-info">
+              <small>{{ group.title }}</small>
+              <strong>{{ event.label }}</strong>
+            </span>
+          </button>
+        </div>
       </div>
     </div>
 
     <div class="form-section quote-checklist-section">
       <span class="section-label">PASO 2</span>
 
-      <h2>¿Qué le gustaría cotizar?</h2>
+      <h2>¿Qué le gustaría incluir?</h2>
 
       <p>
-        Marque las opciones que le llaman la atención para preparar una
+        Marque los servicios que le llaman la atención para preparar una
         cotización más precisa.
       </p>
 
@@ -133,12 +142,6 @@
           placeholder="Cantidad aproximada de personas, lugar del evento o detalles importantes..."
         ></textarea>
       </label>
-
-      <div class="selected-summary">
-        <span>Evento seleccionado</span>
-
-        <strong>{{ selectedEventName }}</strong>
-      </div>
 
       <div class="selected-summary">
         <span>Opciones seleccionadas</span>
