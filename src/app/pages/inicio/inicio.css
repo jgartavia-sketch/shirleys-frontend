@@ -93,7 +93,8 @@
   backdrop-filter: blur(8px);
 }
 
-.customers-badge {
+.customers-badge,
+.launch-promo-badge {
   display: inline-block;
   margin-bottom: 24px;
   padding: 11px 18px;
@@ -138,7 +139,8 @@
   opacity: 0.95;
 }
 
-.hero-buttons {
+.hero-buttons,
+.launch-promo-actions {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
@@ -189,6 +191,116 @@
   border-color: rgba(242, 200, 102, 0.72);
   color: #f2c866;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+}
+
+.launch-promo-section {
+  position: relative;
+  padding: 105px 8%;
+  overflow: hidden;
+  color: #fff7df;
+  background:
+    radial-gradient(circle at top right, rgba(212, 175, 55, 0.16), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(17, 92, 48, 0.22), transparent 36%),
+    linear-gradient(135deg, #070b07, #0b150d 58%, #11190f);
+}
+
+.launch-promo-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.launch-promo-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.launch-promo-header {
+  max-width: 860px;
+  margin-bottom: 42px;
+}
+
+.launch-promo-header h2 {
+  margin: 0 0 22px;
+  color: #fff3d1;
+  font-size: clamp(2.35rem, 5vw, 4.6rem);
+  line-height: 0.96;
+  letter-spacing: -2px;
+}
+
+.launch-promo-header p {
+  max-width: 780px;
+  margin: 0;
+  color: rgba(232, 222, 197, 0.9);
+  font-size: 1.08rem;
+  line-height: 1.85;
+}
+
+.launch-promo-header strong {
+  color: #f2c866;
+}
+
+.launch-promo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 34px;
+}
+
+.launch-promo-card {
+  min-height: 230px;
+  padding: 28px;
+  border-radius: 30px;
+  border: 1px solid rgba(212, 175, 55, 0.24);
+  background:
+    linear-gradient(145deg, rgba(255, 247, 223, 0.1), rgba(255, 247, 223, 0.035));
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.24s ease,
+    border-color 0.24s ease,
+    box-shadow 0.24s ease;
+}
+
+.launch-promo-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(242, 200, 102, 0.52);
+  box-shadow: 0 24px 58px rgba(0, 0, 0, 0.28);
+}
+
+.launch-promo-icon {
+  width: 58px;
+  height: 58px;
+  margin-bottom: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  font-size: 1.75rem;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(242, 200, 102, 0.28);
+}
+
+.launch-promo-card h3 {
+  margin: 0 0 12px;
+  color: #f2c866;
+  font-size: 1.35rem;
+}
+
+.launch-promo-card p {
+  margin: 0;
+  color: rgba(232, 222, 197, 0.9);
+  line-height: 1.75;
+}
+
+.launch-promo-actions {
+  margin-top: 10px;
 }
 
 .customers-section {
@@ -505,6 +617,7 @@
   .hero-content,
   .primary-btn,
   .secondary-btn,
+  .launch-promo-card,
   .point-card,
   .mock-form button,
   .qr-popup button {
@@ -514,6 +627,7 @@
 
   .primary-btn:hover,
   .secondary-btn:hover,
+  .launch-promo-card:hover,
   .point-card:hover,
   .mock-form button:hover:not(:disabled),
   .qr-popup button:hover {
@@ -522,6 +636,10 @@
 }
 
 @media (max-width: 1100px) {
+  .launch-promo-grid {
+    grid-template-columns: 1fr;
+  }
+
   .customers-container {
     grid-template-columns: 1fr;
     gap: 42px;
@@ -543,8 +661,13 @@
     line-height: 0.98;
   }
 
+  .launch-promo-section,
   .customers-section {
     padding: 80px 7%;
+  }
+
+  .launch-promo-header h2 {
+    line-height: 1;
   }
 
   .points-preview {
@@ -569,6 +692,7 @@
 
   .hero-kicker,
   .customers-badge,
+  .launch-promo-badge,
   .secondary-btn,
   .mock-phone,
   .qr-popup-overlay {
@@ -588,11 +712,13 @@
   }
 
   .hero-content p,
+  .launch-promo-header p,
   .customers-description {
     font-size: 1rem;
   }
 
-  .hero-buttons {
+  .hero-buttons,
+  .launch-promo-actions {
     flex-direction: column;
     align-items: stretch;
   }
@@ -602,17 +728,26 @@
     width: 100%;
   }
 
+  .launch-promo-section,
   .customers-section {
     padding: 68px 6%;
   }
 
+  .launch-promo-section::before,
   .customers-section::before {
     opacity: 0.04;
   }
 
+  .launch-promo-header h2,
   .customers-text h2 {
     font-size: 2.45rem;
     letter-spacing: -1px;
+  }
+
+  .launch-promo-card {
+    min-height: auto;
+    padding: 24px;
+    border-radius: 26px;
   }
 
   .mock-phone {
