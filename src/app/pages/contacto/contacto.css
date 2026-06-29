@@ -259,7 +259,7 @@
 @media (max-width: 760px) {
   .contact-page {
     min-height: auto;
-    padding: 175px 22px 54px;
+    padding: var(--page-top-space, 125px) 22px 54px;
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.60)),
       url("/images/hero/hero-3.png");

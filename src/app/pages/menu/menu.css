@@ -2,7 +2,7 @@
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  padding: 260px 7% 110px;
+  padding: var(--page-top-space) 7% 110px;
   color: #f7f0df;
 
   background:

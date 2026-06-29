@@ -3,7 +3,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 230px 8% 95px;
+  padding: var(--page-top-space) 8% 95px;
   overflow: hidden;
   isolation: isolate;
 
