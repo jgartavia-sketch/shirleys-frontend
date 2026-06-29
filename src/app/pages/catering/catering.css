@@ -2,7 +2,7 @@
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  padding: 300px 8% 100px;
+  padding: var(--page-top-space, 145px) 8% 100px;
   color: #f7f0df;
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.52)),
@@ -428,7 +428,7 @@ textarea:focus {
 @media (max-width: 760px) {
   .catering-page {
     min-height: auto;
-    padding: 185px 22px 54px;
+    padding: var(--page-top-space, 125px) 22px 54px;
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.58)),
       url("/images/hero/hero-2.png");

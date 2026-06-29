@@ -2,7 +2,7 @@
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  padding: 220px 8% 100px;
+  padding: calc(var(--page-top-space, 145px) + 75px) 8% 100px;
 
   background:
     linear-gradient(
@@ -182,7 +182,7 @@
 @media (max-width: 760px) {
   .about-page {
     min-height: auto;
-    padding: 175px 22px 56px;
+    padding: calc(var(--page-top-space, 125px) + 50px) 22px 56px;
 
     background:
       linear-gradient(
