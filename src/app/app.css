@@ -3,7 +3,7 @@
   min-height: 100vh;
   color: var(--text-primary);
   background: var(--background-dark);
-  --page-top-space: 190px;
+  --page-top-space: 145px;
 }
 
 .navbar {
@@ -163,10 +163,6 @@
   filter: brightness(1.05);
 }
 
-.page-shell {
-  min-height: 100vh;
-}
-
 .premium-footer {
   position: relative;
   overflow: hidden;
@@ -265,7 +261,7 @@
 
 @media (max-width: 900px) {
   :host {
-    --page-top-space: 190px;
+    --page-top-space: 135px;
   }
 
   .navbar {
@@ -334,7 +330,7 @@
 
 @media (max-width: 520px) {
   :host {
-    --page-top-space: 165px;
+    --page-top-space: 125px;
   }
 
   .navbar {
