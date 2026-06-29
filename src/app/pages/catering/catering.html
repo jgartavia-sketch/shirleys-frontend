@@ -22,12 +22,28 @@
       </p>
 
       <div class="event-category-block" *ngFor="let group of eventGroups">
-        <div class="event-category-header">
-          <span>{{ group.icon }}</span>
-          <h3>{{ group.title }}</h3>
-        </div>
+        <button
+          type="button"
+          class="event-category-header event-category-toggle"
+          (click)="toggleEventGroup(group.title)"
+        >
+          <span class="event-category-title">
+            <span>{{ group.icon }}</span>
+            <h3>{{ group.title }}</h3>
+          </span>
 
-        <div class="quote-options-grid">
+          <span
+            class="event-category-arrow"
+            [class.open]="openEventGroup === group.title"
+          >
+            ▾
+          </span>
+        </button>
+
+        <div
+          class="quote-options-grid"
+          *ngIf="openEventGroup === group.title"
+        >
           <button
             type="button"
             class="quote-option"

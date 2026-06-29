@@ -38,6 +38,7 @@ export class Catering {
   errorMessage = '';
 
   selectedOptions: string[] = [];
+  openEventGroup: string | null = null;
 
   events: CateringEvent[] = [
     {
@@ -338,6 +339,10 @@ export class Catering {
     return this.selectedOptions.includes(optionId);
   }
 
+  toggleEventGroup(groupTitle: string): void {
+    this.openEventGroup = this.openEventGroup === groupTitle ? null : groupTitle;
+  }
+
   async submitQuote(event: Event): Promise<void> {
     event.preventDefault();
 
@@ -393,6 +398,7 @@ export class Catering {
       form.reset();
       this.selectedEvent = 'baby-showers';
       this.selectedOptions = [];
+      this.openEventGroup = null;
       this.successMessage = 'Solicitud preparada correctamente. WhatsApp se abrirá para enviar la cotización.';
     } catch {
       this.errorMessage = 'No se pudo preparar la solicitud. Intente nuevamente.';
