@@ -32,6 +32,17 @@ interface CreateWhatsappOrderPayload {
 export class Menu {
   openSection: string | null = null;
 
+  private _searchTerm = '';
+
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  set searchTerm(value: string) {
+    this._searchTerm = value;
+    this.applyMenuSearch();
+  }
+
   readonly whatsappNumber = '50688335888';
   readonly packagingFee = 200;
   readonly doublePackagingFee = 400;
@@ -50,7 +61,26 @@ export class Menu {
 
   constructor(private http: HttpClient) {}
 
+  get hasSearchTerm(): boolean {
+    return this.searchTerm.trim().length > 0;
+  }
+
+  setQuickSearch(value: string): void {
+    this.searchTerm = value;
+    this.openSection = null;
+  }
+
+  clearSearch(): void {
+    this.searchTerm = '';
+    this.openSection = null;
+    this.resetMenuSearch();
+  }
+
   toggleSection(section: string): void {
+    if (this.hasSearchTerm) {
+      return;
+    }
+
     const willOpenSection = this.openSection !== section;
 
     this.openSection = willOpenSection ? section : null;
@@ -61,7 +91,7 @@ export class Menu {
   }
 
   isOpen(section: string): boolean {
-    return this.openSection === section;
+    return this.hasSearchTerm || this.openSection === section;
   }
 
   setOrderType(type: OrderType): void {
@@ -226,12 +256,208 @@ export class Menu {
     });
   }
 
-  private scrollSectionIntoView(section: string): void {
+  private applyMenuSearch(): void {
     window.setTimeout(() => {
-      const button = document.querySelector(
-        `button[onclick], .category-badge`
+      const term = this.normalize(this.searchTerm);
+
+      if (!term) {
+        this.resetMenuSearch();
+        return;
+      }
+
+      const categories = Array.from(
+        document.querySelectorAll<HTMLElement>('.menu-category')
       );
 
+      categories.forEach((category) => {
+        const categoryLabel =
+          category.querySelector('.category-badge')?.textContent ?? '';
+
+        const items = Array.from(
+          category.querySelectorAll<HTMLElement>('.menu-item')
+        );
+
+        let visibleItems = 0;
+
+        items.forEach((item) => {
+          const itemName =
+            item.querySelector('.item-info span')?.textContent ?? '';
+
+          const itemPriceText =
+            item.querySelector('.item-info strong')?.textContent ?? '';
+
+          const shouldShow = this.matchesMenuSearch(
+            itemName,
+            itemPriceText,
+            categoryLabel,
+            term
+          );
+
+          item.style.display = shouldShow ? 'grid' : 'none';
+
+          if (shouldShow) {
+            visibleItems += 1;
+          }
+        });
+
+        category.style.display = visibleItems > 0 ? 'block' : 'none';
+      });
+    }, 80);
+  }
+
+  private resetMenuSearch(): void {
+    window.setTimeout(() => {
+      const categories = Array.from(
+        document.querySelectorAll<HTMLElement>('.menu-category')
+      );
+
+      categories.forEach((category) => {
+        category.style.display = '';
+
+        const items = Array.from(
+          category.querySelectorAll<HTMLElement>('.menu-item')
+        );
+
+        items.forEach((item) => {
+          item.style.display = '';
+        });
+      });
+    }, 80);
+  }
+
+  private matchesMenuSearch(
+    itemName: string,
+    itemPriceText: string,
+    categoryLabel: string,
+    term: string
+  ): boolean {
+    const maxPrice = this.extractMaxPrice(term);
+    const itemPrice = this.extractPriceFromText(itemPriceText);
+
+    if (maxPrice !== null && itemPrice > maxPrice) {
+      return false;
+    }
+
+    const expandedText = this.normalize(
+      [
+        itemName,
+        categoryLabel,
+        this.getIntentWords(itemName),
+        this.getIntentWords(categoryLabel),
+      ].join(' ')
+    );
+
+    const words = term
+      .split(' ')
+      .filter((word) => word.length > 1)
+      .filter(
+        (word) =>
+          ![
+            'quiero',
+            'algo',
+            'con',
+            'sin',
+            'para',
+            'de',
+            'del',
+            'la',
+            'el',
+            'los',
+            'las',
+            'menos',
+            'que',
+            'un',
+            'una',
+          ].includes(word)
+      )
+      .filter((word) => !/^\d+$/.test(word));
+
+    if (words.length === 0 && maxPrice !== null) {
+      return true;
+    }
+
+    return words.every((word) => expandedText.includes(word));
+  }
+
+  private getIntentWords(value: string): string {
+    const text = this.normalize(value);
+    const words: string[] = [];
+
+    if (text.includes('pollo')) {
+      words.push('pollo carne blanca');
+    }
+
+    if (text.includes('carne') || text.includes('churrasco') || text.includes('rib eye') || text.includes('lomo') || text.includes('angus')) {
+      words.push('carne res fuerte abundante');
+    }
+
+    if (text.includes('camarones') || text.includes('pescado') || text.includes('ceviche')) {
+      words.push('mariscos pescado camarones liviano');
+    }
+
+    if (text.includes('taco') || text.includes('tacos') || text.includes('birria') || text.includes('pizza') || text.includes('nachos') || text.includes('orden familiar')) {
+      words.push('compartir familiar grupo');
+    }
+
+    if (text.includes('hamburguesa') || text.includes('papas') || text.includes('salchipapas')) {
+      words.push('rapido niños ninos casual');
+    }
+
+    if (text.includes('postre') || text.includes('chocolate') || text.includes('smoothie')) {
+      words.push('dulce postre antojo');
+    }
+
+    if (text.includes('cafe') || text.includes('te') || text.includes('coca') || text.includes('fanta') || text.includes('soda') || text.includes('mojito') || text.includes('margarita') || text.includes('limonada') || text.includes('colada')) {
+      words.push('bebida bebidas tomar beber fresco cafe coctel');
+    }
+
+    if (text.includes('ensalada') || text.includes('ceviche') || text.includes('natural')) {
+      words.push('liviano ligero fresco');
+    }
+
+    if (text.includes('jalapena')) {
+      words.push('picante');
+    }
+
+    return words.join(' ');
+  }
+
+  private extractMaxPrice(term: string): number | null {
+    if (
+      !term.includes('menos') &&
+      !term.includes('barato') &&
+      !term.includes('economico') &&
+      !term.includes('económico')
+    ) {
+      return null;
+    }
+
+    const match = term.match(/\d+/);
+
+    if (!match) {
+      return 5000;
+    }
+
+    return Number(match[0]);
+  }
+
+  private extractPriceFromText(value: string): number {
+    const numericValue = value.replace(/[^\d]/g, '');
+    return Number(numericValue || 0);
+  }
+
+  private normalize(value: string): string {
+    return value
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[’']/g, '')
+      .replace(/[₡,]/g, '')
+      .trim();
+  }
+
+  private scrollSectionIntoView(section: string): void {
+    window.setTimeout(() => {
       const sections = Array.from(
         document.querySelectorAll<HTMLElement>('.menu-category')
       );
@@ -240,11 +466,10 @@ export class Menu {
         const categoryButton =
           menuSection.querySelector<HTMLButtonElement>('.category-badge');
 
-        return categoryButton?.getAttribute('ng-reflect-ng-class') === section ||
-          categoryButton?.textContent
-            ?.trim()
-            .toLowerCase()
-            .includes(this.getSectionLabel(section));
+        return categoryButton?.textContent
+          ?.trim()
+          .toLowerCase()
+          .includes(this.getSectionLabel(section));
       });
 
       const fallbackTarget = document.querySelector<HTMLElement>(

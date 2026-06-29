@@ -1,3 +1,4 @@
+```html
 <section class="menu-page">
   <div class="menu-overlay"></div>
 
@@ -9,6 +10,43 @@
     <p>
       Tradición, ambiente y comida preparada para convertir cada visita
       en una experiencia difícil de olvidar.
+    </p>
+  </div>
+
+  <div class="menu-search-panel">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+
+      <input
+        type="text"
+        name="menuSearch"
+        [(ngModel)]="searchTerm"
+        placeholder="Buscar: pollo, tacos, café, algo dulce, menos de ₡5000..."
+        autocomplete="off"
+      />
+
+      <button
+        type="button"
+        class="search-clear"
+        *ngIf="hasSearchTerm"
+        (click)="clearSearch()"
+      >
+        Limpiar
+      </button>
+    </div>
+
+    <div class="quick-searches">
+      <button type="button" (click)="setQuickSearch('Pollo')">Pollo</button>
+      <button type="button" (click)="setQuickSearch('Camarones')">Camarones</button>
+      <button type="button" (click)="setQuickSearch('Hamburguesas')">Hamburguesas</button>
+      <button type="button" (click)="setQuickSearch('Bebidas')">Bebidas</button>
+      <button type="button" (click)="setQuickSearch('Café')">Café</button>
+      <button type="button" (click)="setQuickSearch('Para compartir')">Para compartir</button>
+      <button type="button" (click)="setQuickSearch('Menos de ₡5000')">Menos de ₡5000</button>
+    </div>
+
+    <p class="search-results-text" *ngIf="hasSearchTerm">
+      Escribí lo que se te antoja y el menú te ayuda a encontrarlo.
     </p>
   </div>
 
@@ -319,3 +357,4 @@
     </div>
   </ng-template>
 </section>
+```
