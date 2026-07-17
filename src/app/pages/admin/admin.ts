@@ -99,6 +99,9 @@ export class Admin implements OnInit {
 
   updatingOrderId: string | null = null;
   pendingOrdersExpanded = false;
+  operationalHistoryExpanded = false;
+  registeredCustomersExpanded = false;
+  recentPurchasesExpanded = false;
   updatingCustomerCode: string | null = null;
   customerActionError = '';
 
@@ -147,6 +150,18 @@ export class Admin implements OnInit {
 
   togglePendingOrders(): void {
     this.pendingOrdersExpanded = !this.pendingOrdersExpanded;
+  }
+
+  toggleOperationalHistory(): void {
+    this.operationalHistoryExpanded = !this.operationalHistoryExpanded;
+  }
+
+  toggleRegisteredCustomers(): void {
+    this.registeredCustomersExpanded = !this.registeredCustomersExpanded;
+  }
+
+  toggleRecentPurchases(): void {
+    this.recentPurchasesExpanded = !this.recentPurchasesExpanded;
   }
 
   deleteCustomer(customer: TopCustomer): void {

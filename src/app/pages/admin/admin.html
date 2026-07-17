@@ -262,7 +262,13 @@
       class="admin-card whatsapp-orders-card history-card"
     >
 
-      <div class="card-header">
+      <button
+        type="button"
+        class="card-header accordion-header"
+        (click)="toggleOperationalHistory()"
+        [attr.aria-expanded]="operationalHistoryExpanded"
+        aria-controls="operational-history"
+      >
         <div>
           <h2>Historial operativo</h2>
           <span>
@@ -270,10 +276,23 @@
           </span>
         </div>
 
-        <span class="history-counter">
-          {{ processedWhatsappOrders.length }} procesados
+        <span class="accordion-summary">
+          <span class="history-counter">
+            {{ processedWhatsappOrders.length }} procesados
+          </span>
+          <span
+            class="accordion-chevron"
+            [class.expanded]="operationalHistoryExpanded"
+            aria-hidden="true"
+          >⌄</span>
         </span>
-      </div>
+      </button>
+
+      <div
+        id="operational-history"
+        class="accordion-content"
+        *ngIf="operationalHistoryExpanded"
+      >
 
       <div
         class="empty-state"
@@ -316,6 +335,8 @@
 
       </div>
 
+      </div>
+
     </section>
 
     <!-- GRID -->
@@ -323,10 +344,32 @@
 
       <section class="admin-card">
 
-        <div class="card-header">
-          <h2>Clientes registrados</h2>
-          <span>Compras, puntos y gestión</span>
-        </div>
+        <button
+          type="button"
+          class="card-header accordion-header"
+          (click)="toggleRegisteredCustomers()"
+          [attr.aria-expanded]="registeredCustomersExpanded"
+          aria-controls="registered-customers"
+        >
+          <div>
+            <h2>Clientes registrados</h2>
+            <span>Compras, puntos y gestión</span>
+          </div>
+          <span class="accordion-summary">
+            <span>{{ summary.top_customers.length }} clientes</span>
+            <span
+              class="accordion-chevron"
+              [class.expanded]="registeredCustomersExpanded"
+              aria-hidden="true"
+            >⌄</span>
+          </span>
+        </button>
+
+        <div
+          id="registered-customers"
+          class="accordion-content"
+          *ngIf="registeredCustomersExpanded"
+        >
 
         <div
           class="admin-alert error customer-action-error"
@@ -383,14 +426,38 @@
           </div>
         </div>
 
+        </div>
+
       </section>
 
       <section class="admin-card">
 
-        <div class="card-header">
-          <h2>Compras recientes</h2>
-          <span>Últimas facturas registradas</span>
-        </div>
+        <button
+          type="button"
+          class="card-header accordion-header"
+          (click)="toggleRecentPurchases()"
+          [attr.aria-expanded]="recentPurchasesExpanded"
+          aria-controls="recent-purchases"
+        >
+          <div>
+            <h2>Compras recientes</h2>
+            <span>Últimas facturas registradas</span>
+          </div>
+          <span class="accordion-summary">
+            <span>{{ summary.recent_purchases.length }} compras</span>
+            <span
+              class="accordion-chevron"
+              [class.expanded]="recentPurchasesExpanded"
+              aria-hidden="true"
+            >⌄</span>
+          </span>
+        </button>
+
+        <div
+          id="recent-purchases"
+          class="accordion-content"
+          *ngIf="recentPurchasesExpanded"
+        >
 
         <div
           class="empty-state"
@@ -422,6 +489,8 @@
           <span>
             +{{ purchase.points_earned }} pts
           </span>
+
+        </div>
 
         </div>
 
