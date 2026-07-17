@@ -90,7 +90,13 @@
     <!-- PEDIDOS PENDIENTES -->
     <section class="admin-card whatsapp-orders-card">
 
-      <div class="card-header">
+      <button
+        type="button"
+        class="card-header accordion-header"
+        (click)="togglePendingOrders()"
+        [attr.aria-expanded]="pendingOrdersExpanded"
+        aria-controls="pending-whatsapp-orders"
+      >
         <div>
           <h2>Pedidos pendientes</h2>
           <span>
@@ -98,10 +104,23 @@
           </span>
         </div>
 
-        <span class="pending-counter">
-          {{ pendingWhatsappOrders.length }} pendientes
+        <span class="accordion-summary">
+          <span class="pending-counter">
+            {{ pendingWhatsappOrders.length }} pendientes
+          </span>
+          <span
+            class="accordion-chevron"
+            [class.expanded]="pendingOrdersExpanded"
+            aria-hidden="true"
+          >⌄</span>
         </span>
-      </div>
+      </button>
+
+      <div
+        id="pending-whatsapp-orders"
+        class="accordion-content"
+        *ngIf="pendingOrdersExpanded"
+      >
 
       <div class="admin-alert" *ngIf="loadingOrders">
         Cargando pedidos de WhatsApp...
@@ -234,6 +253,8 @@
 
       </div>
 
+      </div>
+
     </section>
 
     <!-- HISTORIAL -->
@@ -303,8 +324,15 @@
       <section class="admin-card">
 
         <div class="card-header">
-          <h2>Top clientes</h2>
-          <span>Por compras y recurrencia</span>
+          <h2>Clientes registrados</h2>
+          <span>Compras, puntos y gestión</span>
+        </div>
+
+        <div
+          class="admin-alert error customer-action-error"
+          *ngIf="customerActionError"
+        >
+          {{ customerActionError }}
         </div>
 
         <div
@@ -330,7 +358,29 @@
             </p>
           </div>
 
-          <span>{{ customer.points }} pts</span>
+          <div class="customer-row-side">
+            <span>{{ customer.points }} pts</span>
+
+            <div class="customer-actions">
+              <button
+                type="button"
+                class="redeem-points"
+                (click)="redeemCustomerPoints(customer)"
+                [disabled]="isUpdatingCustomer(customer.code) || customer.points <= 0"
+              >
+                {{ isUpdatingCustomer(customer.code) ? 'Procesando...' : 'Rebajar puntos' }}
+              </button>
+
+              <button
+                type="button"
+                class="delete-customer"
+                (click)="deleteCustomer(customer)"
+                [disabled]="isUpdatingCustomer(customer.code)"
+              >
+                Eliminar
+              </button>
+            </div>
+          </div>
         </div>
 
       </section>

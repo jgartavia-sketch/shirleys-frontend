@@ -98,6 +98,9 @@ export class Admin implements OnInit {
   ordersError = '';
 
   updatingOrderId: string | null = null;
+  pendingOrdersExpanded = false;
+  updatingCustomerCode: string | null = null;
+  customerActionError = '';
 
   summary: AdminSummary = {
     total_customers: 0,
@@ -140,6 +143,96 @@ export class Admin implements OnInit {
     return this.whatsappOrders.filter(
       (order) => order.status !== 'pending_confirmation'
     );
+  }
+
+  togglePendingOrders(): void {
+    this.pendingOrdersExpanded = !this.pendingOrdersExpanded;
+  }
+
+  deleteCustomer(customer: TopCustomer): void {
+    if (this.updatingCustomerCode) return;
+
+    const customerName = customer.name || 'este cliente';
+    const confirmed = window.confirm(
+      `¿Eliminar definitivamente a ${customerName} del registro de clientes? Esta acción no se puede deshacer.`
+    );
+    if (!confirmed) return;
+
+    this.updatingCustomerCode = customer.code;
+    this.customerActionError = '';
+
+    this.http
+      .delete(`${this.apiBaseUrl}/customers/${encodeURIComponent(customer.code)}`)
+      .subscribe({
+        next: () => {
+          this.updatingCustomerCode = null;
+          this.loadAdminSummary();
+          this.cdr.detectChanges();
+        },
+        error: (error) => {
+          console.error('❌ Error deleting customer:', error);
+          this.customerActionError =
+            'No se pudo eliminar el cliente. Inténtalo nuevamente.';
+          this.updatingCustomerCode = null;
+          this.cdr.detectChanges();
+        },
+      });
+  }
+
+  redeemCustomerPoints(customer: TopCustomer): void {
+    if (this.updatingCustomerCode) return;
+
+    if (customer.points <= 0) {
+      window.alert('Este cliente no tiene puntos disponibles para canjear.');
+      return;
+    }
+
+    const enteredValue = window.prompt(
+      `¿Cuántos puntos deseas rebajar a ${customer.name || 'este cliente'}?\nDisponibles: ${customer.points} puntos.`
+    );
+    if (enteredValue === null) return;
+
+    const pointsToRedeem = Number(enteredValue.trim());
+    if (
+      !Number.isInteger(pointsToRedeem) ||
+      pointsToRedeem <= 0 ||
+      pointsToRedeem > customer.points
+    ) {
+      window.alert(`Ingresa una cantidad entera entre 1 y ${customer.points}.`);
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `¿Confirmas el canje de ${pointsToRedeem} puntos para ${customer.name || 'este cliente'}? Su nuevo saldo será de ${customer.points - pointsToRedeem} puntos.`
+    );
+    if (!confirmed) return;
+
+    this.updatingCustomerCode = customer.code;
+    this.customerActionError = '';
+
+    this.http
+      .patch(
+        `${this.apiBaseUrl}/customers/${encodeURIComponent(customer.code)}/redeem-points`,
+        { points: pointsToRedeem }
+      )
+      .subscribe({
+        next: () => {
+          this.updatingCustomerCode = null;
+          this.loadAdminSummary();
+          this.cdr.detectChanges();
+        },
+        error: (error) => {
+          console.error('❌ Error redeeming customer points:', error);
+          this.customerActionError =
+            'No se pudieron rebajar los puntos. Inténtalo nuevamente.';
+          this.updatingCustomerCode = null;
+          this.cdr.detectChanges();
+        },
+      });
+  }
+
+  isUpdatingCustomer(customerCode: string): boolean {
+    return this.updatingCustomerCode === customerCode;
   }
 
   loadAdminSummary(): void {

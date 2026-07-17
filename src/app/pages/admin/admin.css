@@ -148,6 +148,57 @@
   font-size: 0.9rem;
 }
 
+.accordion-header {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.accordion-header:hover h2,
+.accordion-header:focus-visible h2 {
+  color: #d4af37;
+}
+
+.accordion-header:focus-visible {
+  outline: 2px solid rgba(212, 175, 55, 0.72);
+  outline-offset: 10px;
+  border-radius: 12px;
+}
+
+.accordion-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.accordion-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 50%;
+  color: #d4af37 !important;
+  font-size: 1.4rem !important;
+  line-height: 1;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.accordion-chevron.expanded {
+  transform: rotate(180deg);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.accordion-content {
+  padding-top: 4px;
+}
+
 .empty-state {
   padding: 22px;
   border: 1px dashed rgba(212, 175, 55, 0.22);
@@ -185,6 +236,54 @@
   color: #d4af37;
   font-weight: 700;
   font-size: 1rem;
+}
+
+.customer-row-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.customer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.customer-actions button {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  color: #080808;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.22s ease, opacity 0.22s ease, filter 0.22s ease;
+}
+
+.customer-actions button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+.customer-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.customer-actions .redeem-points {
+  background: #d4af37;
+}
+
+.customer-actions .delete-customer {
+  background: #ff8f8f;
+}
+
+.customer-action-error {
+  margin-bottom: 10px;
 }
 
 .whatsapp-orders-list {
@@ -369,7 +468,23 @@
   }
 
   .customer-row {
+    align-items: flex-start;
+    flex-direction: column;
     gap: 14px;
+  }
+
+  .customer-row-side {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .customer-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .customer-actions button {
+    flex: 1 1 140px;
   }
 
   .whatsapp-order-actions button {
