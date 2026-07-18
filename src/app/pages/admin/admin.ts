@@ -105,6 +105,17 @@ export class Admin implements OnInit {
   updatingCustomerCode: string | null = null;
   customerActionError = '';
 
+selectedCustomer: TopCustomer | null = null;
+pointsModalOpen = false;
+deleteModalOpen = false;
+pointsModalMode: 'add' | 'redeem' = 'add';
+pointsInput = '';
+modalValidationError = '';
+modalSubmitting = false;
+toastMessage = '';
+toastType: 'success' | 'error' = 'success';
+private toastTimer: ReturnType<typeof setTimeout> | null = null;
+
   summary: AdminSummary = {
     total_customers: 0,
     total_purchases: 0,
@@ -164,87 +175,180 @@ export class Admin implements OnInit {
     this.recentPurchasesExpanded = !this.recentPurchasesExpanded;
   }
 
-  deleteCustomer(customer: TopCustomer): void {
-    if (this.updatingCustomerCode) return;
 
-    const customerName = customer.name || 'este cliente';
-    const confirmed = window.confirm(
-      `¿Eliminar definitivamente a ${customerName} del registro de clientes? Esta acción no se puede deshacer.`
-    );
-    if (!confirmed) return;
+openPointsModal(mode: 'add' | 'redeem', customer: TopCustomer): void {
+  if (this.updatingCustomerCode) return;
 
-    this.updatingCustomerCode = customer.code;
-    this.customerActionError = '';
+  this.selectedCustomer = customer;
+  this.pointsModalMode = mode;
+  this.pointsInput = '';
+  this.modalValidationError = '';
+  this.pointsModalOpen = true;
+  this.deleteModalOpen = false;
+}
 
-    this.http
-      .delete(`${this.apiBaseUrl}/customers/${encodeURIComponent(customer.code)}`)
-      .subscribe({
-        next: () => {
-          this.updatingCustomerCode = null;
-          this.loadAdminSummary();
-          this.cdr.detectChanges();
-        },
-        error: (error) => {
-          console.error('❌ Error deleting customer:', error);
-          this.customerActionError =
-            'No se pudo eliminar el cliente. Inténtalo nuevamente.';
-          this.updatingCustomerCode = null;
-          this.cdr.detectChanges();
-        },
-      });
+closePointsModal(): void {
+  if (this.modalSubmitting) return;
+
+  this.pointsModalOpen = false;
+  this.selectedCustomer = null;
+  this.pointsInput = '';
+  this.modalValidationError = '';
+}
+
+onPointsInput(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  this.pointsInput = input.value;
+  this.modalValidationError = '';
+}
+
+get projectedPointsBalance(): number {
+  const currentPoints = this.selectedCustomer?.points || 0;
+  const amount = Number(this.pointsInput);
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    return currentPoints;
   }
 
-  redeemCustomerPoints(customer: TopCustomer): void {
-    if (this.updatingCustomerCode) return;
+  return this.pointsModalMode === 'add'
+    ? currentPoints + Math.trunc(amount)
+    : Math.max(0, currentPoints - Math.trunc(amount));
+}
 
-    if (customer.points <= 0) {
-      window.alert('Este cliente no tiene puntos disponibles para canjear.');
-      return;
-    }
+submitPointsModal(): void {
+  const customer = this.selectedCustomer;
+  if (!customer || this.modalSubmitting) return;
 
-    const enteredValue = window.prompt(
-      `¿Cuántos puntos deseas rebajar a ${customer.name || 'este cliente'}?\nDisponibles: ${customer.points} puntos.`
-    );
-    if (enteredValue === null) return;
+  const points = Number(this.pointsInput);
 
-    const pointsToRedeem = Number(enteredValue.trim());
-    if (
-      !Number.isInteger(pointsToRedeem) ||
-      pointsToRedeem <= 0 ||
-      pointsToRedeem > customer.points
-    ) {
-      window.alert(`Ingresa una cantidad entera entre 1 y ${customer.points}.`);
-      return;
-    }
-
-    const confirmed = window.confirm(
-      `¿Confirmas el canje de ${pointsToRedeem} puntos para ${customer.name || 'este cliente'}? Su nuevo saldo será de ${customer.points - pointsToRedeem} puntos.`
-    );
-    if (!confirmed) return;
-
-    this.updatingCustomerCode = customer.code;
-    this.customerActionError = '';
-
-    this.http
-      .patch(
-        `${this.apiBaseUrl}/customers/${encodeURIComponent(customer.code)}/redeem-points`,
-        { points: pointsToRedeem }
-      )
-      .subscribe({
-        next: () => {
-          this.updatingCustomerCode = null;
-          this.loadAdminSummary();
-          this.cdr.detectChanges();
-        },
-        error: (error) => {
-          console.error('❌ Error redeeming customer points:', error);
-          this.customerActionError =
-            'No se pudieron rebajar los puntos. Inténtalo nuevamente.';
-          this.updatingCustomerCode = null;
-          this.cdr.detectChanges();
-        },
-      });
+  if (!Number.isInteger(points) || points <= 0) {
+    this.modalValidationError =
+      'Ingresa una cantidad entera mayor que cero.';
+    return;
   }
+
+  if (this.pointsModalMode === 'redeem' && points > customer.points) {
+    this.modalValidationError =
+      `No puedes rebajar más de ${customer.points} puntos.`;
+    return;
+  }
+
+  this.modalSubmitting = true;
+  this.updatingCustomerCode = customer.code;
+  this.customerActionError = '';
+
+  const endpoint =
+    this.pointsModalMode === 'add'
+      ? 'add-points'
+      : 'redeem-points';
+
+  this.http
+    .patch(
+      `${this.apiBaseUrl}/customers/${encodeURIComponent(customer.code)}/${endpoint}`,
+      { points }
+    )
+    .subscribe({
+      next: () => {
+        const actionLabel =
+          this.pointsModalMode === 'add'
+            ? `${points} puntos agregados correctamente.`
+            : `${points} puntos rebajados correctamente.`;
+
+        this.modalSubmitting = false;
+        this.updatingCustomerCode = null;
+        this.pointsModalOpen = false;
+        this.selectedCustomer = null;
+        this.pointsInput = '';
+        this.showToast(actionLabel, 'success');
+        this.loadAdminSummary();
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('❌ Error updating customer points:', error);
+
+        this.modalSubmitting = false;
+        this.updatingCustomerCode = null;
+        this.modalValidationError =
+          this.pointsModalMode === 'add'
+            ? 'No se pudieron sumar los puntos. Inténtalo nuevamente.'
+            : 'No se pudieron rebajar los puntos. Inténtalo nuevamente.';
+
+        this.cdr.detectChanges();
+      },
+    });
+}
+
+openDeleteCustomerModal(customer: TopCustomer): void {
+  if (this.updatingCustomerCode) return;
+
+  this.selectedCustomer = customer;
+  this.deleteModalOpen = true;
+  this.pointsModalOpen = false;
+  this.modalValidationError = '';
+}
+
+closeDeleteCustomerModal(): void {
+  if (this.modalSubmitting) return;
+
+  this.deleteModalOpen = false;
+  this.selectedCustomer = null;
+}
+
+confirmDeleteCustomer(): void {
+  const customer = this.selectedCustomer;
+  if (!customer || this.modalSubmitting) return;
+
+  this.modalSubmitting = true;
+  this.updatingCustomerCode = customer.code;
+  this.customerActionError = '';
+
+  this.http
+    .delete(`${this.apiBaseUrl}/customers/${encodeURIComponent(customer.code)}`)
+    .subscribe({
+      next: () => {
+        this.modalSubmitting = false;
+        this.updatingCustomerCode = null;
+        this.deleteModalOpen = false;
+        this.selectedCustomer = null;
+        this.showToast('Cliente eliminado correctamente.', 'success');
+        this.loadAdminSummary();
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('❌ Error deleting customer:', error);
+
+        this.modalSubmitting = false;
+        this.updatingCustomerCode = null;
+        this.deleteModalOpen = false;
+        this.selectedCustomer = null;
+        this.customerActionError =
+          'No se pudo eliminar el cliente. Inténtalo nuevamente.';
+        this.showToast(
+          'No se pudo eliminar el cliente. Inténtalo nuevamente.',
+          'error'
+        );
+
+        this.cdr.detectChanges();
+      },
+    });
+}
+
+private showToast(
+  message: string,
+  type: 'success' | 'error' = 'success'
+): void {
+  if (this.toastTimer) {
+    clearTimeout(this.toastTimer);
+  }
+
+  this.toastMessage = message;
+  this.toastType = type;
+
+  this.toastTimer = setTimeout(() => {
+    this.toastMessage = '';
+    this.cdr.detectChanges();
+  }, 3200);
+}
 
   isUpdatingCustomer(customerCode: string): boolean {
     return this.updatingCustomerCode === customerCode;

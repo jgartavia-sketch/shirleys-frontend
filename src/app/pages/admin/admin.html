@@ -407,8 +407,17 @@
             <div class="customer-actions">
               <button
                 type="button"
+                class="add-points"
+                (click)="openPointsModal('add', customer)"
+                [disabled]="isUpdatingCustomer(customer.code)"
+              >
+                {{ isUpdatingCustomer(customer.code) ? 'Procesando...' : 'Sumar puntos' }}
+              </button>
+
+              <button
+                type="button"
                 class="redeem-points"
-                (click)="redeemCustomerPoints(customer)"
+                (click)="openPointsModal('redeem', customer)"
                 [disabled]="isUpdatingCustomer(customer.code) || customer.points <= 0"
               >
                 {{ isUpdatingCustomer(customer.code) ? 'Procesando...' : 'Rebajar puntos' }}
@@ -417,7 +426,7 @@
               <button
                 type="button"
                 class="delete-customer"
-                (click)="deleteCustomer(customer)"
+                (click)="openDeleteCustomerModal(customer)"
                 [disabled]="isUpdatingCustomer(customer.code)"
               >
                 Eliminar
@@ -499,5 +508,187 @@
     </div>
 
   </ng-container>
+
+
+<!-- MODAL DE PUNTOS -->
+<div
+  class="admin-modal-backdrop"
+  *ngIf="pointsModalOpen"
+  (click)="closePointsModal()"
+>
+  <section
+    class="admin-modal points-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="points-modal-title"
+    (click)="$event.stopPropagation()"
+  >
+    <button
+      type="button"
+      class="modal-close"
+      (click)="closePointsModal()"
+      [disabled]="modalSubmitting"
+      aria-label="Cerrar"
+    >
+      ×
+    </button>
+
+    <div
+      class="modal-icon"
+      [class.add]="pointsModalMode === 'add'"
+      [class.redeem]="pointsModalMode === 'redeem'"
+      aria-hidden="true"
+    >
+      {{ pointsModalMode === 'add' ? '+' : '−' }}
+    </div>
+
+    <span class="modal-kicker">
+      {{ pointsModalMode === 'add' ? 'Bonificación' : 'Canje de puntos' }}
+    </span>
+
+    <h2 id="points-modal-title">
+      {{ pointsModalMode === 'add' ? 'Sumar puntos' : 'Rebajar puntos' }}
+    </h2>
+
+    <p class="modal-description">
+      {{ selectedCustomer?.name || 'Cliente sin nombre' }}
+    </p>
+
+    <div class="points-balance-grid">
+      <div>
+        <span>Saldo actual</span>
+        <strong>{{ selectedCustomer?.points || 0 }} pts</strong>
+      </div>
+
+      <div>
+        <span>Saldo final</span>
+        <strong>{{ projectedPointsBalance }} pts</strong>
+      </div>
+    </div>
+
+    <label class="modal-field">
+      <span>Cantidad de puntos</span>
+      <input
+        type="number"
+        min="1"
+        step="1"
+        [value]="pointsInput"
+        (input)="onPointsInput($event)"
+        [max]="pointsModalMode === 'redeem' ? (selectedCustomer?.points || 0) : null"
+        placeholder="Ejemplo: 25"
+        [disabled]="modalSubmitting"
+        autofocus
+      />
+    </label>
+
+    <p class="modal-validation-error" *ngIf="modalValidationError">
+      {{ modalValidationError }}
+    </p>
+
+    <div class="admin-modal-actions">
+      <button
+        type="button"
+        class="secondary"
+        (click)="closePointsModal()"
+        [disabled]="modalSubmitting"
+      >
+        Cancelar
+      </button>
+
+      <button
+        type="button"
+        class="primary"
+        [class.add]="pointsModalMode === 'add'"
+        [class.redeem]="pointsModalMode === 'redeem'"
+        (click)="submitPointsModal()"
+        [disabled]="modalSubmitting"
+      >
+        {{
+          modalSubmitting
+            ? 'Procesando...'
+            : pointsModalMode === 'add'
+              ? 'Agregar puntos'
+              : 'Confirmar rebaja'
+        }}
+      </button>
+    </div>
+  </section>
+</div>
+
+<!-- MODAL ELIMINAR CLIENTE -->
+<div
+  class="admin-modal-backdrop"
+  *ngIf="deleteModalOpen"
+  (click)="closeDeleteCustomerModal()"
+>
+  <section
+    class="admin-modal danger-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="delete-modal-title"
+    (click)="$event.stopPropagation()"
+  >
+    <button
+      type="button"
+      class="modal-close"
+      (click)="closeDeleteCustomerModal()"
+      [disabled]="modalSubmitting"
+      aria-label="Cerrar"
+    >
+      ×
+    </button>
+
+    <div class="modal-icon danger" aria-hidden="true">!</div>
+
+    <span class="modal-kicker danger">Acción irreversible</span>
+
+    <h2 id="delete-modal-title">Eliminar cliente</h2>
+
+    <p class="modal-description">
+      ¿Seguro que deseas eliminar a
+      <strong>{{ selectedCustomer?.name || 'este cliente' }}</strong>?
+    </p>
+
+    <div class="danger-notice">
+      También se eliminará su historial de compras asociado. Esta acción no
+      se puede deshacer.
+    </div>
+
+    <div class="admin-modal-actions">
+      <button
+        type="button"
+        class="secondary"
+        (click)="closeDeleteCustomerModal()"
+        [disabled]="modalSubmitting"
+      >
+        Cancelar
+      </button>
+
+      <button
+        type="button"
+        class="primary danger"
+        (click)="confirmDeleteCustomer()"
+        [disabled]="modalSubmitting"
+      >
+        {{ modalSubmitting ? 'Eliminando...' : 'Eliminar definitivamente' }}
+      </button>
+    </div>
+  </section>
+</div>
+
+<!-- TOAST -->
+<div
+  class="admin-toast"
+  *ngIf="toastMessage"
+  [class.error]="toastType === 'error'"
+  role="status"
+  aria-live="polite"
+>
+  <span class="toast-icon">{{ toastType === 'error' ? '!' : '✓' }}</span>
+  <div>
+    <strong>{{ toastType === 'error' ? 'No se pudo completar' : 'Operación exitosa' }}</strong>
+    <p>{{ toastMessage }}</p>
+  </div>
+</div>
 
 </section>
