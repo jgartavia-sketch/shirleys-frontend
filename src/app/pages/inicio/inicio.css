@@ -94,7 +94,8 @@
 }
 
 .customers-badge,
-.launch-promo-badge {
+.launch-promo-badge,
+.winners-badge {
   display: inline-block;
   margin-bottom: 24px;
   padding: 11px 18px;
@@ -255,7 +256,12 @@
   margin-bottom: 34px;
 }
 
+.launch-promo-grid-active {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .launch-promo-card {
+  position: relative;
   min-height: 230px;
   padding: 28px;
   border-radius: 30px;
@@ -273,6 +279,21 @@
   transform: translateY(-4px);
   border-color: rgba(242, 200, 102, 0.52);
   box-shadow: 0 24px 58px rgba(0, 0, 0, 0.28);
+}
+
+.launch-promo-status {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: #071007;
+  background: linear-gradient(135deg, #f4d06f, #c99622);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  box-shadow: 0 10px 24px rgba(212, 175, 55, 0.18);
 }
 
 .launch-promo-icon {
@@ -301,6 +322,160 @@
 
 .launch-promo-actions {
   margin-top: 10px;
+}
+
+.launch-promo-motivation {
+  max-width: 790px;
+  margin: 0 0 28px;
+  padding: 18px 22px;
+  border-left: 3px solid #d4af37;
+  color: #fff3d1;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent);
+  font-size: 1.03rem;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.winners-section {
+  position: relative;
+  padding: 105px 8%;
+  overflow: hidden;
+  color: #fff7df;
+  background:
+    radial-gradient(circle at 14% 20%, rgba(212, 175, 55, 0.18), transparent 28%),
+    radial-gradient(circle at 88% 82%, rgba(17, 92, 48, 0.2), transparent 32%),
+    linear-gradient(145deg, #10170d, #070b07 62%, #0b140d);
+}
+
+.winners-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.winners-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.winners-header {
+  max-width: 820px;
+  margin-bottom: 42px;
+}
+
+.winners-header h2 {
+  margin: 0 0 20px;
+  color: #fff3d1;
+  font-size: clamp(2.35rem, 5vw, 4.6rem);
+  line-height: 0.96;
+  letter-spacing: -2px;
+}
+
+.winners-header p {
+  max-width: 720px;
+  margin: 0;
+  color: rgba(232, 222, 197, 0.9);
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.winners-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.winner-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-height: 170px;
+  padding: 28px;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background:
+    linear-gradient(145deg, rgba(255, 247, 223, 0.11), rgba(255, 247, 223, 0.035));
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.24);
+  transition:
+    transform 0.24s ease,
+    border-color 0.24s ease,
+    box-shadow 0.24s ease;
+}
+
+.winner-card::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  top: -72px;
+  right: -55px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.winner-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(242, 200, 102, 0.58);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.32);
+}
+
+.winner-icon {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 72px;
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+  font-size: 2rem;
+  border: 1px solid rgba(242, 200, 102, 0.34);
+  background: rgba(212, 175, 55, 0.13);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.winner-info {
+  position: relative;
+  z-index: 1;
+}
+
+.winner-status {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #f2c866;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.winner-info h3 {
+  margin: 0 0 8px;
+  color: #fff3d1;
+  font-size: 1.55rem;
+}
+
+.winner-info p {
+  margin: 0;
+  color: rgba(232, 222, 197, 0.88);
+  line-height: 1.65;
+}
+
+.winners-transparency {
+  margin: 26px 0 0;
+  color: rgba(242, 200, 102, 0.88);
+  font-size: 0.92rem;
+  letter-spacing: 0.3px;
 }
 
 .customers-section {
@@ -618,6 +793,7 @@
   .primary-btn,
   .secondary-btn,
   .launch-promo-card,
+  .winner-card,
   .point-card,
   .mock-form button,
   .qr-popup button {
@@ -628,6 +804,7 @@
   .primary-btn:hover,
   .secondary-btn:hover,
   .launch-promo-card:hover,
+  .winner-card:hover,
   .point-card:hover,
   .mock-form button:hover:not(:disabled),
   .qr-popup button:hover {
@@ -637,6 +814,10 @@
 
 @media (max-width: 1100px) {
   .launch-promo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .winners-grid {
     grid-template-columns: 1fr;
   }
 
@@ -662,6 +843,7 @@
   }
 
   .launch-promo-section,
+  .winners-section,
   .customers-section {
     padding: 80px 7%;
   }
@@ -693,6 +875,7 @@
   .hero-kicker,
   .customers-badge,
   .launch-promo-badge,
+  .winners-badge,
   .secondary-btn,
   .mock-phone,
   .qr-popup-overlay {
@@ -729,16 +912,19 @@
   }
 
   .launch-promo-section,
+  .winners-section,
   .customers-section {
     padding: 68px 6%;
   }
 
   .launch-promo-section::before,
+  .winners-section::before,
   .customers-section::before {
     opacity: 0.04;
   }
 
   .launch-promo-header h2,
+  .winners-header h2,
   .customers-text h2 {
     font-size: 2.45rem;
     letter-spacing: -1px;
@@ -748,6 +934,40 @@
     min-height: auto;
     padding: 24px;
     border-radius: 26px;
+  }
+
+  .launch-promo-status {
+    position: static;
+    display: inline-block;
+    margin-bottom: 18px;
+  }
+
+  .launch-promo-icon {
+    margin-bottom: 18px;
+  }
+
+  .launch-promo-motivation {
+    padding: 16px 18px;
+  }
+
+  .winner-card {
+    align-items: flex-start;
+    gap: 16px;
+    min-height: auto;
+    padding: 22px;
+    border-radius: 26px;
+  }
+
+  .winner-icon {
+    flex-basis: 58px;
+    width: 58px;
+    height: 58px;
+    border-radius: 19px;
+    font-size: 1.55rem;
+  }
+
+  .winner-info h3 {
+    font-size: 1.3rem;
   }
 
   .mock-phone {
