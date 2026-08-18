@@ -104,6 +104,7 @@ export class Admin implements OnInit {
   recentPurchasesExpanded = false;
   updatingCustomerCode: string | null = null;
   customerActionError = '';
+  customerSearchTerm = '';
 
 selectedCustomer: TopCustomer | null = null;
 pointsModalOpen = false;
@@ -157,6 +158,30 @@ private toastTimer: ReturnType<typeof setTimeout> | null = null;
     return this.whatsappOrders.filter(
       (order) => order.status !== 'pending_confirmation'
     );
+  }
+
+  get filteredCustomers(): TopCustomer[] {
+    const term = this.customerSearchTerm.toLowerCase().trim();
+
+    if (!term) {
+      return this.summary.top_customers;
+    }
+
+    return this.summary.top_customers.filter((customer) =>
+      customer.name?.toLowerCase().includes(term) ||
+      customer.email?.toLowerCase().includes(term) ||
+      customer.whatsapp?.toLowerCase().includes(term) ||
+      customer.code?.toLowerCase().includes(term)
+    );
+  }
+
+  onCustomerSearch(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.customerSearchTerm = input.value;
+  }
+
+  clearCustomerSearch(): void {
+    this.customerSearchTerm = '';
   }
 
   togglePendingOrders(): void {

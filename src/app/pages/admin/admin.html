@@ -379,6 +379,38 @@
         </div>
 
         <div
+          class="customer-search"
+          *ngIf="summary.top_customers.length > 0"
+        >
+          <div class="customer-search-box">
+            <span class="customer-search-icon" aria-hidden="true">⌕</span>
+
+            <input
+              type="search"
+              [value]="customerSearchTerm"
+              (input)="onCustomerSearch($event)"
+              placeholder="Buscar por nombre, correo, WhatsApp o código..."
+              autocomplete="off"
+              aria-label="Buscar cliente"
+            />
+
+            <button
+              type="button"
+              *ngIf="customerSearchTerm"
+              (click)="clearCustomerSearch()"
+              aria-label="Limpiar búsqueda"
+            >
+              ×
+            </button>
+          </div>
+
+          <span class="customer-search-results">
+            {{ filteredCustomers.length }}
+            {{ filteredCustomers.length === 1 ? 'cliente encontrado' : 'clientes encontrados' }}
+          </span>
+        </div>
+
+        <div
           class="empty-state"
           *ngIf="summary.top_customers.length === 0"
         >
@@ -386,8 +418,18 @@
         </div>
 
         <div
+          class="empty-state"
+          *ngIf="
+            summary.top_customers.length > 0 &&
+            filteredCustomers.length === 0
+          "
+        >
+          No se encontraron clientes con ese criterio.
+        </div>
+
+        <div
           class="customer-row"
-          *ngFor="let customer of summary.top_customers"
+          *ngFor="let customer of filteredCustomers"
         >
 
           <div>

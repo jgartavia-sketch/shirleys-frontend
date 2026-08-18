@@ -928,3 +928,81 @@
     width: calc(100vw - 28px);
   }
 }
+
+/* =========================
+   Buscador de clientes
+   ========================= */
+
+.customer-search {
+  margin: 8px 0 22px;
+}
+
+.customer-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.customer-search-box input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 48px 14px 46px;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 18px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.04);
+  color: #f5f1e8;
+  font: inherit;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.customer-search-box input::placeholder {
+  color: rgba(245, 241, 232, 0.42);
+}
+
+.customer-search-box input:focus {
+  border-color: rgba(212, 175, 55, 0.7);
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.08);
+}
+
+.customer-search-icon {
+  position: absolute;
+  left: 16px;
+  color: #d4af37;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.customer-search-box button {
+  position: absolute;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  color: #f5f1e8;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.customer-search-box button:hover {
+  transform: rotate(6deg);
+  background: rgba(212, 175, 55, 0.12);
+  color: #d4af37;
+}
+
+.customer-search-results {
+  display: block;
+  margin-top: 9px;
+  color: rgba(245, 241, 232, 0.55);
+  font-size: 0.82rem;
+}
